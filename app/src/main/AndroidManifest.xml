@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.vladimirbabenko.hotlinecustom">
 
+  <uses-permission android:name="android.permission.INTERNET"/>
+
   <application
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
@@ -19,6 +21,11 @@
 
     <activity android:name=".LoginActivity"
         android:label="Login">
+
+    </activity>
+    <activity
+        android:name=".LoginActivityJ"
+        android:label="LoginJ">
 
     </activity>
     <activity android:name=".BaseActivity">

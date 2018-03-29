@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:orientation="vertical"
-    android:gravity="bottom"
     android:background="@drawable/logo_activity_background"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context=".LoginActivity"
     >
 
 
@@ -19,11 +19,33 @@
       />
 
   <LinearLayout
+
+      android:id="@+id/llSignInLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:contentDescription="SignIn layout"
+      android:orientation="horizontal"
       >
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btSignInGoogleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <Button
+        android:id="@+id/btSignOutGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SignOut"
+        />
 
-    
+    <Button
+        android:id="@+id/btCheckForExitingUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="check user"
+        />
+
+
   </LinearLayout>
 
 

@@ -1,8 +1,16 @@
 package com.example.vladimirbabenko.hotlinecustom.data
 
-class DataManager private constructor(){
+class DataManager internal constructor(){
 
-  private object DataManagerHolder { val INSTANCE = DataManager() }
+  init {
+    println("DataMAnager is Initialized!")
+  }
+
+  private object DataManagerHolder {
+    init {
+      println("DataMAnagerHolder initializing")
+    }
+    val INSTANCE = DataManager() }
 
 companion object {
 
