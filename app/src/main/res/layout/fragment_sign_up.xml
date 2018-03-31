@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:background="@drawable/umbrella_sign_in_background"
+    android:padding="24dp"
+    tools:context=".fragments.SignUpFragmentJ"
+    >
+
+  <ImageView
+      android:id="@+id/ivSignInFragmentLogo"
+      android:layout_width="match_parent"
+      android:layout_height="64dp"
+      android:contentDescription="Umbrella signIn logo"
+      android:src="@drawable/umbrella_sign_in_logo"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <TextView
+      android:id="@+id/tvSignInFragmentTitle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="Wellcome"
+      android:textSize="24sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/ivSignInFragmentLogo"
+      />
+
+
+  <LinearLayout
+      android:id="@+id/llSignInFragmentInputFieds"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="16dp"
+      android:layout_marginTop="48dp"
+      android:orientation="vertical"
+      app:layout_constraintBottom_toTopOf="@id/btFragmentSignIn"
+      app:layout_constraintTop_toBottomOf="@id/tvSignInFragmentTitle"
+      >
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+      <android.support.design.widget.TextInputEditText
+          android:id="@+id/etFragmentSignInEmail"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:cursorVisible="false"
+          android:hint="email"
+          android:inputType="textEmailAddress"
+          android:textColor="@android:color/black"
+          />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!--It's possible to use android:inputType="numberPassword" -->
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        >
+      <android.support.design.widget.TextInputEditText
+          android:id="@+id/etFragmentSignInPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:cursorVisible="false"
+          android:hint="password"
+          android:inputType="numberPassword"
+          android:textColor="@android:color/black"
+          />
+    </android.support.design.widget.TextInputLayout>
+  </LinearLayout>
+
+  <Button
+      android:id="@+id/btFragmentSignIn"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:backgroundTint="@color/colorRed"
+      android:text="go to hell"
+      app:layout_constraintBottom_toBottomOf="parent"
+
+      />
+
+
+</android.support.constraint.ConstraintLayout>

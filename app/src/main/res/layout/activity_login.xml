@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/logo_activity_background"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -19,7 +20,6 @@
       />
 
   <LinearLayout
-
       android:id="@+id/llSignInLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:background="@android:color/transparent"
-        android:text="Signup"
+        android:text="Sign up"
         android:textColor="@android:color/darker_gray"
         android:textSize="9sp"
         />

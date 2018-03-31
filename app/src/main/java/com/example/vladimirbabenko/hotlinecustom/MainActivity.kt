@@ -1,15 +1,20 @@
 package com.example.vladimirbabenko.hotlinecustom
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
+import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
 
-    startActivity( Intent(this, LoginActivityJ::class.java))
+    //TODO( insert from DataManager)
+    //var isUserLoggedIn: Boolean = DataManager
+
+    if (true) startActivity(Intent(this, LoginActivityJ::class.java))
+    //    else
+    //      startActivity(this,)
   }
 }

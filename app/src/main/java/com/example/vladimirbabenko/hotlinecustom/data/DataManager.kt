@@ -1,24 +1,36 @@
 package com.example.vladimirbabenko.hotlinecustom.data
 
-class DataManager internal constructor(){
+import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
+import kotlin.coroutines.experimental.coroutineContext
+
+class DataManager( context: Context){
+
+  private lateinit var preferencesHelper: PreferencesHelper
 
   init {
-    println("DataMAnager is Initialized!")
+    val context:Context = context
+    preferencesHelper = PreferencesHelper(context)
+    Log.d("TAG", "DataManager initializing")
   }
 
-  private object DataManagerHolder {
-    init {
-      println("DataMAnagerHolder initializing")
-    }
-    val INSTANCE = DataManager() }
+  //private object DataManagerHolder() {
+  //  init {
+  //    println("DataMAnagerHolder initializing")
+  //  }
+  //  val INSTANCE = DataManager(context) }
+
+
 
 companion object {
 
-  val getInstanse:DataManager by lazy { DataManagerHolder.INSTANCE }
+  //fun getInstance(context: Context)= DataManager by lazy { DataManagerHolder().INSTANCE }
+
+  //val getInstanse:DataManager by lazy { DataManagerHolder.INSTANCE }
   }
 
-
-
+  fun getPreferences():PreferencesHelper = preferencesHelper
 }
 
 
