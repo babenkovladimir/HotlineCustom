@@ -2,11 +2,12 @@ package com.example.vladimirbabenko.hotlinecustom.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 
-open class BasePreferencesHelper constructor(context: Context) {
+open class BasePreferencesHelper (context: Context) {
 
-  private lateinit var _sharedPreferences: SharedPreferences
+  private val _sharedPreferences: SharedPreferences
 
   init {
     _sharedPreferences = context.getSharedPreferences(AppConstants.APP_PREFERENCES.key, Context.MODE_PRIVATE)

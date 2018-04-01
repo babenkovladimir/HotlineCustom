@@ -12,6 +12,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_login)
 
+
   }
 
   override fun onClick(view: View?) {

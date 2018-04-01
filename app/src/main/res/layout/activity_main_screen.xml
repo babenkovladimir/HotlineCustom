@@ -8,4 +8,25 @@
     tools:context=".MainScreenActivityJ"
     >
 
+  <FrameLayout
+      android:id="@+id/flContainer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintBottom_toTopOf="@+id/navigationView"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <android.support.design.widget.BottomNavigationView
+      android:id="@+id/navigationView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      app:itemBackground="@color/colorWhite"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:itemIconTint="@color/colorPrimary"
+      app:itemTextColor="@color/colorRed"
+      tools:menu="@menu/menu_navigation_items"
+      />
+  <!--tools tag - only for view. Not for compilation-->
+
 </android.support.constraint.ConstraintLayout>

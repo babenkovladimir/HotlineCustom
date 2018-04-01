@@ -10,7 +10,9 @@ import android.widget.Button;
 import butterknife.BindView;
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivityJ;
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
+import com.example.vladimirbabenko.hotlinecustom.data.PreferencesHelper;
 import com.example.vladimirbabenko.hotlinecustom.fragments.SignUpFragmentJ;
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -22,8 +24,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class LoginActivityJ extends BaseActivityJ implements View.OnClickListener {
 
-  private final int RC_GOOGLE_SIGN_IN = 1234;
-  //private SharedPreferences prefs = DataManager.Companion.
+  //private PreferencesHelper prefs;
+  //private DataManager mManager = new DataManager(getApplicationContext());
 
   @BindView(R.id.btSignInGoogleButton) SignInButton mGoogleSignInButton;
   @BindView(R.id.btSignOutGoogle) Button btGoogleSignOutButton;
@@ -33,6 +35,7 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.activity_login);
     super.onCreate(savedInstanceState);
+    //prefs = new PreferencesHelper(this);
 
     setupUI();
     checkForexitingSignedInUser();
@@ -41,7 +44,7 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
 
-    if (requestCode == RC_GOOGLE_SIGN_IN) {
+    if (requestCode == AppConstants.RC_GOOGLE_SIGN_IN.getIntKey()) {
       Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
       handleSignInResult(task);
     }
@@ -58,13 +61,11 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
   }
 
   private void googleSignIn() {
-    // TODO solve problem with int key
-    GoogleSignInOptions gso =
-        new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
     GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-    startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN);
+    startActivityForResult(signInIntent, AppConstants.RC_GOOGLE_SIGN_IN.getIntKey());
   }
 
   private void googleSigneOut() {
@@ -107,18 +108,30 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
   }
 
   private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+    // TODO check for the intenet connection???
     try {
       GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
-      // TODO work with sharedPreferences and then go to MainScreenActivity
-
+      saveToPreffs(account);
 
       startActivity(new Intent(getApplicationContext(), MainScreenActivityJ.class));
-      finish();
+
 
     } catch (ApiException e) {
       Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
       //updateUI(null);
     }
   }
+
+  private void saveToPreffs(GoogleSignInAccount account){
+    // TODO add null check for account
+    prefs.setUserLoggedIn(true);// by Kotli getter/setter
+    prefs.setUserEmail(account.getEmail());
+    prefs.setUserDisplayedName(account.getDisplayName());
+    prefs.setUserGivenName(account.getGivenName());
+    prefs.setUserFamilyName(account.getGivenName());
+    prefs.setUserPhotoUrl(account.getPhotoUrl().toString());
+
+
+  }
+
 }

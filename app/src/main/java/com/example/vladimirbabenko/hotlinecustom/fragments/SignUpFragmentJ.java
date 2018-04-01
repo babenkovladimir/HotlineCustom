@@ -1,5 +1,6 @@
 package com.example.vladimirbabenko.hotlinecustom.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.example.vladimirbabenko.hotlinecustom.MainScreenActivityJ;
 import com.example.vladimirbabenko.hotlinecustom.R;
 
 public class SignUpFragmentJ extends DialogFragment {
@@ -66,7 +68,11 @@ public class SignUpFragmentJ extends DialogFragment {
 
       if (!emailError && !passwordError) {
         Toast.makeText(getContext(), "User is valid can continue", Toast.LENGTH_LONG).show();
+
         //TODO FireBase??
+        //TODO Preferences
+        startActivity(new Intent(getContext(), MainScreenActivityJ.class));
+
         }
 
       });
