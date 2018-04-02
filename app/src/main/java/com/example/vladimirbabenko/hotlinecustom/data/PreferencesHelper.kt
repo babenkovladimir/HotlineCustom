@@ -2,7 +2,10 @@ package com.example.vladimirbabenko.hotlinecustom.data
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
+import com.example.vladimirbabenko.hotlinecustom.entity.User
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
+import com.google.gson.Gson
 
 class PreferencesHelper(context: Context) : BasePreferencesHelper(context) {
 
@@ -42,4 +45,13 @@ class PreferencesHelper(context: Context) : BasePreferencesHelper(context) {
   fun setUserPhotoUrl(photoUrl:String) = setString(AppConstants.USER_FHOTO_URL.key, photoUrl)
   fun getUserPhotoUrl() = getString(AppConstants.USER_FHOTO_URL.key)
 
+  fun saveUserByGson(user: User) {
+    Log.d("TAG", user.toString())
+    var userString: String = Gson().toJson(user)
+    Log.d("TAG", userString)
+    setString(AppConstants.USER_FROM_JSON.key, userString)
+  }
+
+  fun getUserFromGson(): User = Gson().fromJson(getString(AppConstants.USER_FROM_JSON.key), User::class.java)
 }
+

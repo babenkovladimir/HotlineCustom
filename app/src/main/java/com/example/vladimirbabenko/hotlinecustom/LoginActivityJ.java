@@ -11,6 +11,7 @@ import butterknife.BindView;
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivityJ;
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
 import com.example.vladimirbabenko.hotlinecustom.data.PreferencesHelper;
+import com.example.vladimirbabenko.hotlinecustom.entity.User;
 import com.example.vladimirbabenko.hotlinecustom.fragments.SignUpFragmentJ;
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -122,17 +123,19 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
     }
   }
 
-  private void saveToPreffs(GoogleSignInAccount account){
+  private void saveToPreffs(GoogleSignInAccount account) {
     // TODO add null check for account
+
+    prefs.saveUserByGson(
+        new User(account.getEmail(), account.getDisplayName(), account.getFamilyName(),
+            account.getGivenName(), account.getPhotoUrl().toString()));
 
     prefs.setUserLoggedIn(true);// by Kotli getter/setter
     prefs.setUserEmail(account.getEmail());
     prefs.setUserDisplayedName(account.getDisplayName());
     prefs.setUserGivenName(account.getGivenName());
-    prefs.setUserFamilyName(account.getGivenName());
+    prefs.setUserFamilyName(account.getFamilyName());
     prefs.setUserPhotoUrl(account.getPhotoUrl().toString());
-
-
   }
 
 }

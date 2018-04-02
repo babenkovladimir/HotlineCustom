@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
 
-data class User(val email:String, var displayedName:String?, var familyName:String, var givenName:String, var fotoUrl:String? ) :
+data class User(val email:String, var displayedName:String?="DisplayedName", var familyName:String?="familyName", var givenName:String? = "givenName", var fotoUrl:String?="emptyUrl") :
   Parcelable {
   constructor(parcel: Parcel) : this(parcel.readString(), parcel.readString(), parcel.readString(),
     parcel.readString(), parcel.readString()) {
