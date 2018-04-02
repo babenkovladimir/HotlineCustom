@@ -112,10 +112,10 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
     try {
       GoogleSignInAccount account = completedTask.getResult(ApiException.class);
       saveToPreffs(account);
-
-      startActivity(new Intent(getApplicationContext(), MainScreenActivityJ.class));
-
-
+      Intent intent = new Intent(getApplicationContext(), MainScreenActivityJ.class);
+      //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+      finishAffinity();//
+      startActivity(intent);
     } catch (ApiException e) {
       Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
       //updateUI(null);
@@ -124,6 +124,7 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
 
   private void saveToPreffs(GoogleSignInAccount account){
     // TODO add null check for account
+
     prefs.setUserLoggedIn(true);// by Kotli getter/setter
     prefs.setUserEmail(account.getEmail());
     prefs.setUserDisplayedName(account.getDisplayName());
