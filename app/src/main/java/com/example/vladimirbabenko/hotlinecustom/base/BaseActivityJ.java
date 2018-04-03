@@ -4,16 +4,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import butterknife.ButterKnife;
+import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
 import com.example.vladimirbabenko.hotlinecustom.data.PreferencesHelper;
 
-public class BaseActivityJ extends AppCompatActivity {
+public abstract class BaseActivityJ extends AppCompatActivity {
 
   protected final String TAG = "TAG";
-  protected final PreferencesHelper prefs = App.Companion.getAppPrefs();
+  // Get Preferences from App:Application()
+  //protected final PreferencesHelper prefs = App.Companion.getAppPrefs();
+    protected DataManager mDataManager;
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    mDataManager = DataManager.Companion.create(this);
     ButterKnife.bind(this);
   }
 }

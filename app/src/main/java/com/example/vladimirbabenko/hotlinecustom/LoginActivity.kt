@@ -1,33 +1,85 @@
 package com.example.vladimirbabenko.hotlinecustom
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
+import com.example.vladimirbabenko.hotlinecustom.entity.User
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import kotlinx.android.synthetic.main.activity_login.btSignInGoogleButton
 
-class LoginActivity : BaseActivity(), View.OnClickListener {
-
-  //override val TAG:String by BaseActivity
+class LoginActivity : BaseActivity(){
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_login)
 
+    setupUI()
+  }
+
+  private fun setupUI() {
+
+    //btSignInGoogleButton.setOnClickListener(){v -> googleSignIn()}
+
+    btSignInGoogleButton.setOnClickListener(object: View.OnClickListener{
+      override fun onClick(p0: View?) {googleSignIn()}
+    })
 
   }
 
-  override fun onClick(view: View?) {
-    TODO(
-      "not implemented"
-    ) //To change body of created functions use File | Settings | File Templates.
-
-//    when (view!!.id){
-//      R.id.btSignInGoogleButton-> signInWithGoogle()
-////dataManager.getPreferences().
-//
-//    }
+  fun onClick(view: View?) {
+    //    when (view!!.id){
+    //      R.id.btSignInGoogleButton-> signInWithGoogle()
+    ////dataManager.getPreferences().
+    //
+    //    }
   }
 
-  private fun signInWithGoogle(): Unit {
+  private fun googleSignIn(): Unit {
+    val gso: GoogleSignInOptions =
+      GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+    val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+    val signInIntent = mGoogleSignInClient.signInIntent
+    startActivityForResult(signInIntent, AppConstants.RC_GOOGLE_SIGN_IN.intKey!!)
+  }
 
+  override fun onActivityResult(requestCode: Int, resultCode: Int,
+    data: Intent?) { //super.onActivityResult(requestCode, resultCode, data)
+
+    when (requestCode) {
+      AppConstants.RC_GOOGLE_SIGN_IN.intKey -> {
+        val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data!!)
+        handleSignInResunlt(task)
+      }
+    }
+  }
+
+  private fun handleSignInResunlt(completeTask: Task<GoogleSignInAccount>) {
+    try {
+      val account: GoogleSignInAccount = completeTask.result
+      saveToPrefs(account)
+    } catch (e: ApiException) {
+      Log.w(TAG, "signInResult:failed code=" + e.statusCode)
+    }
+  }
+
+  private fun saveToPrefs(account: GoogleSignInAccount) {
+    with(account) {
+      with(prefs) {
+        userInJson = User(email!!, displayName, familyName, givenName, photoUrl.toString())
+        userLoggedIn = true
+        userEmail = email!!
+        userDisplayName = displayName!!
+        userFamilyName = familyName!!
+        userGivenName = givenName!!
+        userPhotoUrl = photoUrl.toString()!!
+      }
+    }
   }
 }

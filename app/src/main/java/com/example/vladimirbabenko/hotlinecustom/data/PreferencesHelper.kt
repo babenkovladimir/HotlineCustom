@@ -9,49 +9,51 @@ import com.google.gson.Gson
 
 class PreferencesHelper(context: Context) : BasePreferencesHelper(context) {
 
-  fun clearUserPreferences(){
-    userLoggedIn = false
-    userEmail = ""
-    setUserFamilyName("")
-    setUserGivenName("")
-    setUserDisplayedName("")
-    setUserPhotoUrl("")
+  init {
+
   }
 
-//  fun isUserLoggedIn() = getBoolean(AppConstants.IS_USER_LOGGED.key)
-//  fun setIsUserLoggedIn(value: Boolean) = setBoolean(AppConstants.IS_USER_LOGGED.key, value)
+  fun clearUserPreferences() {
+    userLoggedIn = false
+    userEmail = ""
+    userFamilyName = ""
+    userGivenName = ""
+    userDisplayName = ""
+    userPhotoUrl = ""
+  }
 
-  var userLoggedIn:Boolean
+  var userLoggedIn: Boolean
     get() = getBoolean(AppConstants.IS_USER_LOGGED.key)
     set(value) = setBoolean(AppConstants.IS_USER_LOGGED.key, value)
 
-
-//  fun setUserEmail(email:String) = setString(AppConstants.USER_EMAIL.key, email)
-//  fun getUserEmail():String = getString(AppConstants.USER_EMAIL.key)
-
-  var userEmail:String
+  var userEmail: String
     get() = getString(AppConstants.USER_EMAIL.key)
     set(value) = setString(AppConstants.USER_EMAIL.key, value)
 
-  fun setUserDisplayedName(name:String) = setString(AppConstants.USER_DISPLAYED_NAME.key, name)
-  fun getDisplayedUserName():String = getString(AppConstants.USER_DISPLAYED_NAME.key)
+  var userDisplayName: String
+    get() = getString(AppConstants.USER_DISPLAYED_NAME.key)
+    set(value) = setString(AppConstants.USER_DISPLAYED_NAME.key, value)
 
-  fun setUserGivenName(givenName:String) = setString(AppConstants.USER_GIVEN_NAME.key, givenName)
-  fun getUserGivenName():String = getString(AppConstants.USER_GIVEN_NAME.key)
+  var userGivenName: String
+    get() = getString(AppConstants.USER_GIVEN_NAME.key)
+    set(value) = setString(AppConstants.USER_GIVEN_NAME.key, value)
 
-  fun setUserFamilyName(familyName:String) = setString(AppConstants.USER_FAMILY_NAME.key, familyName)
-  fun getUserFamilyName() = getString(AppConstants.USER_FAMILY_NAME.key)
+  var userFamilyName: String
+    get() = getString(AppConstants.USER_FAMILY_NAME.key)
+    set(value) = setString(AppConstants.USER_FAMILY_NAME.key, value)
 
-  fun setUserPhotoUrl(photoUrl:String) = setString(AppConstants.USER_FHOTO_URL.key, photoUrl)
-  fun getUserPhotoUrl() = getString(AppConstants.USER_FHOTO_URL.key)
+  var userPhotoUrl: String
+    get() = getString(AppConstants.USER_FHOTO_URL.key)
+    set(value) = setString(AppConstants.USER_FHOTO_URL.key, value)
 
-  fun saveUserByGson(user: User) {
-    Log.d("TAG", user.toString())
-    var userString: String = Gson().toJson(user)
-    Log.d("TAG", userString)
-    setString(AppConstants.USER_FROM_JSON.key, userString)
-  }
-
-  fun getUserFromGson(): User = Gson().fromJson(getString(AppConstants.USER_FROM_JSON.key), User::class.java)
+  //TODO How to create null user?
+  var userInJson: User
+    get() = Gson().fromJson(getString(AppConstants.USER_FROM_JSON.key), User::class.java)
+    set(user) {
+      Log.d("TAG", user.toString())
+      var userString: String = Gson().toJson(user)
+      Log.d("TAG", userString)
+      setString(AppConstants.USER_FROM_JSON.key, userString)
+    }
 }
 

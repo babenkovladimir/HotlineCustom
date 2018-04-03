@@ -48,16 +48,13 @@ public class ProfileFragmentJ extends Fragment {
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    User currentUser = mPreferencesHelper.getUserFromGson();
-
-
+    User currentUser = mPreferencesHelper.getUserInJson();
 
     //Picasso
     //    .get()
-    //    .load(mPreferencesHelper.getUserPhotoUrl())
+    //    .load(mPreferencesHelper.getUserPhotoUrl( ))
     //    .error(R.drawable.logo_activity_umbrella)
     //    .into(mCircleImageView);
-
 
     tvName.setText(currentUser.getGivenName());
     tvEmail.setText(currentUser.getEmail());

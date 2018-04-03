@@ -21,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import java.util.Objects;
 import org.jetbrains.annotations.Nullable;
 
 public class LoginActivityJ extends BaseActivityJ implements View.OnClickListener {
@@ -36,10 +37,9 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.activity_login);
     super.onCreate(savedInstanceState);
-    //prefs = new PreferencesHelper(this);
 
     setupUI();
-    checkForexitingSignedInUser();
+    //checkForexitingSignedInUser();
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -126,16 +126,16 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
   private void saveToPreffs(GoogleSignInAccount account) {
     // TODO add null check for account
 
-    prefs.saveUserByGson(
+    mDataManager.getPrefs().setUserInJson(
         new User(account.getEmail(), account.getDisplayName(), account.getFamilyName(),
-            account.getGivenName(), account.getPhotoUrl().toString()));
+            account.getGivenName(), Objects.requireNonNull(account.getPhotoUrl()).toString()));// Return stub
 
-    prefs.setUserLoggedIn(true);// by Kotli getter/setter
-    prefs.setUserEmail(account.getEmail());
-    prefs.setUserDisplayedName(account.getDisplayName());
-    prefs.setUserGivenName(account.getGivenName());
-    prefs.setUserFamilyName(account.getFamilyName());
-    prefs.setUserPhotoUrl(account.getPhotoUrl().toString());
+    mDataManager.getPrefs().setUserLoggedIn(true);// by Kotli getter/setter
+    mDataManager.getPrefs().setUserEmail(account.getEmail());
+    mDataManager.getPrefs().setUserDisplayName(account.getDisplayName());
+    mDataManager.getPrefs().setUserGivenName(account.getGivenName());
+    mDataManager.getPrefs().setUserFamilyName(account.getFamilyName());
+    mDataManager.getPrefs().setUserPhotoUrl(account.getPhotoUrl().toString());
   }
 
 }
