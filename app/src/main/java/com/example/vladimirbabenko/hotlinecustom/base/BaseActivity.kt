@@ -30,10 +30,14 @@ open abstract class BaseActivity() : AppCompatActivity() {
     setContentView(R.layout.activity_base)
     dataManager = DataManager.create(this)
     Log.d("TAG","BAseActivivti onCreate dataManager = "+dataManager)
-    //prefs = dataManager.prefs
+    prefs = dataManager.prefs
   }
 
   fun Context.extendedToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+  }
+
+  fun Context.logd(message: String) {
+    Log.d("TAG", message)
   }
 }

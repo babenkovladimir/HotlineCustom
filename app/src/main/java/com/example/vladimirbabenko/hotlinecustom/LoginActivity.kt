@@ -1,20 +1,28 @@
 package com.example.vladimirbabenko.hotlinecustom
 
+import android.app.Activity
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.FragmentManager
 import android.util.Log
 import android.view.View
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
 import com.example.vladimirbabenko.hotlinecustom.entity.User
+import com.example.vladimirbabenko.hotlinecustom.fragments.SignUpFragmentJ
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import kotlinx.android.synthetic.main.activity_login.btCheckForExitingUser
 import kotlinx.android.synthetic.main.activity_login.btSignInGoogleButton
+import kotlinx.android.synthetic.main.activity_login.btSignOutGoogle
+import kotlinx.android.synthetic.main.activity_login.btSignUp
 
-class LoginActivity : BaseActivity(){
+class LoginActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -26,15 +34,36 @@ class LoginActivity : BaseActivity(){
   private fun setupUI() {
 
     //btSignInGoogleButton.setOnClickListener(){v -> googleSignIn()}
-
-    btSignInGoogleButton.setOnClickListener(object: View.OnClickListener{
-      override fun onClick(p0: View?) {googleSignIn()}
+    btSignInGoogleButton.setOnClickListener(object : View.OnClickListener {
+      override fun onClick(p0: View?) {
+        googleSignIn()
+      }
     })
+    btSignInGoogleButton.setSize(SignInButton.SIZE_STANDARD)
+
+    btSignOutGoogle.setOnClickListener(){v->
+      val gso =
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+      val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+      mGoogleSignInClient.signOut()}
+    btCheckForExitingUser.setOnClickListener() {v -> checkForexitingSignedInUser() }
+    btSignUp.setOnClickListener({showSignUpFragment()})
 
   }
 
-  fun onClick(view: View?) {
-    //    when (view!!.id){
+  private fun checkForexitingSignedInUser(): Unit {
+    val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
+
+    if (account != null) {
+      with(GoogleSignIn.getLastSignedInAccount(this)!!) {
+        logd(email!!)
+        logd(displayName!!)
+        logd(photoUrl.toString()!!)
+      }
+    }else logd("User is S I G N E D   O U T")
+  }
+
+  fun onClick(view: View?) { //    when (view!!.id){
     //      R.id.btSignInGoogleButton-> signInWithGoogle()
     ////dataManager.getPreferences().
     //
@@ -64,6 +93,9 @@ class LoginActivity : BaseActivity(){
     try {
       val account: GoogleSignInAccount = completeTask.result
       saveToPrefs(account)
+
+      startActivity(Intent(applicationContext,MainScreenActivityJ::class.java))
+      finishAffinity()
     } catch (e: ApiException) {
       Log.w(TAG, "signInResult:failed code=" + e.statusCode)
     }
@@ -81,5 +113,13 @@ class LoginActivity : BaseActivity(){
         userPhotoUrl = photoUrl.toString()!!
       }
     }
+  }
+
+  private fun showSignUpFragment():Unit {
+    // Compiling :-)
+    //val signUpFragment: SignUpFragmentJ by lazy { SignUpFragmentJ.newInstance(null) }
+    val signUpFragment: SignUpFragmentJ = SignUpFragmentJ.newInstance(null)
+    val manager: FragmentManager = supportFragmentManager
+    signUpFragment.show(manager, "SignUpFragmentJ")
   }
 }

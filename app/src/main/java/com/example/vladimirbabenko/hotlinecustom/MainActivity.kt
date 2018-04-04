@@ -10,13 +10,14 @@ class MainActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    
+    var isUserLoggedIn: Boolean = dataManager.prefs.userLoggedIn
+    Log.d("TAG", "Mainactivity")
 
-    //TODO( insert from DataManager)
-    //var isUserLoggedIn: Boolean = dataManager.prefs.userLoggedIn
-    Log.d("TAG","Mainactivity")
-
-    if (true) startActivity(Intent(this, LoginActivityJ::class.java))
-       else
-          startActivity(Intent(this, MainScreenActivityJ::class.java))
+    if (isUserLoggedIn) {
+      startActivity(Intent(this, MainScreenActivityJ::class.java))
+    } else {
+      startActivity(Intent(this, LoginActivity::class.java))
+    }
   }
 }

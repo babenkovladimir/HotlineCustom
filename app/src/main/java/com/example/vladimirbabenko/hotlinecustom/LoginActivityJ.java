@@ -72,7 +72,7 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
   private void googleSigneOut() {
     GoogleSignInOptions gso =
         new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-    GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+    GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
     mGoogleSignInClient.signOut();
   }
 
@@ -86,12 +86,14 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
 
   }
 
+  //Done in Kotlin
   private void showSignUpFragment() {
     SignUpFragmentJ signUpFragmentJ = SignUpFragmentJ.newInstance(null);
     FragmentManager manager = getSupportFragmentManager();
     signUpFragmentJ.show(manager, "SignUpFragmentJ");
   }
 
+  // Done in Kotlin
   private void checkForexitingSignedInUser() {
     GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
     if (account != null) {
@@ -108,6 +110,8 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
     }
   }
 
+
+  // Done in Kotlin
   private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
     // TODO check for the intenet connection???
     try {
@@ -123,6 +127,7 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
     }
   }
 
+  // Done in Kotlin
   private void saveToPreffs(GoogleSignInAccount account) {
     // TODO add null check for account
 
