@@ -29,8 +29,11 @@
     </activity>
     <!-- <activity android:name=".base.BaseActivity"> -->
     <!-- </activity> -->
-    <activity android:name=".MainScreenActivityJ"
+    <activity
+        android:name=".MainScreenActivityJ"
         android:label="MainScreenJ">
+    </activity>
+    <activity android:name=".TermsActivity" android:label="Terms">
     </activity>
   </application>
 

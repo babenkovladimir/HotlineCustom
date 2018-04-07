@@ -13,7 +13,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.vladimirbabenko.hotlinecustom.BuildConfig;
-import com.example.vladimirbabenko.hotlinecustom.LoginActivityJ;
+import com.example.vladimirbabenko.hotlinecustom.LoginActivity;
 import com.example.vladimirbabenko.hotlinecustom.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -57,7 +57,7 @@ public class SettingsFragmentJ extends Fragment {
         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
         mGoogleSignInClient.signOut();
         getActivity().finishAffinity();
-        startActivity(new Intent(getContext(), LoginActivityJ.class));
+        startActivity(new Intent(getContext(), LoginActivity.class));
       }
       default:
         break;

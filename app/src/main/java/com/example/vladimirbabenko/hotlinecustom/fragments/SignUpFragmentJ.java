@@ -72,22 +72,20 @@ public class SignUpFragmentJ extends DialogFragment {
         //TODO FireBase??
         //TODO Preferences
         startActivity(new Intent(getContext(), MainScreenActivityJ.class));
-
-        }
-
-      });
-    }
-
-    private boolean isValidEmail(CharSequence email){
-      if (TextUtils.isEmpty(email)) {
-        return false;
-      } else {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
       }
-    }
+    });
+  }
 
-    private boolean isValidPassword (CharSequence password){
-      if (password.length() < 6 && password.length() > 0) return false;
-      return true;
+  private boolean isValidEmail(CharSequence email) {
+    if (TextUtils.isEmpty(email)) {
+      return false;
+    } else {
+      return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
   }
+
+  private boolean isValidPassword(CharSequence password) {
+    if (password.length() < 6 && password.length() > 0) return false;
+    return true;
+  }
+}

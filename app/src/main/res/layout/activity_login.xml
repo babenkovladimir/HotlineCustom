@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/logo_activity_background"
+    android:background="@drawable/login_background"
     android:gravity="bottom"
     android:orientation="vertical"
     tools:context=".LoginActivity"
@@ -13,18 +13,29 @@
 
 
   <ImageView
+      android:id="@+id/ivMainLogo"
       android:layout_width="200dp"
       android:layout_height="200dp"
       android:layout_gravity="center"
+      android:layout_marginBottom="150dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginStart="8dp"
       android:background="@drawable/logo_activity_umbrella"
+      android:contentDescription="mainLogo"
+      app:layout_constraintBottom_toTopOf="@+id/llSignInLayout"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+
       />
 
   <LinearLayout
+
       android:id="@+id/llSignInLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:contentDescription="SignIn layout"
       android:orientation="horizontal"
+      app:layout_constraintBottom_toTopOf="@id/flBottomButtons"
       >
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btSignInGoogleButton"
@@ -50,9 +61,15 @@
 
 
   <FrameLayout
+      android:id="@+id/flBottomButtons"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      android:layout_marginStart="8dp"
       android:orientation="horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       >
 
     <Button
@@ -62,22 +79,21 @@
         android:layout_gravity="start"
         android:background="@android:color/transparent"
         android:text="Sign up"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@android:color/black"
         android:textSize="9sp"
         />
 
     <Button
-
-        android:id="@+id/btForgot"
+        android:id="@+id/btTerms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:background="@android:color/transparent"
-        android:text="Forgot"
-        android:textColor="@android:color/darker_gray"
+        android:text="Terms"
+        android:textColor="@android:color/black"
         android:textSize="9sp"
         />
 
   </FrameLayout>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

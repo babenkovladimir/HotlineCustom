@@ -11,6 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.vladimirbabenko.hotlinecustom.R;
+import com.example.vladimirbabenko.hotlinecustom.base.BaseFragment;
 import com.example.vladimirbabenko.hotlinecustom.data.PreferencesHelper;
 import com.example.vladimirbabenko.hotlinecustom.entity.User;
 import com.liangfeizc.avatarview.AvatarView;

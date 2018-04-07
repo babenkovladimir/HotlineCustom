@@ -1,7 +1,5 @@
 package com.example.vladimirbabenko.hotlinecustom
 
-import android.app.Activity
-import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
@@ -21,8 +19,11 @@ import kotlinx.android.synthetic.main.activity_login.btCheckForExitingUser
 import kotlinx.android.synthetic.main.activity_login.btSignInGoogleButton
 import kotlinx.android.synthetic.main.activity_login.btSignOutGoogle
 import kotlinx.android.synthetic.main.activity_login.btSignUp
+import kotlinx.android.synthetic.main.activity_login.btTerms
 
 class LoginActivity : BaseActivity() {
+
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -49,6 +50,9 @@ class LoginActivity : BaseActivity() {
     btCheckForExitingUser.setOnClickListener() {v -> checkForexitingSignedInUser() }
     btSignUp.setOnClickListener({showSignUpFragment()})
 
+    btTerms.setOnClickListener({
+      startActivity(Intent(applicationContext, TermsActivity::class.java))
+    })
   }
 
   private fun checkForexitingSignedInUser(): Unit {
