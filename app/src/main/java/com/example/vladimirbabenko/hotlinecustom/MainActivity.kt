@@ -14,8 +14,8 @@ class MainActivity : BaseActivity() {
     var isUserLoggedIn: Boolean = dataManager.prefs.userLoggedIn
     Log.d("TAG", "Mainactivity")
 
-    if (!isUserLoggedIn) {
-      startActivity(Intent(this, MainScreenActivityJ::class.java))
+    if (isUserLoggedIn) {
+      startActivity(Intent(this, MainScreenActivity::class.java))
     } else {
       startActivity(Intent(this, LoginActivity::class.java))
     }

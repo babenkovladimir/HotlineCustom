@@ -33,6 +33,10 @@
         android:name=".MainScreenActivityJ"
         android:label="MainScreenJ">
     </activity>
+    <activity
+        android:name=".MainScreenActivity"
+        android:label="MainScreen">
+    </activity>
     <activity android:name=".TermsActivity" android:label="Terms">
     </activity>
   </application>
