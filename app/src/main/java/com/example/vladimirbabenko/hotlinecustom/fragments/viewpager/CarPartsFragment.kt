@@ -33,7 +33,7 @@ class CarPartsFragment() : Fragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?): View? {
     val view: View = inflater.inflate(R.layout.fragment_car_parts, container, false)
-    view.rvNoteBookRecyclerView.layoutManager = LinearLayoutManager(container!!.context)
+
 
     //TODO fil the fragment with logic
 
