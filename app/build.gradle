@@ -47,7 +47,7 @@ dependencies {
   annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
   // AvatarView
-  compile "com.liangfeizc:avatarview:0.0.1@aar"
+ implementation "com.liangfeizc:avatarview:0.0.1@aar"
 
   //SircleImageView - works
   implementation 'de.hdodenhof:circleimageview:2.2.0'

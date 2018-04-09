@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.vladimirbabenko.hotlinecustom.R;
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
+import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.TabsPagerFragmentAdapter;
 import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.j.TabsPagerFragmentAdapterJ;
 
 public class MainScreenFragmentJ extends Fragment {
@@ -37,7 +38,7 @@ public class MainScreenFragmentJ extends Fragment {
 
     ButterKnife.bind(this, view);
 
-    TabsPagerFragmentAdapterJ adapter = new TabsPagerFragmentAdapterJ(getChildFragmentManager());
+    TabsPagerFragmentAdapter adapter = new TabsPagerFragmentAdapter(getChildFragmentManager());
 
     mViewPager.setAdapter(adapter);
     mTabLayout.setupWithViewPager(mViewPager);
