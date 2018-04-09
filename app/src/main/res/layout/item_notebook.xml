@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+  <ImageView
+      android:id="@+id/ivNotebookImage"
+      android:layout_width="160dp"
+      android:layout_height="160dp"
+      android:layout_marginBottom="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:contentDescription="Notebook photo"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <TextView
+      android:id="@+id/tvNoteBrand"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_marginTop="24dp"
+      app:layout_constraintStart_toEndOf="@+id/ivNotebookImage"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="model Brand"
+      />
+  <TextView
+      android:id="@+id/tvNoteModel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintStart_toEndOf="@+id/ivNotebookImage"
+      app:layout_constraintTop_toBottomOf="@+id/tvNoteBrand"
+      tools:text="Notebook model"
+      />
+  <TextView
+      android:id="@+id/tvNoteProcessor"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintStart_toEndOf="@+id/ivNotebookImage"
+      app:layout_constraintTop_toBottomOf="@+id/tvNoteModel"
+      tools:text="Notebook Processor"
+      />
+
+  <TextView
+      android:id="@+id/tvNoteVideoCard"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintStart_toEndOf="@+id/ivNotebookImage"
+      app:layout_constraintTop_toBottomOf="@+id/tvNoteProcessor"
+      tools:text="Notebook videoCard"
+      />
+
+  <TextView
+      android:id="@+id/tvNoteHdd"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintStart_toEndOf="@+id/ivNotebookImage"
+      app:layout_constraintTop_toBottomOf="@+id/tvNoteVideoCard"
+      tools:text="Notebook Hdd"
+      />
+
+  <TextView
+      android:id="@+id/tvNotePrice"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tvNoteVideoCard"
+      tools:text="Note Price"
+      />
+
+
+
+
+</android.support.constraint.ConstraintLayout>

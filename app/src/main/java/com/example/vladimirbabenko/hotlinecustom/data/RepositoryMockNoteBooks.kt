@@ -7,7 +7,7 @@ class RepositoryMockNoteBookS : IRepositoryMock<NoteBook> {
   lateinit var noteBookList: ArrayList<NoteBook>
 
   val brands: Set<String> = setOf("Apple", "Dell", "HP", "Asus", "Lenovo", "Xiaomi")
-  val models = listOf<String>("Model 1", "Model 2", "Model 3", " model 4", "Model 5")
+  val models = listOf<String>("Model 1", "Model 2", "Model 3", "Model 4", "Model 5")
 
   // Map of processor and its price
   val processors: Map<String, Int> =
