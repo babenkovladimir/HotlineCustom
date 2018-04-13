@@ -1,6 +1,7 @@
-package com.example.vladimirbabenko.hotlinecustom.data;
+package com.example.vladimirbabenko.hotlinecustom.data.j;
 
 import android.content.Context;
+import com.example.vladimirbabenko.hotlinecustom.data.j.BasePreferencesHelperJ;
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants;
 
 public class PreferencesHelperJ extends BasePreferencesHelperJ {

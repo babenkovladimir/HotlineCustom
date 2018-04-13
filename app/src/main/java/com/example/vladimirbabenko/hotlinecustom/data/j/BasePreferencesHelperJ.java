@@ -1,4 +1,4 @@
-package com.example.vladimirbabenko.hotlinecustom.data;
+package com.example.vladimirbabenko.hotlinecustom.data.j;
 
 import android.content.Context;
 import android.content.SharedPreferences;

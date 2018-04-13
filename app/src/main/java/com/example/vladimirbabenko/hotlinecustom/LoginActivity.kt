@@ -8,6 +8,7 @@ import android.view.View
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
 import com.example.vladimirbabenko.hotlinecustom.entity.User
 import com.example.vladimirbabenko.hotlinecustom.fragments.SignUpFragmentJ
+import com.example.vladimirbabenko.hotlinecustom.j.MainScreenActivityJ
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -96,7 +97,8 @@ class LoginActivity : BaseActivity() {
       val account: GoogleSignInAccount = completeTask.result
       saveToPrefs(account)
 
-      startActivity(Intent(applicationContext,MainScreenActivityJ::class.java))
+      startActivity(Intent(applicationContext,
+        MainScreenActivityJ::class.java))
       finishAffinity()
     } catch (e: ApiException) {
       Log.w(TAG, "signInResult:failed code=" + e.statusCode)

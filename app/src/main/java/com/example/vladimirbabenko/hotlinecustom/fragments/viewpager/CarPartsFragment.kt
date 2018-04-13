@@ -27,7 +27,7 @@ class CarPartsFragment() : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    dataManager = DataManager.create(context!!)
+    dataManager = DataManager.create()
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

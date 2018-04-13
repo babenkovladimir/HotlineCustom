@@ -1,16 +1,14 @@
-package com.example.vladimirbabenko.hotlinecustom;
+package com.example.vladimirbabenko.hotlinecustom.j;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import butterknife.BindView;
-import com.example.vladimirbabenko.hotlinecustom.base.BaseActivityJ;
-import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
-import com.example.vladimirbabenko.hotlinecustom.data.PreferencesHelper;
+import com.example.vladimirbabenko.hotlinecustom.R;
+import com.example.vladimirbabenko.hotlinecustom.base.j.BaseActivityJ;
 import com.example.vladimirbabenko.hotlinecustom.entity.User;
 import com.example.vladimirbabenko.hotlinecustom.fragments.SignUpFragmentJ;
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants;

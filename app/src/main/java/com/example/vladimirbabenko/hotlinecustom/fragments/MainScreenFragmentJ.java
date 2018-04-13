@@ -31,7 +31,7 @@ public class MainScreenFragmentJ extends Fragment {
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    mDataManager = DataManager.Companion.create(container.getContext());
+    mDataManager = DataManager.Companion.create();
 
     View view = null;
     view = inflater.inflate(R.layout.fragment_main_screen, container, false);

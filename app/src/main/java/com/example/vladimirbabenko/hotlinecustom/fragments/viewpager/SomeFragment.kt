@@ -21,7 +21,7 @@ class SomeFragment(): Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    dataManager = DataManager.create(context!!)
+    dataManager = DataManager.create()
   }
 
 }

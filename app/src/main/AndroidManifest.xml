@@ -24,21 +24,32 @@
         android:label="Login">
     </activity>
     <activity
-        android:name=".LoginActivityJ"
+        android:name=".j.LoginActivityJ"
         android:label="LoginJ">
     </activity>
     <!-- <activity android:name=".base.BaseActivity"> -->
     <!-- </activity> -->
     <activity
-        android:name=".MainScreenActivityJ"
+        android:name=".j.MainScreenActivityJ"
         android:label="MainScreenJ">
     </activity>
     <activity
         android:name=".MainScreenActivity"
         android:label="MainScreen">
     </activity>
-    <activity android:name=".TermsActivity" android:label="Terms">
+    <activity
+        android:name=".TermsActivity"
+        android:label="Terms">
     </activity>
+
+    <receiver
+        android:name=".utils.MyReceiverCheckInternetConnectionJ"
+        android:enabled="true"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+      </intent-filter>
+    </receiver>
   </application>
 
 </manifest>

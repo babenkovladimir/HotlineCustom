@@ -1,4 +1,4 @@
-package com.example.vladimirbabenko.hotlinecustom;
+package com.example.vladimirbabenko.hotlinecustom.j;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -6,7 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 import butterknife.BindView;
-import com.example.vladimirbabenko.hotlinecustom.base.BaseActivityJ;
+import com.example.vladimirbabenko.hotlinecustom.R;
+import com.example.vladimirbabenko.hotlinecustom.base.j.BaseActivityJ;
 import com.example.vladimirbabenko.hotlinecustom.fragments.MainScreenFragmentJ;
 import com.example.vladimirbabenko.hotlinecustom.fragments.ProfileFragmentJ;
 import com.example.vladimirbabenko.hotlinecustom.fragments.SettingsFragmentJ;

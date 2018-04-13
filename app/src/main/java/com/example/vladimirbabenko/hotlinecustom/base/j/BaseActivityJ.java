@@ -1,4 +1,4 @@
-package com.example.vladimirbabenko.hotlinecustom.base;
+package com.example.vladimirbabenko.hotlinecustom.base.j;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +17,7 @@ public abstract class BaseActivityJ extends AppCompatActivity {
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    mDataManager = DataManager.Companion.create(this);
+    mDataManager = DataManager.Companion.create();
     ButterKnife.bind(this);
   }
 }

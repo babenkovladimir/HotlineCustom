@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.vladimirbabenko.hotlinecustom.MainScreenActivityJ;
+import com.example.vladimirbabenko.hotlinecustom.j.MainScreenActivityJ;
 import com.example.vladimirbabenko.hotlinecustom.R;
 
 public class SignUpFragmentJ extends DialogFragment {

@@ -1,4 +1,4 @@
-package com.example.vladimirbabenko.hotlinecustom.data
+package com.example.vladimirbabenko.hotlinecustom.data.mocks
 
 /*
 * List<out T> - readOnly Collection

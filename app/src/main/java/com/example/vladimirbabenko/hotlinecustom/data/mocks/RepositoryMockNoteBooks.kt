@@ -1,9 +1,10 @@
-package com.example.vladimirbabenko.hotlinecustom.data
+package com.example.vladimirbabenko.hotlinecustom.data.mocks
 
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import java.util.Random
 
-class RepositoryMockNoteBookS : IRepositoryMock<NoteBook> {
+class RepositoryMockNoteBookS :
+  IRepositoryMock<NoteBook> {
   lateinit var noteBookList: ArrayList<NoteBook>
 
   val brands: Set<String> = setOf("Apple", "Dell", "HP", "Asus", "Lenovo", "Xiaomi")
