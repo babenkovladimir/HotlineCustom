@@ -2,6 +2,7 @@ package com.example.vladimirbabenko.hotlinecustom.fragments
 
 import android.os.Bundle
 import android.os.Handler
+import android.provider.ContactsContract.Data
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DividerItemDecoration
@@ -12,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
@@ -23,7 +25,7 @@ class NoteBookListFragment : Fragment() {
 
   // for view
   private lateinit var returnView: View
-  private lateinit var rvNoteBookRecyclerView: RecyclerView
+  private lateinit var rvNoteBookRecycler: RecyclerView
   private lateinit var adapter: NoteBookRecyclerViewAdapter
   private lateinit var layoutManager: LinearLayoutManager
 
@@ -54,46 +56,56 @@ class NoteBookListFragment : Fragment() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     dataManager = DataManager.create()
-    notebooks = (dataManager.fetchMocks()).toMutableList()
-    notebooks = (dataManager.fetchMocks()).toMutableList()
-
-    dataManager.casheNoteBook.saveList(dataManager.fetchMocks())
+    // notebooks = (dataManager.fetchMocks()).toMutableList()
+    //notebooks = (dataManager.getCasheNotebook()).toMutableList()
+    //dataManager.casheNoteBook.saveList(dataManager.fetchMocks())
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?): View? {
 
+    // Create view element and detect recyclerView
     returnView = inflater.inflate(R.layout.fragment_notebook_list, container, false)
-    rvNoteBookRecyclerView = returnView.rvNoteBookRecyclerView
+    rvNoteBookRecycler = returnView.rvNoteBookRecyclerView
 
+    // Create LayoutManager and setup RecyclerView with its manager
     layoutManager = LinearLayoutManager(container!!.context, LinearLayout.VERTICAL, false)
-    rvNoteBookRecyclerView.layoutManager = layoutManager
+    rvNoteBookRecycler.layoutManager = layoutManager
 
+    // Create and setup adapter to RecyclerView
     adapter = NoteBookRecyclerViewAdapter()
-    rvNoteBookRecyclerView.adapter = adapter
+    rvNoteBookRecycler.adapter = adapter
 
-    val itemDecoration =
-      DividerItemDecoration(rvNoteBookRecyclerView.context, LinearLayout.VERTICAL)
-    rvNoteBookRecyclerView.addItemDecoration(itemDecoration)
-    adapter.setNoteBooks(notebooks)
+    // Create ItemDecoration and setup RV with ItemDecoration
+    val itemDecoration = DividerItemDecoration(rvNoteBookRecycler.context, LinearLayout.VERTICAL)
+    rvNoteBookRecycler.addItemDecoration(itemDecoration)
 
-    swipeRefreshLayout = returnView.srlSwipeRefresh
+    //if isConnected to internet
+    if (false) {
+      dataManager.casheNoteBook.saveList(dataManager.fetchMocks())
+      adapter.setNoteBooks(dataManager.getCasheNotebook())
+    }
+
+
+    adapter.setNoteBooks(dataManager.getCasheNotebook())
 
     setupRefreshLayout()
-
     return returnView
   }
 
   //todo - question about runnable in mHandler
   private fun setupRefreshLayout() {
+    swipeRefreshLayout = returnView.srlSwipeRefresh
     swipeRefreshLayout.setOnRefreshListener {
       mRunnable = Runnable() {
         // Download new Books
-
         swipeRefreshLayout.isRefreshing = false
       }
 
       mHandler.postDelayed(mRunnable, 1500)
+
+
+      Toast.makeText(context, "Is refreshing lyambda works", Toast.LENGTH_SHORT).show()
     }
   }
 }

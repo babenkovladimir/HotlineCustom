@@ -13,15 +13,15 @@ open class BaseCashe<in T, out B>(context: Context, PREFS_KEY: String, jsonKey: 
 
   fun saveList(vararg list: List<T>): Unit {
     val objectsList = Gson().toJson(list)
-    Log.d("TAG", "list entities : " + objectsList)
+    //Log.d("TAG", "/n/p list entities : " + objectsList)
     prefs.edit().putString(jsonKey, objectsList).apply()
   }
 
   fun getList(): List<B> {
     val jsonObject = prefs.getString(jsonKey, "NoNe string")
-    val type = object : TypeToken<List<B>>() {}.type
-    val res = Gson().fromJson<List<B>>(jsonObject, type)
-    Log.d("TAG", "List to print = " + res)
+    val type = object : TypeToken<ArrayList<B>>() {}.type
+    val res = Gson().fromJson<List<B>>(jsonObject, type).toList()
+
     return res
   }
 }

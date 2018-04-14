@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.vladimirbabenko.hotlinecustom">
 
   <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
 
   <application
       android:name=".base.App"
@@ -47,8 +50,21 @@
         android:enabled="true"
         android:exported="true">
       <intent-filter>
-        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+        <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+        <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+        <!--<action-->
+        <!--android:name="android.net.conn.CONNECTIVITY_CHANGE"-->
+        <!--tools:ignore="BatteryLife"/>-->
       </intent-filter>
+
+    </receiver>
+
+    <receiver android:name=".utils.BattaryChargingReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+        <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+      </intent-filter>
+
     </receiver>
   </application>
 
