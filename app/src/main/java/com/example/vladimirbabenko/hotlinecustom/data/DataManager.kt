@@ -16,6 +16,7 @@ class DataManager private constructor(context: Context) {
 
   val prefs: PreferencesHelper = PreferencesHelper(context)
   private val mRepositoryMockNoteBookS = RepositoryMockNoteBookS()
+  
 
   val casheNoteBook: CasheNotebookJ =
     CasheNotebookJ(context, CASHE_NOTEBOOK_PREF_KEY.key, CASH_NOTEBOOK_JSON_KEY.key)

@@ -81,13 +81,12 @@ class NoteBookListFragment : Fragment() {
     val itemDecoration = DividerItemDecoration(rvNoteBookRecycler.context, LinearLayout.VERTICAL)
     rvNoteBookRecycler.addItemDecoration(itemDecoration)
 
-    //if isConnected to internet
-    //if (false) {
-    if (InternetConnectionHelper.isConnection()) {
+    //
+    //Check for first run????
+    //if (InternetConnectionHelper.isConnection()) {
+    if (dataManager.prefs.withInternetConnection) {
       dataManager.casheNoteBook.saveList(dataManager.fetchMocks())
-      adapter.setNoteBooks(dataManager.getCasheNotebook())
     }
-
 
     adapter.setNoteBooks(dataManager.getCasheNotebook())
 
@@ -106,35 +105,10 @@ class NoteBookListFragment : Fragment() {
 
       mHandler.postDelayed(mRunnable, 1500)
 
-
       Toast.makeText(context, "Is refreshing lyambda works", Toast.LENGTH_SHORT).show()
     }
   }
 }
-
-//inner class MyAsynckLoader() : AsyncTask<Void, Int, NoteBook>() {
-//
-//  override fun doInBackground(vararg params: Void?): NoteBook {
-//    publishProgress(30)
-//    Thread.sleep(500)
-//    publishProgress(20)
-//    Thread.sleep(500)
-//    publishProgress(10)
-//
-//    return NoteBook("AlienWare", "AW 1556", 1000, "i7 4820HK", "1080TI", "samsung 960 PRO", "")
-//  }
-//
-//  override fun onProgressUpdate(vararg values: Int?) {
-//    super.onProgressUpdate(*values)
-//    Toast.makeText(context, "IsLoading " + values[0].toString(), Toast.LENGTH_SHORT)
-//  }
-//
-//  override fun onPostExecute(notebook: NoteBook?) {
-//    super.onPostExecute(notebook)
-//    notebooks.add(notebook!!)
-//    adapter.setNoteBooks(notebooks)
-//    srlSwipeRefresh.isRefreshing = false
-//  }
 
 
 

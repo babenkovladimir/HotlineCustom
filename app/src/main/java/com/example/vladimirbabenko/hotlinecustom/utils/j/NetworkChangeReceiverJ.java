@@ -1,4 +1,4 @@
-package com.example.vladimirbabenko.hotlinecustom.utils;
+package com.example.vladimirbabenko.hotlinecustom.utils.j;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
