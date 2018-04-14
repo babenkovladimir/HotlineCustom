@@ -55,5 +55,9 @@ class PreferencesHelper(context: Context) : BasePreferencesHelper(context) {
       Log.d("TAG", userString)
       setString(AppConstants.USER_FROM_JSON.key, userString)
     }
+
+  var withInternetConnection:Boolean
+  get() = getBoolean(AppConstants.IS_INTERNET_CONNECTED_KEY.key)
+  set(value) = setBoolean(AppConstants.IS_INTERNET_CONNECTED_KEY.key, value)
 }
 

@@ -17,7 +17,7 @@ class DataManager private constructor(context: Context) {
   val prefs: PreferencesHelper = PreferencesHelper(context)
   private val mRepositoryMockNoteBookS = RepositoryMockNoteBookS()
 
-  val casheNoteBook =
+  val casheNoteBook: CasheNotebookJ =
     CasheNotebookJ(context, CASHE_NOTEBOOK_PREF_KEY.key, CASH_NOTEBOOK_JSON_KEY.key)
 
   companion object {
@@ -30,11 +30,12 @@ class DataManager private constructor(context: Context) {
 
   fun fetchMocks(): List<NoteBook> = mRepositoryMockNoteBookS.fetchMocks()
 
-  fun getCasheNotebook() = casheNoteBook.getList()
 
-  fun saveCasheNoteBook(vararg list: List<NoteBook>) {
-    //casheNoteBook.saveList(list)
-  }
+  fun getCasheNotebook() = casheNoteBook.getList()
+  fun saveCasheNoteBook(list:List<NoteBook>) =  casheNoteBook.saveList(list)
+
+
+
 }
 
 

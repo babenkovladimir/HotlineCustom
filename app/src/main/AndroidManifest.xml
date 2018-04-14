@@ -45,23 +45,18 @@
         android:label="Terms">
     </activity>
 
-    <receiver
-        android:name=".utils.MyReceiverCheckInternetConnectionJ"
-        android:enabled="true"
-        android:exported="true">
-      <intent-filter>
-
-        <action
-        android:name="android.net.conn.CONNECTIVITY_CHANGE"
-        tools:ignore="BatteryLife"/>
-      </intent-filter>
-
-    </receiver>
-
     <receiver android:name=".utils.BattaryChargingReceiver">
       <intent-filter>
         <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
         <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+      </intent-filter>
+
+    </receiver>
+
+    <receiver android:name=".utils.NetworkChangeReceiverJ">
+      <intent-filter>
+        <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
+            tools:ignore="BatteryLife"/>
       </intent-filter>
 
     </receiver>

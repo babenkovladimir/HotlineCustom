@@ -18,6 +18,7 @@ import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.NoteBookRecyclerViewAdapter
+import com.example.vladimirbabenko.hotlinecustom.utils.InternetConnectionHelper
 import kotlinx.android.synthetic.main.fragment_notebook_list.view.rvNoteBookRecyclerView
 import kotlinx.android.synthetic.main.fragment_notebook_list.view.srlSwipeRefresh
 
@@ -58,7 +59,7 @@ class NoteBookListFragment : Fragment() {
     dataManager = DataManager.create()
     // notebooks = (dataManager.fetchMocks()).toMutableList()
     //notebooks = (dataManager.getCasheNotebook()).toMutableList()
-    dataManager.casheNoteBook.saveList(dataManager.fetchMocks())
+    dataManager.saveCasheNoteBook(dataManager.fetchMocks())
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -81,7 +82,8 @@ class NoteBookListFragment : Fragment() {
     rvNoteBookRecycler.addItemDecoration(itemDecoration)
 
     //if isConnected to internet
-    if (false) {
+    //if (false) {
+    if (InternetConnectionHelper.isConnection()) {
       dataManager.casheNoteBook.saveList(dataManager.fetchMocks())
       adapter.setNoteBooks(dataManager.getCasheNotebook())
     }

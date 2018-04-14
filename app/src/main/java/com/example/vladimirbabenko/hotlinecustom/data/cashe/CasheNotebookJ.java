@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class CasheNotebookJ {
 
@@ -28,7 +29,7 @@ public class CasheNotebookJ {
 
   public List<NoteBook> getList() {
     String jsonToParce = prefs.getString(jsonKey, "NoNe string");
-    Type type = new TypeToken<List<NoteBook>>(){}.getType();
+    Type type = new TypeToken<List<NoteBook>>() {}.getType();
     return gson.fromJson(jsonToParce, type);
   }
 }

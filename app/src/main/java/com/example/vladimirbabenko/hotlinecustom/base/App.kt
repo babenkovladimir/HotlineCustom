@@ -5,10 +5,12 @@ import android.content.Context
 import android.content.IntentFilter
 import android.os.Build
 import com.example.vladimirbabenko.hotlinecustom.utils.BattaryChargingReceiver
+import com.example.vladimirbabenko.hotlinecustom.utils.NetworkChangeReceiverJ
 
 class App : Application() {
 
   lateinit var battaryChargingReceiver: BattaryChargingReceiver
+  lateinit var networkChangeReceiver: NetworkChangeReceiverJ
 
   init {
     instance = this
@@ -28,10 +30,15 @@ class App : Application() {
 
 
     registerChargingReceiver()
+    registerNetworkChangeReceiver()
   }
 
-
-
+  private fun registerNetworkChangeReceiver() {
+     networkChangeReceiver= NetworkChangeReceiverJ()
+    val intentFilter=IntentFilter()
+    intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
+    registerReceiver(networkChangeReceiver, intentFilter)
+  }
 
   private fun registerChargingReceiver(): Unit { // O - Api 26
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

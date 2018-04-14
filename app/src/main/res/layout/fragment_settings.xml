@@ -27,7 +27,7 @@
       android:layout_marginStart="8dp"
 
       android:layout_marginTop="8dp"
-      android:text="Check charger connection"
+      android:text="Check internetConnection"
       app:layout_constraintEnd_toStartOf="@+id/btSignOutSettingsFragment"
       app:layout_constraintHorizontal_bias="0.571"
       app:layout_constraintStart_toStartOf="parent"
