@@ -58,7 +58,7 @@ class NoteBookListFragment : Fragment() {
     dataManager = DataManager.create()
     // notebooks = (dataManager.fetchMocks()).toMutableList()
     //notebooks = (dataManager.getCasheNotebook()).toMutableList()
-    //dataManager.casheNoteBook.saveList(dataManager.fetchMocks())
+    dataManager.casheNoteBook.saveList(dataManager.fetchMocks())
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
