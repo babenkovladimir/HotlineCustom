@@ -13,6 +13,9 @@ import android.widget.LinearLayout
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager.Companion
+import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
+import com.example.vladimirbabenko.hotlinecustom.utils.ItemClickSupport
 import kotlinx.android.synthetic.main.fragment_car_parts.view.rvCarParts
 
 class CarPartsFragment() : Fragment(), ICarPartsView {
@@ -30,7 +33,6 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     presenter = CarPartsPresenter()
     layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
     adapter = CarRVAdapter()
-
   }
 
   companion object {
@@ -62,6 +64,22 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
 
 
     adapter.setCarParts(dataManager.fetchCarMocks())
+    presenter.fetchMocks()
+
+    ItemClickSupport.addTo(recyclerView)
+      .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
+        override fun onItemClicked(recyclerView: RecyclerView?, position: Int, v: View?) {
+          presenter.onItemClicked(position)
+        }
+      })
+      .setOnItemLongClickListener(object : ItemClickSupport.OnItemLongClickListener{
+        override fun onItemLongClicked(recyclerView: RecyclerView?, position: Int,
+          v: View?): Boolean {
+          TODO(
+            "not implemented") //To change body of created functions use File | Settings | File Templates.
+          return true
+        }
+      })
 
     //TODO fil the fragment with logic and add some listner or some other feature
 
@@ -72,4 +90,20 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     presenter.unbind()
     super.onDestroy()
   }
+
+  // MVR implementation
+
+  override fun showPartList(partList: List<CarPart>) {
+    adapter.setCarParts(partList)
+  }
+
+  override fun handleSingleClick(position: Int?, carPart: CarPart) {
+    val bundle = Bundle()
+    bundle.putParcelable(AppConstants.CAR_PART_BUNDLE.key,carPart)
+
+    val partDetailsFragment = PartDetailsFragment.newInstance(bundle)
+    val manager = childFragmentManager
+    partDetailsFragment.show(manager, "PartDetails")
+  }
+
 }

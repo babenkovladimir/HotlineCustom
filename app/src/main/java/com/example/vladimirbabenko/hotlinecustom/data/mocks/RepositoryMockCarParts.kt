@@ -23,7 +23,7 @@ class RepositoryMockCarParts : IRepositoryMock<CarPart> {
       "https://wiki.zr.ru/images/thumb/c/c1/%D0%9A%D0%BE%D0%BB%D0%B5%D1%81%D0%B0_%D0%BF%D0%BE%D0%B4%D0%B2%D0%B5%D1%81%D0%BA%D0%B0_%D0%BC%D0%BE%D1%81%D1%82%D1%8B_6.jpg/500px-%D0%9A%D0%BE%D0%BB%D0%B5%D1%81%D0%B0_%D0%BF%D0%BE%D0%B4%D0%B2%D0%B5%D1%81%D0%BA%D0%B0_%D0%BC%D0%BE%D1%81%D1%82%D1%8B_6.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/3/34/KFZ1560.jpg")
   val description =
-    "Lorem ipsum dolor sit amet, ad delenit epicurei pri. Qui et delenit appareat efficiantur. Mel accusamus accommodare ei, vix atqui necessitatibus ne, mel an ipsum assum suavitate. Cibo solet honestatis per et, pro an quodsi recteque. Nominati inimicus gubergren usu in, te eos tale veri. Hinc utroque has et, te nam probo diceret.\n" + "\n" + "Vim debet nihil inimicus ea, nec et altera ponderum conclusionemque. Vis harum graecis deterruisset an. Eos dicant vivendo copiosae ei, abhorreant instructior per ne. Sit in diam aeterno, te his nonumes legendos consectetuer.\n" + "\n" + "Tantas aliquip consulatu nec et. Quando sanctus hendrerit ea vix. Has ea petentium cotidieque, facete aliquip hendrerit cu cum. Usu cu eros ludus, habeo probatus lobortis est at, malis ullum similique duo et. Veniam periculis te mea, duis partiendo maiestatis pri an. Ex quando vocibus dignissim vim, pro brute movet an, ius facer fierent ei."
+    "Lorem ipsum dolor sit amet, ad delenit epicurei pri. Qui et delenit appareat efficiantur. Mel accusamus accommodare ei, vix atqui necessitatibus ne, mel an ipsum assum suavitate. Cibo solet honestatis per et, pro an quodsi recteque. Nominati inimicus gubergren usu in, te eos tale veri..."
 
   init {
 

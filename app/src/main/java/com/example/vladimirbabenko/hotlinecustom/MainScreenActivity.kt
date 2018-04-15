@@ -1,6 +1,7 @@
 package com.example.vladimirbabenko.hotlinecustom
 
 import android.os.Bundle
+import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
@@ -17,17 +18,22 @@ class MainScreenActivity : BaseActivity() {
 
   val mainScreenFragment: MainScreenFragmentJ by lazy { MainScreenFragmentJ() }
   val profileFragment: ProfileFragmentJ by lazy { ProfileFragmentJ() }
-  val settingsFragment: SettingsFragmentJ by lazy { SettingsFragmentJ() }
-
+  val settingsFragment: SettingsFragmentJ by lazy { SettingsFragmentJ() } //lateinit var navigationView:NavigationView
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main_screen)
 
-    setupUI()
+    setupUI(savedInstanceState)
   }
 
-  private fun setupUI() {
+
+  override fun onSaveInstanceState(outState: Bundle?) {
+    outState?.putInt("opened_fragment", navigationView.selectedItemId)
+    super.onSaveInstanceState(outState)
+  }
+
+  private fun setupUI(savedInstanceState: Bundle?) {
     navigationView.inflateMenu(R.menu.menu_navigation_items)
 
     navigationView.setOnNavigationItemSelectedListener({
@@ -40,7 +46,11 @@ class MainScreenActivity : BaseActivity() {
         }
       }
     })
-    setupFirstAppearenceFragment()
+
+    val currentFragment = savedInstanceState?.getInt("opened_fragment")
+    if (currentFragment != null) {
+      navigationView.selectedItemId = currentFragment
+    } else setupFirstAppearenceFragment()
   }
 
   private fun replaceFragment(newFragment: Fragment, tag: String): Boolean {
@@ -51,6 +61,7 @@ class MainScreenActivity : BaseActivity() {
 
   private fun setupFirstAppearenceFragment() {
     val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-    ft.replace(R.id.flContainer, mainScreenFragment , MAIN_SCREEN_FRAGMENT_TAG).commit() //No AddToBackStack
+    ft.replace(R.id.flContainer, mainScreenFragment, MAIN_SCREEN_FRAGMENT_TAG)
+      .commit() //No AddToBackStack
   }
 }
