@@ -1,10 +1,13 @@
 package com.example.vladimirbabenko.hotlinecustom.data.mocks
 
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
+import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 
 class RepositoryMockCarParts : IRepositoryMock<CarPart> {
 
-  val id = Array(10, { yo -> 123456 * yo })
+  lateinit var partList: ArrayList<CarPart>
+
+  val id = Array(10, { yo -> 123456 * yo +1248754})
   val partName = listOf<String>("Rings", "Piston", "Gasket", "rocker", "Valve", "Oil", "Air filter",
     "Accumulyator", "Tyre", "Disc")
   val partPrice = listOf(120, 300, 200, 80, 50, 12, 5, 80, 70, 75)
@@ -27,11 +30,15 @@ class RepositoryMockCarParts : IRepositoryMock<CarPart> {
   }
 
   override fun fetchMocks(): List<CarPart> {
-    val partList = ArrayList<CarPart>()
+    partList = ArrayList()
 
-    for (i in id) {
+
+    //for (i in id) { throw arrayOutOfBounException
+    for (i in 0..9) {
       partList.add(CarPart(id[i], partName[i], partPrice[i], partPhotoUrl[i], description))
     }
     return partList
   }
+
+
 }

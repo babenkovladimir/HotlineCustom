@@ -2,4 +2,7 @@ package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.car_part_f
 
 import com.example.vladimirbabenko.hotlinecustom.base.mvp.BasePresenter
 
-class CarPartsPresenter: BasePresenter<CarPartsFragment>() {}
+class CarPartsPresenter : BasePresenter<CarPartsFragment>() {
+
+
+}

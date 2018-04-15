@@ -40,7 +40,11 @@ class NoteBookRecyclerViewAdapter :
   class NotebookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(noteBook: NoteBook) {
-      Picasso.get().load(noteBook.photUrl).fit().placeholder(R.drawable.ic_launcher_foreground)
+
+      Picasso.get()
+        .load(noteBook.photUrl)
+        .fit()
+        .placeholder(R.drawable.ic_launcher_foreground)
         .into(itemView.ivNotebookImage)
 
       itemView.tvNoteBrand.text = noteBook.brand
