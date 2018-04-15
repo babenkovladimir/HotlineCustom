@@ -4,24 +4,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
-    android:layout_height="400dp"
+    android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:background="@drawable/parts_backdround"
     >
 
   <TextView
       android:id="@+id/tvPartNameDetails"
+      android:layout_width="83dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="24dp"
+      android:text="Part name"
+      android:textColor="@android:color/black"
+      android:textSize="18sp"
+      app:layout_constraintStart_toEndOf="@+id/ivCarPartImageDialog"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <TextView
+      android:id="@+id/tvCarPriceDetails"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="8dp"
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
-      android:text="Part name"
-      android:textSize="26sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.502"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
+      android:textColor="@android:color/black"
+      android:textSize="18sp"
+      app:layout_constraintStart_toEndOf="@+id/ivCarPartImageDialog"
+      app:layout_constraintTop_toBottomOf="@+id/tvPartNameDetails"
+      tools:text="1000$"
       />
 
   <ImageView
@@ -32,25 +44,43 @@
       android:layout_marginStart="8dp"
       android:layout_marginTop="16dp"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.064"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/tvPartNameDetails"
+      app:layout_constraintTop_toTopOf="parent"
       tools:background="@drawable/car_spares_parts"
       />
 
   <TextView
       android:id="@+id/tvCarPartDetailsDescription"
       android:layout_width="match_parent"
-      android:layout_height="150dp"
-      android:textColor="@android:color/black"
+      android:layout_height="148dp"
       android:layout_marginBottom="8dp"
       android:layout_marginEnd="8dp"
       android:layout_marginStart="8dp"
-      android:layout_marginTop="24dp"
+      android:layout_marginTop="8dp"
+      android:textColor="@android:color/black"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/ivCarPartImageDialog"
+      tools:text="Bla  bla vlas"
+      />
+
+  <Button
+      android:id="@+id/btCarPartCloseDetails"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="8dp"
+
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:text="Close"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tvCarPartDetailsDescription"
       />
 
 

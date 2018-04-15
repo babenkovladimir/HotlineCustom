@@ -10,8 +10,10 @@ import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btCarPartCloseDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.ivCarPartImageDialog
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPartDetailsDescription
+import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPriceDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvPartNameDetails
 
 class PartDetailsFragment():DialogFragment() {
@@ -38,10 +40,14 @@ class PartDetailsFragment():DialogFragment() {
 
     val carPart = arguments?.getParcelable(AppConstants.CAR_PART_BUNDLE.key) as? CarPart
 
-    Log.d("TAGDETAIL", carPart.toString())
     view.tvPartNameDetails.text=carPart?.name
     view.tvCarPartDetailsDescription.text=carPart?.description
+    view.tvCarPriceDetails.text = "$ "+carPart?.partPrice.toString()
+    view.btCarPartCloseDetails.setOnClickListener(){
+      //TODO( add id to bucket???)
 
+      dismiss()
+    }
 
     Picasso.get()
       .load(carPart?.partPhotoUrl)
