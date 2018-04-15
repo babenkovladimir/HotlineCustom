@@ -1,16 +1,14 @@
-package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager
+package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.car_part_fragment_mvp
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
-import kotlinx.android.synthetic.main.fragment_notebook_list.view.rvNoteBookRecyclerView
 
-class CarPartsFragment() : Fragment() {
+class CarPartsFragment() : Fragment(), ICarPartsView {
 
   lateinit var dataManager: DataManager
 
@@ -19,7 +17,8 @@ class CarPartsFragment() : Fragment() {
       get
 
     fun newInstance(bundle: Bundle?): CarPartsFragment {
-      val fragment = CarPartsFragment()
+      val fragment =
+        CarPartsFragment()
       fragment.arguments = bundle
       return fragment
     }
@@ -27,7 +26,7 @@ class CarPartsFragment() : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    dataManager = DataManager.create()
+    dataManager = DataManager.create
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.example.vladimirbabenko.hotlinecustom.fragments.NoteBookListFragment
+import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.car_part_fragment_mvp.CarPartsFragment
 
 class TabsPagerFragmentAdapter(val fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

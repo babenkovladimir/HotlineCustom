@@ -19,6 +19,6 @@ public class NetworkChangeReceiverJ extends BroadcastReceiver {
 
     Toast.makeText(context, "Network is avaible " + isOnline, Toast.LENGTH_SHORT).show();
 
-    DataManager.Companion.create().getPrefs().setWithInternetConnection(isOnline);
+    DataManager.Companion.getCreate().getPrefs().setWithInternetConnection(isOnline);
   }
 }

@@ -28,7 +28,7 @@ open abstract class BaseActivity() : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_base)
-    dataManager = DataManager.create()
+    dataManager = DataManager.create
     Log.d("TAG","BAseActivivti onCreate dataManager = "+dataManager)
     prefs = dataManager.prefs
   }

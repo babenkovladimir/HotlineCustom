@@ -17,7 +17,7 @@ public abstract class BaseActivityJ extends AppCompatActivity {
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    mDataManager = DataManager.Companion.create();
+    mDataManager = DataManager.Companion.getCreate();
     ButterKnife.bind(this);
   }
 }

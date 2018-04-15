@@ -11,7 +11,7 @@ open class BaseCashe<in T, out B>(context: Context, PREFS_KEY: String, jsonKey: 
   val prefs: SharedPreferences = context.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
   val jsonKey = jsonKey
 
-  fun saveList(vararg list: List<T>): Unit {
+  fun saveList(list: List<T>): Unit {
     val objectsList = Gson().toJson(list)
     //Log.d("TAG", "/n/p list entities : " + objectsList)
     prefs.edit().putString(jsonKey, objectsList).apply()

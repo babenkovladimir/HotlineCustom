@@ -32,7 +32,7 @@ public class NoteBookListFragmentJ extends Fragment {
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    mDataManager = DataManager.Companion.create();
+    mDataManager = DataManager.Companion.getCreate();
   }
 
   @Nullable @Override

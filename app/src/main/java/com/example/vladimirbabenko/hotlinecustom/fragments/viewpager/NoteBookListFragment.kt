@@ -56,7 +56,7 @@ class NoteBookListFragment : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    dataManager = DataManager.create()
+    dataManager = DataManager.create
     // notebooks = (dataManager.fetchMocks()).toMutableList()
     //notebooks = (dataManager.getCasheNotebook()).toMutableList()
     dataManager.saveCasheNoteBook(dataManager.fetchMocks())

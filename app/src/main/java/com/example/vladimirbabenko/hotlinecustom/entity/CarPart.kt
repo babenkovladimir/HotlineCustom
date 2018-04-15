@@ -1,4 +1,4 @@
 package com.example.vladimirbabenko.hotlinecustom.entity
-// TODO(describe data class CarPart)
 
-data class CarPart(val id: Int, val name:String){}
+
+data class CarPart(val id: Int, val name:String, val partPrice:Int, val partPhotoUrl:String?="", val description:String?="")
