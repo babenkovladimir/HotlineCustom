@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPartIdDetails
 import kotlinx.android.synthetic.main.item_car_part.view.ivCarPartImage
 import kotlinx.android.synthetic.main.item_car_part.view.tvCarParId
 import kotlinx.android.synthetic.main.item_car_part.view.tvCarPartName
