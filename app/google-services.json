@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "723782124428",
+    "firebase_url": "https://hotlinecustom-1522308334546.firebaseio.com",
+    "project_id": "hotlinecustom-1522308334546",
+    "storage_bucket": "hotlinecustom-1522308334546.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723782124428:android:411529954f4d7b57",
+        "android_client_info": {
+          "package_name": "com.example.vladimirbabenko.hotlinecustom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723782124428-6mtefj8524f442ihie2753vqkqlpu1co.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "723782124428-h7d90cpk1qr022it1csija7bpkb7dm9c.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "723782124428-2sid5uf22vrt6chntsg4542vc5r3fgn0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vladimirbabenko.hotlinecustom",
+            "certificate_hash": "6c8642281baf3ba0c173bce87647807af122264f"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4-EwpZTNtPaKqn3C6ERjpUTJLHUwPiJQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723782124428-6mtefj8524f442ihie2753vqkqlpu1co.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
