@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btCarPartCloseDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.ivCarPartImageDialog
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPartDetailsDescription
+import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPartIdDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPriceDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvPartNameDetails
 
@@ -43,6 +44,8 @@ class PartDetailsFragment():DialogFragment() {
     view.tvPartNameDetails.text=carPart?.name
     view.tvCarPartDetailsDescription.text=carPart?.description
     view.tvCarPriceDetails.text = "$ "+carPart?.partPrice.toString()
+    view.tvCarPartIdDetails.text= "id:${carPart?.id.toString()}"
+
     view.btCarPartCloseDetails.setOnClickListener(){
       //TODO( add id to bucket???)
 

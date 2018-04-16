@@ -107,7 +107,7 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     super.onDestroy()
   }
 
-  // MVR implementation
+  // MVP implementation
 
   override fun showPartList(partList: List<CarPart>) {
     adapter.setCarParts(partList)

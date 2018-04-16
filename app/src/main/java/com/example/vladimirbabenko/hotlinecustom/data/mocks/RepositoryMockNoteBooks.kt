@@ -6,16 +6,31 @@ import java.util.Random
 class RepositoryMockNoteBookS : IRepositoryMock<NoteBook> {
   lateinit var noteBookList: ArrayList<NoteBook>
 
-  val brands: Set<String> = setOf("Apple", "Dell", "HP", "Asus", "Lenovo", "Xiaomi")
-  val models = listOf<String>("Model 1", "Model 2", "Model 3", "Model 4", "Model 5")
+  val ids = Array(16,{ jorik -> 12478+12*jorik})
+
+  val brands: List<String> =
+    listOf("Apple", "Dell", "HP", "Asus",
+          "Lenovo", "Xiaomi", "Apple", "Dell",
+          "HP", "Asus", "Lenovo", "Xiaomi",
+          "AlienWare", "MiNoteBookPro", "Acer", "Levono")
+  val models = listOf<String>(
+      "Model 1", "Model 2", "Model 3", "Model 4",
+      "Model 5", "Model 6", "Model 7", "Model 8",
+      "Model 9", "Model 10", "Model 11", "Model 12",
+      "Model 13", "Model 14", "Model 15", "Model 16")
 
   // Map of processor and its price
   val processors: Map<String, Int> =
-    mapOf(Pair("Core i3", 100), Pair("Core i5", 200), Pair("Core i7", 300), Pair("Ryzen 3", 50))
-
-  val videoCards: Map<String, Int> =
-    mapOf(Pair("GeForce 1050", 220), Pair("GeForce 1050 Ti", 270), Pair("GeForce 1060", 330),
-      Pair("RX470", 180), Pair("RX580", 215))
+    mapOf(
+      Pair("Core i3", 110), Pair("Core i5", 210), Pair("Core i7", 310), Pair("Ryzen 3", 51),
+      Pair("Core i3", 120), Pair("Core i5", 220), Pair("Core i7", 320), Pair("Ryzen 3", 53),
+      Pair("Core i3", 130), Pair("Core i5", 230), Pair("Core i7", 330), Pair("Ryzen 3", 54),
+      Pair("Core i3", 140), Pair("Core i5", 240), Pair("Core i7", 340), Pair("Ryzen 3", 55))
+  val videoCards: Map<String, Int> =mapOf(
+    Pair("GeForce 1050", 220), Pair("GeForce 1050 Ti", 200), Pair("GeForce 1060", 530), Pair("RX470", 480),
+    Pair("RX580", 235),Pair("GeForce 1050", 250), Pair("GeForce 1050 Ti", 270),Pair("GeForce 1060", 330),
+    Pair("RX580", 245),Pair("GeForce 1050", 290), Pair("GeForce 1050 Ti", 270),Pair("GeForce 1060", 330),
+    Pair("RX580", 265),Pair("GeForce 1050", 280), Pair("GeForce 1050 Ti", 270),Pair("GeForce 1060", 330))
 
   // only for testing Mutable Collections
   val hdds: MutableMap<String, Int> =
@@ -35,9 +50,10 @@ class RepositoryMockNoteBookS : IRepositoryMock<NoteBook> {
 
     noteBookList = ArrayList()
 
-    for (i in 1..15) {
-      var brand = brands.elementAt(Random().nextInt(brands.size))
-      var model = models.elementAt(Random().nextInt(models.size))
+    for (i in 0..15) {
+      var id = ids.elementAt(i)
+      var brand = brands.elementAt(i)
+      var model = models.elementAt(i)
       var processor = processors.entries.elementAt(Random().nextInt(processors.size))
       var videoCard = videoCards.entries.elementAt(Random().nextInt(processors.size))
       var hdd = hdds.entries.elementAt(Random().nextInt(hdds.size))
@@ -47,7 +63,7 @@ class RepositoryMockNoteBookS : IRepositoryMock<NoteBook> {
 
 
       noteBookList.add(
-        NoteBook(brand, model, price, processor.key, videoCard.key, hdd.key, photoUrl))
+        NoteBook(id, brand, model, price, processor.key, videoCard.key, hdd.key, photoUrl))
     }
 
     return noteBookList

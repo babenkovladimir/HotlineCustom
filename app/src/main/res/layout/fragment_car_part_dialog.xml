@@ -23,6 +23,19 @@
       />
 
   <TextView
+      android:id="@+id/tvCarPartIdDetails"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="16dp"
+      android:layout_marginStart="8dp"
+      android:textColor="@android:color/black"
+      android:textSize="18sp"
+      app:layout_constraintBottom_toBottomOf="@+id/ivCarPartImageDialog"
+      app:layout_constraintStart_toEndOf="@+id/ivCarPartImageDialog"
+      android:text="id:222434234"
+      />
+
+  <TextView
       android:id="@+id/tvCarPriceDetails"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -55,15 +68,15 @@
       android:layout_width="match_parent"
       android:layout_height="148dp"
       android:layout_marginBottom="8dp"
-      android:layout_marginEnd="8dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
       android:textColor="@android:color/black"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
+
+
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/ivCarPartImageDialog"
+
       tools:text="Bla  bla vlas"
       />
 
@@ -73,7 +86,6 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="8dp"
       android:layout_marginEnd="8dp"
-
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:text="Close"
