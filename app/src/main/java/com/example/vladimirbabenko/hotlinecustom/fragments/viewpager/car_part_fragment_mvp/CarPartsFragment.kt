@@ -2,10 +2,13 @@ package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.car_part_f
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.ContextMenu
+import android.view.ContextMenu.ContextMenuInfo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,12 +74,20 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
         override fun onItemClicked(recyclerView: RecyclerView?, position: Int, v: View?) {
           presenter.onItemClicked(position)
         }
-      })
-      .setOnItemLongClickListener(object : ItemClickSupport.OnItemLongClickListener{
+      }).setOnItemLongClickListener(object : ItemClickSupport.OnItemLongClickListener {
         override fun onItemLongClicked(recyclerView: RecyclerView?, position: Int,
           v: View?): Boolean {
-          TODO(
-            "not implemented") //To change body of created functions use File | Settings | File Templates.
+
+          val builder = AlertDialog.Builder(container!!.context)
+          builder
+            .setTitle("Spear part")
+            .setMessage("Want delete this from list?")
+            .setCancelable(true)
+
+          val dialog = builder.create()
+          dialog.show()
+
+
           return true
         }
       })
@@ -84,6 +95,11 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     //TODO fil the fragment with logic and add some listner or some other feature
 
     return view
+  }
+
+  override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenuInfo?) {
+
+    super.onCreateContextMenu(menu, v, menuInfo)
   }
 
   override fun onDestroy() {
@@ -99,11 +115,10 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
 
   override fun handleSingleClick(position: Int?, carPart: CarPart) {
     val bundle = Bundle()
-    bundle.putParcelable(AppConstants.CAR_PART_BUNDLE.key,carPart)
+    bundle.putParcelable(AppConstants.CAR_PART_BUNDLE.key, carPart)
 
     val partDetailsFragment = PartDetailsFragment.newInstance(bundle)
     val manager = childFragmentManager
     partDetailsFragment.show(manager, "PartDetails")
   }
-
 }

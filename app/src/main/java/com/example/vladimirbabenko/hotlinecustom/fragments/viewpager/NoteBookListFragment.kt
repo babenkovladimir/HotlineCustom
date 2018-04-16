@@ -85,7 +85,7 @@ class NoteBookListFragment : Fragment() {
     //Check for first run????
     //if (InternetConnectionHelper.isConnection()) {
     if (dataManager.prefs.withInternetConnection) {
-      dataManager.casheNoteBook.saveList(dataManager.fetchMocks())
+      dataManager.saveCasheNoteBook(dataManager.fetchMocks())
     }
 
     adapter.setNoteBooks(dataManager.getCasheNotebook())
