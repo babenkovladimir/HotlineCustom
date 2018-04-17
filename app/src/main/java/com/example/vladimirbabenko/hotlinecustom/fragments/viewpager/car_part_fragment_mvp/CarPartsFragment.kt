@@ -7,15 +7,12 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.ContextMenu
-import android.view.ContextMenu.ContextMenuInfo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
-import com.example.vladimirbabenko.hotlinecustom.data.DataManager.Companion
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.example.vladimirbabenko.hotlinecustom.utils.ItemClickSupport
@@ -65,9 +62,9 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     recyclerView.addItemDecoration(itemDecoration)
     recyclerView.adapter = adapter
 
-
     adapter.setCarParts(dataManager.fetchCarMocks())
     presenter.fetchMocks()
+    
 
     ItemClickSupport.addTo(recyclerView)
       .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
@@ -86,8 +83,6 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
 
           val dialog = builder.create()
           dialog.show()
-
-
           return true
         }
       })
@@ -97,9 +92,11 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     return view
   }
 
-  override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenuInfo?) {
+  override fun onSaveInstanceState(outState: Bundle) {
+   // outState.putInt("position", )
+    super.onSaveInstanceState(outState)
 
-    super.onCreateContextMenu(menu, v, menuInfo)
+
   }
 
   override fun onDestroy() {

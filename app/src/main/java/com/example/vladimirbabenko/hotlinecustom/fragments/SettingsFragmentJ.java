@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import com.example.vladimirbabenko.hotlinecustom.BuildConfig;
 import com.example.vladimirbabenko.hotlinecustom.LoginActivity;
 import com.example.vladimirbabenko.hotlinecustom.R;
+import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
 import com.example.vladimirbabenko.hotlinecustom.utils.InternetConnectionHelper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -29,6 +30,13 @@ public class SettingsFragmentJ extends Fragment {
   @BindView(R.id.btSignOutSettingsFragment) Button btSignOut;
   @BindView(R.id.tvBuildVersionSettingsFragment) TextView tvBuildVersion;
   @BindView(R.id.btBattaryState) Button btBattaryState;
+
+  private DataManager mDataManager;
+
+  @Override public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    mDataManager = DataManager.Companion.getCreate();
+  }
 
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -69,6 +77,7 @@ public class SettingsFragmentJ extends Fragment {
         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
         mGoogleSignInClient.signOut();
         getActivity().finishAffinity();
+        mDataManager.getPrefs().clearUserPreferences();
         startActivity(new Intent(getContext(), LoginActivity.class));
       }
       default:
