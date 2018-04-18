@@ -10,7 +10,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.LinearLayout
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
@@ -64,21 +67,25 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
 
     adapter.setCarParts(dataManager.fetchCarMocks())
     presenter.fetchMocks()
-    
 
     ItemClickSupport.addTo(recyclerView)
       .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
         override fun onItemClicked(recyclerView: RecyclerView?, position: Int, v: View?) {
-          presenter.onItemClicked(position)
+
+          YoYo
+            .with(Techniques.ZoomIn)
+            .onEnd({presenter.onItemClicked(position)})
+            .duration(700)
+            .playOn(v)
+
+
         }
       }).setOnItemLongClickListener(object : ItemClickSupport.OnItemLongClickListener {
         override fun onItemLongClicked(recyclerView: RecyclerView?, position: Int,
           v: View?): Boolean {
 
           val builder = AlertDialog.Builder(container!!.context)
-          builder
-            .setTitle("Spear part")
-            .setMessage("Want delete this from list?")
+          builder.setTitle("Spear part").setMessage("Want delete this from list?")
             .setCancelable(true)
 
           val dialog = builder.create()
@@ -92,11 +99,8 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     return view
   }
 
-  override fun onSaveInstanceState(outState: Bundle) {
-   // outState.putInt("position", )
+  override fun onSaveInstanceState(outState: Bundle) { // outState.putInt("position", )
     super.onSaveInstanceState(outState)
-
-
   }
 
   override fun onDestroy() {

@@ -18,7 +18,6 @@ class MainActivity : BaseActivity() {
 
 
 
-
     if (isUserLoggedIn) {
       finishAffinity()
       startActivity(Intent(this, MainScreenActivity::class.java))

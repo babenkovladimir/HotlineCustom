@@ -36,6 +36,7 @@ class MainScreenActivity : BaseActivity() {
   private fun setupUI(savedInstanceState: Bundle?) {
     navigationView.inflateMenu(R.menu.menu_navigation_items)
 
+
     navigationView.setOnNavigationItemSelectedListener({
       when (it.itemId) {
         R.id.bnmiMain -> replaceFragment(mainScreenFragment, MAIN_SCREEN_FRAGMENT_TAG)

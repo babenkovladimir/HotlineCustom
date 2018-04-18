@@ -14,11 +14,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.NoteBookRecyclerViewAdapter
 import com.example.vladimirbabenko.hotlinecustom.utils.InternetConnectionHelper
+import com.example.vladimirbabenko.hotlinecustom.utils.ItemClickSupport
 import kotlinx.android.synthetic.main.fragment_notebook_list.view.rvNoteBookRecyclerView
 import kotlinx.android.synthetic.main.fragment_notebook_list.view.srlSwipeRefresh
 
@@ -87,6 +90,15 @@ class NoteBookListFragment : Fragment() {
     if (dataManager.prefs.withInternetConnection) {
       dataManager.saveCasheNoteBook(dataManager.fetchMocks())
     }
+
+    ItemClickSupport.addTo(rvNoteBookRecycler).setOnItemClickListener(object : ItemClickSupport.OnItemClickListener{
+      override fun onItemClicked(recyclerView: RecyclerView?, position: Int, v: View?) {
+        YoYo.with(Techniques.DropOut)
+          .duration(700)
+          .playOn(v);
+      }
+    })
+
 
     adapter.setNoteBooks(dataManager.getCasheNotebook())
 
