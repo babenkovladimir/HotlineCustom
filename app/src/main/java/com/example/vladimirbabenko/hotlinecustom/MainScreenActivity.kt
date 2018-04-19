@@ -47,12 +47,13 @@ class MainScreenActivity : BaseActivity() {
 
     //ActionItemBadge.update(menu?.findItem(R.id.miBascket),11)
     ActionItemBadge.update(this, menu!!.findItem(R.id.miBascket),
-      ContextCompat.getDrawable(this, R.drawable.ic_shopping_cart_24dp), ActionItemBadge.BadgeStyles.RED.getStyle(), dataManager.getFromBasket().size)
+      ContextCompat.getDrawable(this, R.drawable.ic_shopping_cart_24dp), ActionItemBadge.BadgeStyles.RED.getStyle(),bageCount)//dataManager.getFromBasket().size)
     return true
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     Toast.makeText(this, "before onvalidate", Toast.LENGTH_SHORT).show()
+    bageCount--
     invalidateOptionsMenu()
     return true
     return super.onOptionsItemSelected(item)

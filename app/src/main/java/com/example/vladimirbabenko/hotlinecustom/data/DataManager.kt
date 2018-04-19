@@ -8,6 +8,7 @@ import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheCarPart
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheNotebookJ
 import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockCarParts
 import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockNoteBookS
+import com.example.vladimirbabenko.hotlinecustom.entity.BascketItem
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
@@ -46,8 +47,8 @@ class DataManager private constructor(context: Context) {
   fun getCasheCarPart() = casheCarPart.getList()
   fun saveCasheCarPart(list: List<CarPart>) = casheCarPart.saveList(list)
 
-  fun addBascket(id: Int) = bascketHelper.put(id)
-  fun getFromBasket():MutableSet<Int> = bascketHelper.get()
+  fun addBascket(id: BascketItem) = bascketHelper.put(id)
+  fun getFromBasket():MutableSet<BascketItem> = bascketHelper.get()
 }
 
 
