@@ -77,6 +77,7 @@ dependencies {
   implementation 'com.mikepenz:iconics-core:2.9.3'
   //appcompat
   //implementation "com.android.support:appcompat-v7:${supportLibVersion}" // Commited because dependency already in project
+  compile 'com.mikepenz:fontawesome-typeface:4.7.0.0@aar'
 
 }
 apply plugin: 'com.google.gms.google-services'

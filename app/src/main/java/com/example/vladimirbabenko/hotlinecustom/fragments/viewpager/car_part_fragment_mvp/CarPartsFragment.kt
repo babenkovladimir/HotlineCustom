@@ -75,7 +75,7 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
           YoYo
             .with(Techniques.ZoomIn)
             .onEnd({presenter.onItemClicked(position)})
-            .duration(700)
+            .duration(200)
             .playOn(v)
 
 

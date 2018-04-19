@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.vladimirbabenko.hotlinecustom.R
+import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_car_part.view.btCarPartStar
 import kotlinx.android.synthetic.main.item_car_part.view.ivCarPartImage
 import kotlinx.android.synthetic.main.item_car_part.view.tvCarParId
 import kotlinx.android.synthetic.main.item_car_part.view.tvCarPartName
@@ -15,6 +17,7 @@ import kotlinx.android.synthetic.main.item_car_part.view.tvCarPartPrice
 class CarRVAdapter : RecyclerView.Adapter<CarRVAdapter.CarViewHolder>() {
   
   private var partList: List<CarPart> = emptyList() // Use delegateObservable
+  private val dataManager = DataManager.create
 
   fun setCarParts(partList: List<CarPart>){
     this.partList = partList
@@ -29,12 +32,14 @@ class CarRVAdapter : RecyclerView.Adapter<CarRVAdapter.CarViewHolder>() {
   override fun getItemCount(): Int = partList.size
 
   override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-    holder.bind(partList[position])
+    //TODO is in Bascket
+    var isInBasket = true
+    holder.bind(partList[position], isInBasket )
   }
 
   class CarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(carPart: CarPart){
+    fun bind(carPart: CarPart, isInBasket: Boolean){
 
       Picasso.get()
         .load(carPart.partPhotoUrl)
@@ -45,6 +50,8 @@ class CarRVAdapter : RecyclerView.Adapter<CarRVAdapter.CarViewHolder>() {
       itemView.tvCarParId.text=carPart.id.toString()
       itemView.tvCarPartName.text = carPart.name
       itemView.tvCarPartPrice.text = "price: ${carPart.partPrice}"
+      itemView.btCarPartStar.isSelected = isInBasket
+
     }
 
   }

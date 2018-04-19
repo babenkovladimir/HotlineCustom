@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.R
+import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.squareup.picasso.Picasso
@@ -24,6 +25,8 @@ import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPriceDe
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvPartNameDetails
 
 class PartDetailsFragment() : DialogFragment() {
+
+  val dataManager = DataManager.create
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -64,6 +67,7 @@ class PartDetailsFragment() : DialogFragment() {
 
     view.btCarPartCloseDetails.setOnClickListener() {
       //TODO( add id to bucket???)
+      if (view.btStarButton.isSelected) dataManager.addBascket(carPart!!.id)
 
       dismiss()
     }

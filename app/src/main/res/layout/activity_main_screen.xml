@@ -5,19 +5,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".j.MainScreenActivityJ"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="MainScreenActivity"
+
     >
+
+
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="56dp"
+      android:background="@color/colorPrimary"
+      android:elevation="4dp"
+      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+      app:title="HotlineCustom"
+      />
 
   <FrameLayout
       android:id="@+id/flContainer"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-
+      android:layout_marginTop="56dp"
+      android:layout_marginBottom="56dp"
       app:layout_constraintBottom_toTopOf="@id/navigationView"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginBottom="56dp"
+      app:layout_constraintTop_toBottomOf="parent"
 
       />
 
@@ -27,9 +41,9 @@
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
       app:itemBackground="@color/colorWhite"
-      app:layout_constraintBottom_toBottomOf="parent"
       app:itemIconTint="@color/colorPrimary"
       app:itemTextColor="@color/colorRed"
+      app:layout_constraintBottom_toBottomOf="parent"
       tools:menu="@menu/menu_navigation_items"
       />
   <!--tools tag - only for view. Not for compilation-->

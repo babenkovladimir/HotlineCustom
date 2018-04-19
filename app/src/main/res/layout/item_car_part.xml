@@ -5,18 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    tools:layout_editor_absoluteY="25dp"
     >
 
   <android.support.v7.widget.CardView
       xmlns:card_view="http://schemas.android.com/apk/res-auto"
       android:id="@+id/card_view"
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       card_view:cardBackgroundColor="@color/colorApricot"
       card_view:cardCornerRadius="4dp"
-      card_view:cardUseCompatPadding="true"
       card_view:cardElevation="8dp"
-      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:cardUseCompatPadding="true"
       card_view:layout_constraintEnd_toEndOf="parent"
       card_view:layout_constraintStart_toStartOf="parent"
       card_view:layout_constraintTop_toTopOf="parent"
@@ -84,8 +84,24 @@
             tools:text="price 100$"
             />
 
+
       </LinearLayout>
+
+      <Button
+          android:id="@+id/btCarPartStar"
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:background="@drawable/states_star"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          android:layout_marginTop="8dp"
+          android:layout_marginEnd="8dp"
+          android:enabled="false"
+
+
+          />
     </android.support.constraint.ConstraintLayout>
+
   </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>
