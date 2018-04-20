@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.item_notebook.view.tvNoteVideoCard
 class NoteBookRecyclerViewAdapter :
   RecyclerView.Adapter<NoteBookRecyclerViewAdapter.NotebookViewHolder>() {
 
-  private var notebooks: List<NoteBook> = emptyList() // Here we can use Delegates Observable
+  private var notebooks: List<NoteBook> = emptyList() // Here we can use Delegates Observable???
 
   fun setNoteBooks(notebooks: List<NoteBook>) {
     this.notebooks = notebooks

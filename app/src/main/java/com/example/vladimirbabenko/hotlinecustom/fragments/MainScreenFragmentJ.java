@@ -26,12 +26,13 @@ public class MainScreenFragmentJ extends Fragment {
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    mDataManager = DataManager.Companion.getCreate();
   }
 
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    mDataManager = DataManager.Companion.getCreate();
+
 
     View view = null;
     view = inflater.inflate(R.layout.fragment_main_screen, container, false);
@@ -42,7 +43,6 @@ public class MainScreenFragmentJ extends Fragment {
 
     mViewPager.setAdapter(adapter);
     mTabLayout.setupWithViewPager(mViewPager);
-
 
     return view;
   }

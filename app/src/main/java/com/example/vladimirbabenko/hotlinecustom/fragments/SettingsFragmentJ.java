@@ -78,6 +78,7 @@ public class SettingsFragmentJ extends Fragment {
         mGoogleSignInClient.signOut();
         getActivity().finishAffinity();
         mDataManager.getPrefs().clearUserPreferences();
+        mDataManager.clearBascket();
         startActivity(new Intent(getContext(), LoginActivity.class));
       }
       default:

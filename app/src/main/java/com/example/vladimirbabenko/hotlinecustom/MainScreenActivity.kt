@@ -1,5 +1,6 @@
 package com.example.vladimirbabenko.hotlinecustom
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
@@ -7,6 +8,7 @@ import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.vladimirbabenko.hotlinecustom.bascket_activity_mvp.BascketActivity
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
 import com.example.vladimirbabenko.hotlinecustom.fragments.MainScreenFragmentJ
 import com.example.vladimirbabenko.hotlinecustom.fragments.ProfileFragmentJ
@@ -47,16 +49,18 @@ class MainScreenActivity : BaseActivity() {
 
     //ActionItemBadge.update(menu?.findItem(R.id.miBascket),11)
     ActionItemBadge.update(this, menu!!.findItem(R.id.miBascket),
-      ContextCompat.getDrawable(this, R.drawable.ic_shopping_cart_24dp), ActionItemBadge.BadgeStyles.RED.getStyle(),bageCount)//dataManager.getFromBasket().size)
+      ContextCompat.getDrawable(this, R.drawable.ic_shopping_cart_24dp), ActionItemBadge.BadgeStyles.RED.getStyle(),dataManager.getFromBasket().size)//dataManager.getFromBasket().size)
     return true
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     Toast.makeText(this, "before onvalidate", Toast.LENGTH_SHORT).show()
-    bageCount--
+
     invalidateOptionsMenu()
+    val intent= Intent(this, BascketActivity::class.java)
+    startActivity(intent)
     return true
-    return super.onOptionsItemSelected(item)
+
   }
 
 

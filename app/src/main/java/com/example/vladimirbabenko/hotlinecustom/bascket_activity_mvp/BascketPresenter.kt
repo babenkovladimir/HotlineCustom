@@ -13,9 +13,7 @@ class BascketPresenter():BasePresenter<BascketActivity>(){
   }
 
   fun fetchMocks(){
-    // Create bascket wrapper
-
-    //getView().show
+    getView()?.showList(dataManager.getFromBasket())
   }
 
 

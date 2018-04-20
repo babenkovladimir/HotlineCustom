@@ -26,7 +26,12 @@ class BascketHelper(val context: Context, val BASCKET_PREFERENCEC_KEY: String,
     if (jsonString.equals("")) {
       return emptySet<BascketItem>().toMutableSet()
     }
+
     set = gson.fromJson(jsonString, type)
     return set
+  }
+
+  fun clearBascket(){
+    prefs.edit().putString(json_key, "").apply()
   }
 }

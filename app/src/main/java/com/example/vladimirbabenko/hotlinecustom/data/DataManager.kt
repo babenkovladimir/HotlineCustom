@@ -49,6 +49,7 @@ class DataManager private constructor(context: Context) {
 
   fun addBascket(id: BascketItem) = bascketHelper.put(id)
   fun getFromBasket():MutableSet<BascketItem> = bascketHelper.get()
+  fun clearBascket() = bascketHelper.clearBascket()
 }
 
 
