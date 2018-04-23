@@ -49,6 +49,15 @@
       app:layout_constraintStart_toStartOf="parent"
       tools:text="Build version"
       />
+  <Button
+      android:id="@+id/btTestEventBus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="36dp"
+      android:layout_marginTop="36dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btBattaryState"
+      />
 
 
 </android.support.constraint.ConstraintLayout>

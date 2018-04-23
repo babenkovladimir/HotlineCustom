@@ -4,10 +4,10 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
 
-data class BascketItem (val id: Int, val name:String, val price: Int, val photoUrl:String) :
+data class BascketItem (val id: Int, val name:String, val price: Int, val photoUrl:String, var num:Int) :
   Parcelable {
   constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString(), parcel.readInt(),
-    parcel.readString()) {
+    parcel.readString(), parcel.readInt()) {
   }
 
   override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -15,6 +15,7 @@ data class BascketItem (val id: Int, val name:String, val price: Int, val photoU
     parcel.writeString(name)
     parcel.writeInt(price)
     parcel.writeString(photoUrl)
+    parcel.writeInt(num)
   }
 
   override fun describeContents(): Int {

@@ -59,5 +59,11 @@ class PreferencesHelper(context: Context) : BasePreferencesHelper(context) {
   var withInternetConnection:Boolean
   get() = getBoolean(AppConstants.IS_INTERNET_CONNECTED_KEY.key)
   set(value) = setBoolean(AppConstants.IS_INTERNET_CONNECTED_KEY.key, value)
+
+  var bascketSize:Int = getInt(AppConstants.BASKETSIZE.key)
+  get
+  fun modifyBascketSize(value: Int) = setInt(AppConstants.BASKETSIZE.key, bascketSize+value)
+
+
 }
 

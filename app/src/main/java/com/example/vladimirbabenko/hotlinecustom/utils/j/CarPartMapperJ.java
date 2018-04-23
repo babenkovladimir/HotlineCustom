@@ -7,6 +7,6 @@ import com.example.vladimirbabenko.hotlinecustom.utils.j.BaseMapperJ;
 public class CarPartMapperJ implements BaseMapperJ<CarPart, BascketItem> {
 
   @Override public BascketItem transform(CarPart in) {
-    return new BascketItem(in.getId(), in.getName(), in.getPartPrice(), in.getPartPhotoUrl());
+    return new BascketItem(in.getId(), in.getName(), in.getPartPrice(), in.getPartPhotoUrl(),1);
   }
 }

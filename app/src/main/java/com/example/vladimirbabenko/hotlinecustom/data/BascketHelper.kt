@@ -19,10 +19,15 @@ class BascketHelper(val context: Context, val BASCKET_PREFERENCEC_KEY: String,
     prefs.edit().putString(json_key, gson.toJson(set)).apply()
   }
 
+  fun putAll(items: MutableSet<BascketItem>){
+    clearBascket()
+    prefs.edit().putString(json_key, gson.toJson(items)).apply()
+  }
+
   fun get(): MutableSet<BascketItem> {
     val set: MutableSet<BascketItem>
     val jsonString = prefs.getString(json_key, "")
-    Log.d("TAGBASCKET", jsonString)
+
     if (jsonString.equals("")) {
       return emptySet<BascketItem>().toMutableSet()
     }
@@ -33,5 +38,16 @@ class BascketHelper(val context: Context, val BASCKET_PREFERENCEC_KEY: String,
 
   fun clearBascket(){
     prefs.edit().putString(json_key, "").apply()
+  }
+
+  fun removeFromBaskcet(item: BascketItem?) {
+    val set: MutableSet<BascketItem> = get().toMutableSet()
+
+    var newSet: MutableSet<BascketItem> = emptySet<BascketItem>().toMutableSet()
+
+    for(i  in 0..set.size-1)
+      if (!set.elementAt(i).id.equals(item?.id)) {newSet.add(set.elementAt(i))}
+
+    prefs.edit().putString(json_key, gson.toJson(newSet)).apply()
   }
 }

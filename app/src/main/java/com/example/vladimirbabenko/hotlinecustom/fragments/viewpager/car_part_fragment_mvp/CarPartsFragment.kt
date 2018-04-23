@@ -10,29 +10,29 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.example.vladimirbabenko.hotlinecustom.R
-import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
+import com.example.vladimirbabenko.hotlinecustom.event_bus.Events.CarFragmentRefresh
+import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.example.vladimirbabenko.hotlinecustom.utils.ItemClickSupport
+import com.squareup.otto.Subscribe
 import kotlinx.android.synthetic.main.fragment_car_parts.view.rvCarParts
 
 class CarPartsFragment() : Fragment(), ICarPartsView {
 
-  lateinit var dataManager: DataManager
   val presenter: CarPartsPresenter
+  val bus = GlobalBus.instance
   lateinit var adapter: CarRVAdapter
   lateinit var recyclerView: RecyclerView
   lateinit var layoutManager: LinearLayoutManager
   lateinit var itemDecoration: DividerItemDecoration
 
   init {
-    Log.d("TAG", "CarPartsFragment() initialization and get instance of presenter")
-    dataManager = DataManager.create
     presenter = CarPartsPresenter()
     layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
     adapter = CarRVAdapter()
@@ -51,8 +51,8 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    dataManager = DataManager.create
     presenter.bind(this)
+    bus.register(this)
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +65,6 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     recyclerView.addItemDecoration(itemDecoration)
     recyclerView.adapter = adapter
 
-    adapter.setCarParts(dataManager.fetchCarMocks())
     presenter.fetchMocks()
 
     ItemClickSupport.addTo(recyclerView)
@@ -74,7 +73,7 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
 
           YoYo
             .with(Techniques.ZoomIn)
-            .onEnd({presenter.onItemClicked(position)})
+            .onEnd({presenter.onItemClicked(position)})// Обращение к преентеру показать
             .duration(200)
             .playOn(v)
 
@@ -85,7 +84,7 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
           v: View?): Boolean {
 
           val builder = AlertDialog.Builder(container!!.context)
-          builder.setTitle("Spear part").setMessage("Want delete this from list?")
+          builder.setTitle("Spear part").setMessage("You should by it!!!")
             .setCancelable(true)
 
           val dialog = builder.create()
@@ -99,24 +98,32 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     return view
   }
 
+
+  @Subscribe fun getFromDialog(refresh: CarFragmentRefresh){
+    Toast.makeText(context, "Catch", Toast.LENGTH_LONG).show()
+   presenter.fetchMocks()
+  }
+
   override fun onSaveInstanceState(outState: Bundle) { // outState.putInt("position", )
     super.onSaveInstanceState(outState)
   }
 
   override fun onDestroy() {
     presenter.unbind()
+    bus.unregister(this)
     super.onDestroy()
   }
 
   // MVP implementation
 
-  override fun showPartList(partList: List<CarPart>) {
-    adapter.setCarParts(partList)
+  override fun showPartList(partList: List<CarPart>, chosenList: MutableList<Int>) {
+    adapter.setCarParts(partList, chosenList)
   }
 
-  override fun handleSingleClick(position: Int?, carPart: CarPart) {
+  override fun handleSingleClick(position: Int?, carPart: CarPart, isInBascket: Boolean) {
     val bundle = Bundle()
     bundle.putParcelable(AppConstants.CAR_PART_BUNDLE.key, carPart)
+    bundle.putBoolean("IsInBascket", isInBascket)
 
     val partDetailsFragment = PartDetailsFragment.newInstance(bundle)
     val manager = childFragmentManager

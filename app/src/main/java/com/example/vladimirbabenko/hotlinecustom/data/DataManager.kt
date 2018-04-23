@@ -3,7 +3,6 @@ package com.example.vladimirbabenko.hotlinecustom.data
 import android.content.Context
 import android.util.Log
 import com.example.vladimirbabenko.hotlinecustom.base.App
-import com.example.vladimirbabenko.hotlinecustom.data.cashe.BaseCashe
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheCarPart
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheNotebookJ
 import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockCarParts
@@ -12,6 +11,7 @@ import com.example.vladimirbabenko.hotlinecustom.entity.BascketItem
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
+import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
 
 class DataManager private constructor(context: Context) {
 
@@ -19,15 +19,18 @@ class DataManager private constructor(context: Context) {
   private val mRepositoryMockNoteBookS = RepositoryMockNoteBookS()
   private val mRepositoryMockCarParts = RepositoryMockCarParts()
 
+
   private val casheNoteBook: CasheNotebookJ =
     CasheNotebookJ(context, AppConstants.CASHE_NOTEBOOK_PREF_KEY.key,
       AppConstants.CASH_NOTEBOOK_JSON_KEY.key)
 
-  private val casheCarPart = CasheCarPart(context, AppConstants.CASHE_CAR_PART_PREFS_KEY.key,
-    AppConstants.CASH_CAR_PART_JSON_KEY.key)
+  private val casheCarPart: CasheCarPart by lazy(SYNCHRONIZED) {
+    CasheCarPart(context, AppConstants.CASHE_CAR_PART_PREFS_KEY.key,
+      AppConstants.CASH_CAR_PART_JSON_KEY.key)
+  }
 
-  private val bascketHelper =
-    BascketHelper(context, AppConstants.BASCKET_PREFS_KEY.key, AppConstants.BASCKET_JSON_KEY.key)
+  private val bascketHelper:BascketHelper by lazy(SYNCHRONIZED) { BascketHelper(context, AppConstants.BASCKET_PREFS_KEY.key, AppConstants.BASCKET_JSON_KEY.key)}
+
 
   init {
     Log.d("TAG", "DataMandger is Created in companion object")
@@ -47,9 +50,15 @@ class DataManager private constructor(context: Context) {
   fun getCasheCarPart() = casheCarPart.getList()
   fun saveCasheCarPart(list: List<CarPart>) = casheCarPart.saveList(list)
 
+
   fun addBascket(id: BascketItem) = bascketHelper.put(id)
-  fun getFromBasket():MutableSet<BascketItem> = bascketHelper.get()
+
+  fun getFromBasket(): MutableSet<BascketItem> = bascketHelper.get()
+
   fun clearBascket() = bascketHelper.clearBascket()
+
+  fun removeFromBascket(bascketItem: BascketItem?) { bascketHelper.removeFromBaskcet(bascketItem)
+  }
 }
 
 

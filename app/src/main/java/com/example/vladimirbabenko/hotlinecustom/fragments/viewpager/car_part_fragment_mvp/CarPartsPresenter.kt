@@ -3,6 +3,7 @@ package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.car_part_f
 import android.util.Log
 import com.example.vladimirbabenko.hotlinecustom.base.mvp.BasePresenter
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
+import com.example.vladimirbabenko.hotlinecustom.entity.BascketItem
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 
 class CarPartsPresenter() : BasePresenter<CarPartsFragment>() {
@@ -14,14 +15,22 @@ class CarPartsPresenter() : BasePresenter<CarPartsFragment>() {
     if (dataManager.prefs.withInternetConnection) {
       dataManager.saveCasheCarPart(dataManager.fetchCarMocks())
     }
-
     partList = dataManager.getCasheCarPart()
-    Log.d("TAGLIST", partList.toString())
-   // partList = dataManager.fetchCarMocks()
-    getView()?.showPartList(partList)
+    getView()?.showPartList(dataManager.getCasheCarPart(), getChosenList())
   }
 
   fun onItemClicked(position: Int) {
-    getView()?.handleSingleClick(position, partList[position])
+
+    val carPart = dataManager.getCasheCarPart().get(position)
+
+    getView()?.handleSingleClick(position, carPart, getChosenList().contains(carPart.id))
   }
+
+  fun getChosenList(): MutableList<Int>{
+    var chosenList = mutableListOf<Int>()
+    val items = dataManager.getFromBasket()
+    for(item in items) chosenList.add(item.id)
+    return chosenList
+  }
+
 }

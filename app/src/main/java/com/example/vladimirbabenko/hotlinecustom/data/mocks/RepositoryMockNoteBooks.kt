@@ -45,6 +45,7 @@ class RepositoryMockNoteBookS : IRepositoryMock<NoteBook> {
       "https://img.aleco.com.ua/products/_original/p82583_15084902_noutbuk_dell_inspiron_3552_i35c45dil_6b.jpg",
       "https://itc.ua/img/ko/2004/51/HP_nw8000.jpg",
       "https://itc.ua/wp-content/uploads/2015/04/acer-671x362.jpg")
+  val description = "Lorem ipsum dolor sit amet, ad delenit epicurei pri. Qui et delenit appareat efficiantur. Mel accusamus accommodare ei, vix atqui necessitatibus ne, mel an ipsum assum suavitate. Cibo solet honestatis per et, pro an quodsi recteque. Nominati inimicus gubergren usu in, te eos tale veri..."
 
   override fun fetchMocks(): List<NoteBook> {
 
@@ -63,7 +64,7 @@ class RepositoryMockNoteBookS : IRepositoryMock<NoteBook> {
 
 
       noteBookList.add(
-        NoteBook(id, brand, model, price, processor.key, videoCard.key, hdd.key, photoUrl))
+        NoteBook(id, brand, model, price, processor.key, videoCard.key, hdd.key, photoUrl, description))
     }
 
     return noteBookList

@@ -2,13 +2,11 @@ package com.example.vladimirbabenko.hotlinecustom.fragments
 
 import android.os.Bundle
 import android.os.Handler
-import android.provider.ContactsContract.Data
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,13 +17,14 @@ import com.daimajia.androidanimations.library.YoYo
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
-import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.NoteBookRecyclerViewAdapter
-import com.example.vladimirbabenko.hotlinecustom.utils.InternetConnectionHelper
+import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment.NoteBookDetailsFragment
+import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment.NoteBookRecyclerViewAdapter
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.example.vladimirbabenko.hotlinecustom.utils.ItemClickSupport
 import kotlinx.android.synthetic.main.fragment_notebook_list.view.rvNoteBookRecyclerView
 import kotlinx.android.synthetic.main.fragment_notebook_list.view.srlSwipeRefresh
 
-class NoteBookListFragment : Fragment() {
+class NoteBookFragment : Fragment() {
 
   // for view
   private lateinit var returnView: View
@@ -50,8 +49,8 @@ class NoteBookListFragment : Fragment() {
     val title: String = "NoteBooks"
       get
 
-    fun newInstance(bundle: Bundle?): NoteBookListFragment {
-      val fragment = NoteBookListFragment()
+    fun newInstance(bundle: Bundle?): NoteBookFragment {
+      val fragment = NoteBookFragment()
       fragment.arguments = bundle
       return fragment
     }
@@ -59,8 +58,7 @@ class NoteBookListFragment : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    dataManager = DataManager.create
-    // notebooks = (dataManager.fetchMocks()).toMutableList()
+    dataManager = DataManager.create // notebooks = (dataManager.fetchMocks()).toMutableList()
     //notebooks = (dataManager.getCasheNotebook()).toMutableList()
     dataManager.saveCasheNoteBook(dataManager.fetchMocks())
   }
@@ -86,38 +84,46 @@ class NoteBookListFragment : Fragment() {
 
     //
     //Check for first run????
-    //if (InternetConnectionHelper.isConnection()) {
+
     if (dataManager.prefs.withInternetConnection) {
       dataManager.saveCasheNoteBook(dataManager.fetchMocks())
     }
+    notebooks = dataManager.getCasheNotebook()
+    adapter.setNoteBooks(notebooks)
 
-    ItemClickSupport.addTo(rvNoteBookRecycler).setOnItemClickListener(object : ItemClickSupport.OnItemClickListener{
-      override fun onItemClicked(recyclerView: RecyclerView?, position: Int, v: View?) {
-        YoYo.with(Techniques.DropOut)
-          .duration(700)
-          .playOn(v);
-      }
-    })
-
-
-    adapter.setNoteBooks(dataManager.getCasheNotebook())
+    ItemClickSupport.addTo(rvNoteBookRecycler)
+      .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
+        override fun onItemClicked(recyclerView: RecyclerView?, position: Int, v: View?) {
+          YoYo.with(Techniques.ZoomInUp).duration(300)
+            .onEnd({ showNotebookDetailsFragment(notebooks.elementAt(position)) }).playOn(v);
+        }
+      })
 
     setupRefreshLayout()
     return returnView
   }
 
-  //todo - question about runnable in mHandler
+  // Private Helpers
+
+  private fun showNotebookDetailsFragment(notebook: NoteBook) {
+    val bundle = Bundle()
+    bundle.putParcelable(AppConstants.NOTEBOOK_PART_BUNDL.key, notebook)
+    val manager = fragmentManager
+    val notebookDetailsFragment = NoteBookDetailsFragment.newInstance(bundle)
+    notebookDetailsFragment.show(manager, "NoteBookDetailsFragment")
+  }
+
   private fun setupRefreshLayout() {
     swipeRefreshLayout = returnView.srlSwipeRefresh
     swipeRefreshLayout.setOnRefreshListener {
       mRunnable = Runnable() {
         // Download new Books
+        Toast.makeText(context, "New Notebook added", Toast.LENGTH_SHORT).show()
         swipeRefreshLayout.isRefreshing = false
       }
 
       mHandler.postDelayed(mRunnable, 1500)
 
-      Toast.makeText(context, "Is refreshing lyambda works", Toast.LENGTH_SHORT).show()
     }
   }
 }

@@ -5,15 +5,19 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.bascket_activity_mvp.BascketActivity
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
+import com.example.vladimirbabenko.hotlinecustom.event_bus.Events.BascketEvent
+import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.fragments.MainScreenFragmentJ
 import com.example.vladimirbabenko.hotlinecustom.fragments.ProfileFragmentJ
 import com.example.vladimirbabenko.hotlinecustom.fragments.SettingsFragmentJ
 import com.mikepenz.actionitembadge.library.ActionItemBadge
+import com.squareup.otto.Subscribe
 import kotlinx.android.synthetic.main.activity_main_screen.navigationView
 import kotlinx.android.synthetic.main.activity_main_screen.toolbar
 
@@ -26,45 +30,44 @@ class MainScreenActivity : BaseActivity() {
   val mainScreenFragment: MainScreenFragmentJ by lazy { MainScreenFragmentJ() }
   val profileFragment: ProfileFragmentJ by lazy { ProfileFragmentJ() }
   val settingsFragment: SettingsFragmentJ by lazy { SettingsFragmentJ() } //lateinit var navigationView:NavigationView
-  var bageCount = 125;
+
+  val bus = GlobalBus.instance
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main_screen)
-
+    bus.register(this);
     setupUI(savedInstanceState)
-
-  }
-
-  override fun onSaveInstanceState(outState: Bundle?) {
-    outState?.putInt("opened_fragment", navigationView.selectedItemId)
-    super.onSaveInstanceState(outState)
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    val inflater = menuInflater
-    inflater.inflate(R.menu.menu_main_screen, menu)
-
-    //ActionItemBadge.hide(menu?.findItem(R.id.miBascket))
-
-    //ActionItemBadge.update(menu?.findItem(R.id.miBascket),11)
-    ActionItemBadge.update(this, menu!!.findItem(R.id.miBascket),
-      ContextCompat.getDrawable(this, R.drawable.ic_shopping_cart_24dp), ActionItemBadge.BadgeStyles.RED.getStyle(),dataManager.getFromBasket().size)//dataManager.getFromBasket().size)
+    menuInflater.inflate(R.menu.menu_main_screen, menu)
+    val count = dataManager.getFromBasket().size
+    if (count < 1) {
+      ActionItemBadge.hide(menu?.findItem(R.id.miBascket))
+    } else {
+      ActionItemBadge.update(this, menu!!.findItem(R.id.miBascket),
+        ContextCompat.getDrawable(this, R.drawable.ic_shopping_cart_24dp),
+        ActionItemBadge.BadgeStyles.RED.getStyle(), count)
+    }
     return true
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    Toast.makeText(this, "before onvalidate", Toast.LENGTH_SHORT).show()
-
-    invalidateOptionsMenu()
-    val intent= Intent(this, BascketActivity::class.java)
-    startActivity(intent)
+    startActivity(Intent(this, BascketActivity::class.java))
     return true
-
   }
 
+  override fun onDestroy() {
+    bus.unregister(this);
+    super.onDestroy()
+  }
 
   // Private Helpers
+
+  @Subscribe fun updateBadge(event: BascketEvent) {
+    invalidateOptionsMenu()
+  }
 
   private fun setupUI(savedInstanceState: Bundle?) {
     navigationView.inflateMenu(R.menu.menu_navigation_items)
@@ -98,5 +101,10 @@ class MainScreenActivity : BaseActivity() {
     val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
     ft.replace(R.id.flContainer, mainScreenFragment, MAIN_SCREEN_FRAGMENT_TAG)
       .commit() //No AddToBackStack
+  }
+
+  override fun onSaveInstanceState(outState: Bundle?) {
+    outState?.putInt("opened_fragment", navigationView.selectedItemId)
+    super.onSaveInstanceState(outState)
   }
 }

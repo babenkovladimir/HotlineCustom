@@ -38,7 +38,8 @@
     </activity>
     <activity
         android:name=".MainScreenActivity"
-        android:label="MainScreen">
+        android:label="MainScreen"
+        android:screenOrientation="portrait">
     </activity>
     <activity
         android:name=".TermsActivity"

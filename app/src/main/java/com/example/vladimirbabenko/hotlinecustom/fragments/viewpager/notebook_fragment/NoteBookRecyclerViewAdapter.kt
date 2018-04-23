@@ -1,14 +1,12 @@
-package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager
+package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.daimajia.androidanimations.library.Techniques
-import com.daimajia.androidanimations.library.YoYo
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
+import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment.NoteBookRecyclerViewAdapter.NotebookViewHolder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_notebook.view.ivNotebookImage
 import kotlinx.android.synthetic.main.item_notebook.view.tvNoteBrand
@@ -19,7 +17,7 @@ import kotlinx.android.synthetic.main.item_notebook.view.tvNoteProcessor
 import kotlinx.android.synthetic.main.item_notebook.view.tvNoteVideoCard
 
 class NoteBookRecyclerViewAdapter :
-  RecyclerView.Adapter<NoteBookRecyclerViewAdapter.NotebookViewHolder>() {
+  RecyclerView.Adapter<NotebookViewHolder>() {
 
   private var notebooks: List<NoteBook> = emptyList() // Here we can use Delegates Observable???
 
@@ -30,7 +28,8 @@ class NoteBookRecyclerViewAdapter :
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotebookViewHolder {
     val v = LayoutInflater.from(parent.context).inflate(R.layout.item_notebook, parent, false)
-    return NotebookViewHolder(v)
+    return NotebookViewHolder(
+      v)
   }
 
   override fun getItemCount(): Int = notebooks.size
