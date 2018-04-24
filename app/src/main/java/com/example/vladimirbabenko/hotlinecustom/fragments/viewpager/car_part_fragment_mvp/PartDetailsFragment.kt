@@ -3,14 +3,10 @@ package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.car_part_f
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings.Global
 import android.support.v4.app.DialogFragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
@@ -19,7 +15,6 @@ import com.example.vladimirbabenko.hotlinecustom.event_bus.Events.BascketEvent
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.example.vladimirbabenko.hotlinecustom.utils.CarPartMapper
-import com.squareup.otto.Produce
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btCarPartCloseDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btStarButton
@@ -30,14 +25,14 @@ import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPartIdD
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPriceDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvPartNameDetails
 
-class PartDetailsFragment() : DialogFragment() {
+class PartDetailsFragment : DialogFragment() {
 
   val dataManager = DataManager.create
   val bus = GlobalBus.instance
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-  bus.register(this)
+    bus.register(this)
     isCancelable = true
   }
 
@@ -51,17 +46,20 @@ class PartDetailsFragment() : DialogFragment() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?): View? {
+    val carPart = arguments?.getParcelable(AppConstants.CAR_PART_BUNDLE.key) as? CarPart
 
     val view = inflater.inflate(R.layout.fragment_car_part_dialog, container, false)
-
-    val carPart = arguments?.getParcelable(AppConstants.CAR_PART_BUNDLE.key) as? CarPart
 
     view.tvPartNameDetails.text = carPart?.name
     view.tvCarPartDetailsDescription.text = carPart?.description
     view.tvCarPriceDetails.text = "$ " + carPart?.partPrice.toString()
     view.tvCarPartIdDetails.text = "id:${carPart?.id.toString()}"
     view.btStarButton.isSelected = arguments!!.getBoolean("IsInBascket")
-    Picasso.get().load(carPart?.partPhotoUrl).fit().placeholder(R.drawable.ic_launcher_background)
+    Picasso
+      .get()
+      .load(carPart?.partPhotoUrl)
+      .fit()
+      .placeholder(R.drawable.ic_launcher_background)
       .into(view.ivCarPartImageDialog)
 
     view.btStarButton.setOnClickListener() {
@@ -69,12 +67,12 @@ class PartDetailsFragment() : DialogFragment() {
         it.isSelected = true
         dataManager.addBascket(CarPartMapper().transform(carPart!!))
         dataManager.prefs.modifyBascketSize(1)
-        bus.post(BascketEvent())
+        bus.post(Events.BascketEvent())
       } else {
         it.isSelected = false
         dataManager.removeFromBascket(CarPartMapper().transform(carPart!!))
         dataManager.prefs.modifyBascketSize(-1)
-        bus.post(BascketEvent())
+        bus.post(Events.BascketEvent())
       }
     }
 
@@ -93,7 +91,8 @@ class PartDetailsFragment() : DialogFragment() {
   }
 
   override fun onDestroy() {
-    super.onDestroy()
     bus.unregister(this)
+    super.onDestroy()
+
   }
 }

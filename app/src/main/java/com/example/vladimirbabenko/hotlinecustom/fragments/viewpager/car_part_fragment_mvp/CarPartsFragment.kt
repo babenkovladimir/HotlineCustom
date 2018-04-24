@@ -27,9 +27,9 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
 
   val presenter: CarPartsPresenter
   val bus = GlobalBus.instance
-  lateinit var adapter: CarRVAdapter
+  var adapter: CarRVAdapter
   lateinit var recyclerView: RecyclerView
-  lateinit var layoutManager: LinearLayoutManager
+  var layoutManager: LinearLayoutManager
   lateinit var itemDecoration: DividerItemDecoration
 
   init {
@@ -71,21 +71,16 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
       .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
         override fun onItemClicked(recyclerView: RecyclerView?, position: Int, v: View?) {
 
-          YoYo
-            .with(Techniques.ZoomIn)
-            .onEnd({presenter.onItemClicked(position)})// Обращение к преентеру показать
-            .duration(200)
-            .playOn(v)
-
-
+          YoYo.with(Techniques.ZoomIn)
+            .onEnd({ presenter.onItemClicked(position) }) // Обращение к преентеру показать
+            .duration(200).playOn(v)
         }
       }).setOnItemLongClickListener(object : ItemClickSupport.OnItemLongClickListener {
         override fun onItemLongClicked(recyclerView: RecyclerView?, position: Int,
           v: View?): Boolean {
 
           val builder = AlertDialog.Builder(container!!.context)
-          builder.setTitle("Spear part").setMessage("You should by it!!!")
-            .setCancelable(true)
+          builder.setTitle("Spear part").setMessage("You should by it!!!").setCancelable(true)
 
           val dialog = builder.create()
           dialog.show()
@@ -98,10 +93,9 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     return view
   }
 
-
-  @Subscribe fun getFromDialog(refresh: CarFragmentRefresh){
+  @Subscribe fun getFromDialog(refresh: CarFragmentRefresh) {
     Toast.makeText(context, "Catch", Toast.LENGTH_LONG).show()
-   presenter.fetchMocks()
+    presenter.fetchMocks()
   }
 
   override fun onSaveInstanceState(outState: Bundle) { // outState.putInt("position", )

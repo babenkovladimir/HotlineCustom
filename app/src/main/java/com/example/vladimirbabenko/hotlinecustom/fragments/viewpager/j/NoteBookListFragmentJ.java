@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import com.example.vladimirbabenko.hotlinecustom.R;
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
 import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment.NoteBookRecyclerViewAdapter;
+import java.util.List;
 
 public class NoteBookListFragmentJ extends Fragment {
 
@@ -46,7 +47,7 @@ public class NoteBookListFragmentJ extends Fragment {
     recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayout.VERTICAL, false));
 
     recyclerView.setAdapter(adapter);
-    adapter.setNoteBooks(mDataManager.fetchMocks());
+    //adapter.setNoteBooks(mDataManager.fetchMocks(),new list); // This is old Mock
 
     return view;
   }

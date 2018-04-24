@@ -11,16 +11,15 @@
     tools:context=".LoginActivity"
     >
 
-
   <ImageView
       android:id="@+id/ivMainLogo"
-      android:layout_width="200dp"
+      android:layout_width="wrap_content"
       android:layout_height="200dp"
       android:layout_gravity="center"
-      android:layout_marginBottom="150dp"
+      android:layout_marginBottom="180dp"
       android:layout_marginEnd="8dp"
       android:layout_marginStart="8dp"
-      android:background="@drawable/logo_activity_umbrella"
+      android:background="@drawable/hotline_logog_mirrored"
       android:contentDescription="mainLogo"
       app:layout_constraintBottom_toTopOf="@+id/llSignInLayout"
       app:layout_constraintEnd_toEndOf="parent"
@@ -29,31 +28,19 @@
       />
 
   <LinearLayout
-
+      android:gravity="center"
       android:id="@+id/llSignInLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:contentDescription="SignIn layout"
       android:orientation="horizontal"
-      app:layout_constraintBottom_toTopOf="@id/flBottomButtons"
-      >
+      app:layout_constraintBottom_toTopOf="@id/flBottomButtons">
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btSignInGoogleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-    <Button
-        android:id="@+id/btSignOutGoogle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SignOut"
-        />
-
-    <Button
-        android:id="@+id/btCheckForExitingUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="check user"
+        android:gravity="center"
         />
 
 

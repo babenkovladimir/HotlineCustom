@@ -6,7 +6,7 @@ import java.util.Random
 class RepositoryMockNoteBookS : IRepositoryMock<NoteBook> {
   lateinit var noteBookList: ArrayList<NoteBook>
 
-  val ids = Array(16,{ jorik -> 12478+12*jorik})
+  val ids = Array(16,{ jorik -> 12478+125*jorik})
 
   val brands: List<String> =
     listOf("Apple", "Dell", "HP", "Asus",

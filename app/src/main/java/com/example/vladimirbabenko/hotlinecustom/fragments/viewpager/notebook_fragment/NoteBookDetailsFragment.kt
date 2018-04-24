@@ -3,25 +3,17 @@ package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_f
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings.Global
 import android.support.v4.app.DialogFragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
-import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.event_bus.Events
-import com.example.vladimirbabenko.hotlinecustom.event_bus.Events.BascketEvent
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
-import com.example.vladimirbabenko.hotlinecustom.utils.CarPartMapper
 import com.example.vladimirbabenko.hotlinecustom.utils.NotebookMapper
-import com.squareup.otto.Produce
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btCarPartCloseDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btStarButton
@@ -62,8 +54,13 @@ class NoteBookDetailsFragment() : DialogFragment() {
     view.tvCarPartDetailsDescription.text = noteBook?.description
     view.tvCarPriceDetails.text = "$ " + noteBook?.price.toString()
     view.tvCarPartIdDetails.text = "id:${noteBook?.id.toString()}"
-    view.btStarButton.isSelected = arguments!!.getBoolean("IsInBascket")
-    Picasso.get().load(noteBook?.photUrl).fit().placeholder(R.drawable.ic_launcher_background)
+    view.btStarButton.isSelected = arguments!!.getBoolean("NotebookIsInBascket")
+
+    Picasso
+      .get()
+      .load(noteBook?.photUrl)
+      .fit()
+      .placeholder(R.drawable.ic_launcher_background)
       .into(view.ivCarPartImageDialog)
 
     view.btStarButton.setOnClickListener() {
@@ -71,12 +68,14 @@ class NoteBookDetailsFragment() : DialogFragment() {
         it.isSelected = true
         dataManager.addBascket(NotebookMapper().transform(noteBook!!))
         dataManager.prefs.modifyBascketSize(1)
-        bus.post(BascketEvent())
+        bus.post(Events.BascketEvent())
+        bus.post(Events.NotebookFragmentRefresh())
       } else {
         it.isSelected = false
         dataManager.removeFromBascket(NotebookMapper().transform(noteBook!!))
         dataManager.prefs.modifyBascketSize(-1)
-        bus.post(BascketEvent())
+        bus.post(Events.BascketEvent())
+        bus.post(Events.NotebookFragmentRefresh())
       }
     }
 

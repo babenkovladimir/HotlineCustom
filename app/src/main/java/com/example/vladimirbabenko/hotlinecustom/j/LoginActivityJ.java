@@ -24,12 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class LoginActivityJ extends BaseActivityJ implements View.OnClickListener {
 
-  //private PreferencesHelper prefs;
-  //private DataManager mManager = new DataManager(getApplicationContext());
-
   @BindView(R.id.btSignInGoogleButton) SignInButton mGoogleSignInButton;
-  @BindView(R.id.btSignOutGoogle) Button btGoogleSignOutButton;
-  @BindView(R.id.btCheckForExitingUser) Button btCheckForExitingUser;
   @BindView(R.id.btSignUp) Button btSignUp;
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,8 +47,6 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
   @Override public void onClick(View view) {
     switch (view.getId()) {
       case (R.id.btSignInGoogleButton): googleSignIn(); break;
-      case (R.id.btSignOutGoogle): googleSigneOut(); break;
-      case (R.id.btCheckForExitingUser): checkForexitingSignedInUser(); break;
       case (R.id.btSignUp): showSignUpFragment();
       default: break;
     }
@@ -75,8 +68,6 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
   }
 
   private void setupUI() {
-    btGoogleSignOutButton.setOnClickListener(this);
-    btCheckForExitingUser.setOnClickListener(this);
     btSignUp.setOnClickListener(this);
     // Set the dimensions of the sign-in button.
     mGoogleSignInButton.setSize(SignInButton.SIZE_STANDARD);

@@ -103,7 +103,7 @@
       />
 
     <Button
-        android:id="@+id/btCarPartStar"
+        android:id="@+id/btNoteBookStar"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="@drawable/states_star"

@@ -8,6 +8,8 @@ import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment.NoteBookRecyclerViewAdapter.NotebookViewHolder
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btStarButton
+import kotlinx.android.synthetic.main.item_notebook.view.btNoteBookStar
 import kotlinx.android.synthetic.main.item_notebook.view.ivNotebookImage
 import kotlinx.android.synthetic.main.item_notebook.view.tvNoteBrand
 import kotlinx.android.synthetic.main.item_notebook.view.tvNoteHdd
@@ -20,9 +22,11 @@ class NoteBookRecyclerViewAdapter :
   RecyclerView.Adapter<NotebookViewHolder>() {
 
   private var notebooks: List<NoteBook> = emptyList() // Here we can use Delegates Observable???
+  private var chosenList: List<Int> = emptyList()
 
-  fun setNoteBooks(notebooks: List<NoteBook>) {
+  fun setNoteBooks(notebooks: List<NoteBook>, chosenList: List<Int>) {
     this.notebooks = notebooks
+    this.chosenList = chosenList
     notifyDataSetChanged()
   }
 
@@ -35,12 +39,13 @@ class NoteBookRecyclerViewAdapter :
   override fun getItemCount(): Int = notebooks.size
 
   override fun onBindViewHolder(holder: NotebookViewHolder, position: Int) {
-    holder.bind(notebooks[position])
+    holder.bind(notebooks[position], chosenList.contains(notebooks[position].id))
   }
 
-  class NotebookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(noteBook: NoteBook) {
+  inner class NotebookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    fun bind(noteBook: NoteBook, isInBasket: Boolean) {
 
       Picasso.get()
         .load(noteBook.photUrl)
@@ -54,6 +59,7 @@ class NoteBookRecyclerViewAdapter :
       itemView.tvNoteVideoCard.text = noteBook.videoCard
       itemView.tvNoteHdd.text = noteBook.hdd
       itemView.tvNotePrice.text = noteBook.price.toString()
+      itemView.btNoteBookStar.isSelected = isInBasket
     }
   }
 }

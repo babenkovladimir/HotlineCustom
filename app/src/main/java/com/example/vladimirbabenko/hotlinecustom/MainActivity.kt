@@ -8,15 +8,10 @@ import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 
 class MainActivity : BaseActivity() {
 
-
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    var isUserLoggedIn: Boolean = dataManager.prefs.userLoggedIn
-    Log.d("TAG", "Mainactivity"+ isUserLoggedIn)
-
-
+    val isUserLoggedIn: Boolean = dataManager.prefs.userLoggedIn
 
     if (isUserLoggedIn) {
       finishAffinity()

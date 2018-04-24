@@ -8,6 +8,8 @@ import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.bascket_activity_mvp.BascketActivity
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
@@ -37,6 +39,7 @@ class MainScreenActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main_screen)
     bus.register(this);
+
     setupUI(savedInstanceState)
   }
 

@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +18,13 @@ import com.daimajia.androidanimations.library.YoYo
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
+import com.example.vladimirbabenko.hotlinecustom.event_bus.Events
+import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment.NoteBookDetailsFragment
 import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment.NoteBookRecyclerViewAdapter
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.example.vladimirbabenko.hotlinecustom.utils.ItemClickSupport
+import com.squareup.otto.Subscribe
 import kotlinx.android.synthetic.main.fragment_notebook_list.view.rvNoteBookRecyclerView
 import kotlinx.android.synthetic.main.fragment_notebook_list.view.srlSwipeRefresh
 
@@ -36,6 +40,9 @@ class NoteBookFragment : Fragment() {
   private lateinit var dataManager: DataManager
   private lateinit var notebooks: MutableList<NoteBook>
 
+  // Bus
+  private var bus:GlobalBus
+
   // SwipeRefreshLayout
   lateinit var swipeRefreshLayout: SwipeRefreshLayout
   private lateinit var mRunnable: Runnable
@@ -43,6 +50,7 @@ class NoteBookFragment : Fragment() {
 
   init {
     mHandler = Handler()
+    bus = GlobalBus.instance
   }
 
   companion object {
@@ -58,6 +66,7 @@ class NoteBookFragment : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    bus.register(this)
     dataManager = DataManager.create // notebooks = (dataManager.fetchMocks()).toMutableList()
     //notebooks = (dataManager.getCasheNotebook()).toMutableList()
     dataManager.saveCasheNoteBook(dataManager.fetchMocks())
@@ -89,7 +98,8 @@ class NoteBookFragment : Fragment() {
       dataManager.saveCasheNoteBook(dataManager.fetchMocks())
     }
     notebooks = dataManager.getCasheNotebook()
-    adapter.setNoteBooks(notebooks)
+    adapter.setNoteBooks(notebooks, getChosenList())
+    Log.d("TAGRRRR", getChosenList().toString())
 
     ItemClickSupport.addTo(rvNoteBookRecycler)
       .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
@@ -103,11 +113,23 @@ class NoteBookFragment : Fragment() {
     return returnView
   }
 
+  override fun onResume() {
+    Log.d("TAGRRRR", getChosenList().toString())
+    adapter.setNoteBooks(notebooks, getChosenList())
+    super.onResume()
+  }
+
+  override fun onDestroy() {
+    bus.unregister(this)
+    super.onDestroy()
+  }
+
   // Private Helpers
 
   private fun showNotebookDetailsFragment(notebook: NoteBook) {
     val bundle = Bundle()
     bundle.putParcelable(AppConstants.NOTEBOOK_PART_BUNDL.key, notebook)
+    bundle.putBoolean("NotebookIsInBascket", getChosenList().contains(notebook.id))
     val manager = fragmentManager
     val notebookDetailsFragment = NoteBookDetailsFragment.newInstance(bundle)
     notebookDetailsFragment.show(manager, "NoteBookDetailsFragment")
@@ -125,6 +147,19 @@ class NoteBookFragment : Fragment() {
       mHandler.postDelayed(mRunnable, 1500)
 
     }
+  }
+
+  private fun getChosenList(): MutableList<Int>{
+    var chosenList = mutableListOf<Int>()
+    val items = dataManager.getFromBasket()
+    for(item in items) chosenList.add(item.id)
+    return chosenList
+  }
+
+  @Subscribe fun refreshAdapter(event: Events.NotebookFragmentRefresh){
+    Log.d("TAGNOTE", "in Refresh adapter")
+    adapter.setNoteBooks(notebooks, getChosenList())
+
   }
 }
 
