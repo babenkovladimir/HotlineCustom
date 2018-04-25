@@ -51,9 +51,9 @@ class PreferencesHelper(context: Context) : BasePreferencesHelper(context) {
 
   //TODO How to create null user?
   var userInJson: User
-    get() = Gson().fromJson(getString(AppConstants.USER_FROM_JSON.key), User::class.java)
+    get() =  Gson().fromJson(getString(AppConstants.USER_FROM_JSON.key), User::class.java)
     set(user) {
-      var userString: String = Gson().toJson(user)
+      val userString: String = Gson().toJson(user)
       setString(AppConstants.USER_FROM_JSON.key, userString)
     }
 

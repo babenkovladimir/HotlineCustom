@@ -121,7 +121,7 @@ public class LoginActivityJ extends BaseActivityJ implements View.OnClickListene
     // TODO add null check for account
 
     mDataManager.getPrefs().setUserInJson(
-        new User(account.getEmail(), account.getDisplayName(), account.getFamilyName(),
+        new User(account.getId(), account.getEmail(), account.getDisplayName(), account.getFamilyName(),
             account.getGivenName(), Objects.requireNonNull(account.getPhotoUrl()).toString()));// Return stub
 
     mDataManager.getPrefs().setUserLoggedIn(true);// by Kotli getter/setter

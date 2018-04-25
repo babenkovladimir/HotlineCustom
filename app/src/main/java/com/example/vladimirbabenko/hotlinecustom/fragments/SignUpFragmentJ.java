@@ -174,13 +174,15 @@ public class SignUpFragmentJ extends DialogFragment {
   }
 
   private boolean saveUserInfoToPreferences(FirebaseUser fireUser) {
+    String id = fireUser.getUid();
     String email = fireUser.getEmail();
     String displayedName = fireUser.getDisplayName();
     String givenName = null;
     String familyName = null;
     String photoUrl = String.valueOf(fireUser.getPhotoUrl());
-    User user = new User(email, displayedName, familyName, givenName, photoUrl);
+    User user = new User(id, email, displayedName, familyName, givenName, photoUrl);
 
+    mDataManager.getPrefs().setUserEmail(email);
     mDataManager.getPrefs().setUserInJson(user);
     mDataManager.getPrefs().setUserLoggedIn(true);
     return true;
