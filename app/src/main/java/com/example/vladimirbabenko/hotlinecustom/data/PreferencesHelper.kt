@@ -9,11 +9,10 @@ import com.google.gson.Gson
 
 class PreferencesHelper(context: Context) : BasePreferencesHelper(context) {
 
-  init {
-
-  }
+  init {}
 
   fun clearUserPreferences() {
+    userId = ""
     userLoggedIn = false
     userEmail = ""
     userFamilyName = ""
@@ -46,13 +45,15 @@ class PreferencesHelper(context: Context) : BasePreferencesHelper(context) {
     get() = getString(AppConstants.USER_FHOTO_URL.key)
     set(value) = setString(AppConstants.USER_FHOTO_URL.key, value)
 
+  var userId: String
+  get() = getString(AppConstants.USER_ID.key)
+  set(value) = setString(AppConstants.USER_ID.key, value)
+
   //TODO How to create null user?
   var userInJson: User
     get() = Gson().fromJson(getString(AppConstants.USER_FROM_JSON.key), User::class.java)
     set(user) {
-      Log.d("TAG", user.toString())
       var userString: String = Gson().toJson(user)
-      Log.d("TAG", userString)
       setString(AppConstants.USER_FROM_JSON.key, userString)
     }
 

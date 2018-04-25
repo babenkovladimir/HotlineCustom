@@ -94,7 +94,8 @@ class LoginActivity : BaseActivity() {
   private fun saveToPrefs(account: GoogleSignInAccount) {
     with(account) {
       with(prefs) {
-        userInJson = User(email!!, displayName, familyName, givenName, photoUrl.toString())
+        userInJson = User(id.toString(),email!!, displayName, familyName, givenName, photoUrl.toString())
+
         userLoggedIn = true
         userEmail = email!!
         userDisplayName = displayName!!

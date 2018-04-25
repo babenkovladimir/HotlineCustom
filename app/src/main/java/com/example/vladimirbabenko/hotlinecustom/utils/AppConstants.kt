@@ -8,6 +8,7 @@ internal enum class AppConstants(val key: String, val intKey: Int? = 0) {
   // String key
   APP_PREFERENCES("APP_PREFERENCES"),
   IS_USER_LOGGED("IS_USER_LOGGED"),
+  USER_ID("USER_ID"),
   USER_EMAIL("USER_EMAIL"),
   USER_DISPLAYED_NAME("USER_DISPLAYED_NAME"),
   USER_GIVEN_NAME("USER_GIVEN_NAME"),
@@ -15,8 +16,7 @@ internal enum class AppConstants(val key: String, val intKey: Int? = 0) {
   USER_FHOTO_URL("USER_FHOTO_URL"),
   USER_FROM_JSON("USER_FROM_JSON"),
 
-  BASKETSIZE("BASKETSIZE"),
-
+  // Bundle key
   CAR_PART_BUNDLE("CAR_PART_BUNDLE"),
   NOTEBOOK_PART_BUNDL("NOTEBOOK_PART_BUNDL"),
 
@@ -28,6 +28,7 @@ internal enum class AppConstants(val key: String, val intKey: Int? = 0) {
   // Basket key
   BASCKET_PREFS_KEY("BASCKET_PREFS_KEY"),
   BASCKET_JSON_KEY("BASCKET_JSON_KEY"),
+  BASKETSIZE("BASKETSIZE"),
 
 
   IS_INTERNET_CONNECTED_KEY("IS_INTERNET_CONNECTED_KEY");
