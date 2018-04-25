@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.vladimirbabenko.hotlinecustom.MainScreenActivity;
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
+import com.example.vladimirbabenko.hotlinecustom.entity.User;
 import com.example.vladimirbabenko.hotlinecustom.j.MainScreenActivityJ;
 import com.example.vladimirbabenko.hotlinecustom.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -66,8 +67,8 @@ public class SignUpFragmentJ extends DialogFragment {
     btSignIn.setOnClickListener(view -> {
       boolean emailError = false;
       boolean passwordError = false;
+      boolean nameError = false;
 
-      //region
       if (!isValidEmail(etEmail.getText())) {
         emailError = true;
         etEmail.setError("email is not valid");
@@ -83,8 +84,16 @@ public class SignUpFragmentJ extends DialogFragment {
         passwordError = false;
         etPassword.setError(null);
       }
-      //endregion
-      if (!emailError && !passwordError) {
+
+      if (!isValidPassword(etUserName.getText())) {
+        nameError = true;
+        etUserName.setError("name is short");
+      } else {
+        nameError = false;
+        etUserName.setError(null);
+      }
+
+      if (!emailError && !passwordError && !nameError) {
         Toast.makeText(getContext(), "User is valid can continue", Toast.LENGTH_LONG).show();
 
         mAuth.createUserWithEmailAndPassword(etEmail.getText().toString(),
@@ -94,9 +103,9 @@ public class SignUpFragmentJ extends DialogFragment {
 
                 FirebaseUser user = mAuth.getCurrentUser();
 
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(etUserName.getText().toString())
-                    .build();
+                UserProfileChangeRequest profileUpdates =
+                    new UserProfileChangeRequest.Builder().setDisplayName(
+                        etUserName.getText().toString()).build();
 
                 user.updateProfile(profileUpdates);
 
@@ -118,18 +127,24 @@ public class SignUpFragmentJ extends DialogFragment {
 
   public void signInUser(String email, String password) {
 
-    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+    mAuth.signInWithEmailAndPassword(email, password)
+        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
           @Override public void onComplete(@NonNull Task<AuthResult> task) {
             if (task.isSuccessful()) {
               // Sign in success, update UI with the signed-in user's information
+
               Log.d("TAGF", "signInWithEmail:success");
-              FirebaseUser user = mAuth.getCurrentUser();
-              getActivity().finishAffinity();
-              startActivity(new Intent(getActivity(), MainScreenActivity.class));
+              FirebaseUser fireUser = mAuth.getCurrentUser();
+
+              // TODO finish features for firebase authentication
+              if (saveUserInfoToPreferences(fireUser)) {
+                getActivity().finishAffinity();
+                startActivity(new Intent(getActivity(), MainScreenActivity.class));
+              }
             } else {
               // If sign in fails, display a message to the user.
-              Log.d("TAGF", "signInWithEmail:failure"+ task.getException());
-               dismiss();
+              Log.d("TAGF", "signInWithEmail:failure" + task.getException());
+              dismiss();
             }
           }
         });
@@ -147,6 +162,27 @@ public class SignUpFragmentJ extends DialogFragment {
 
   private boolean isValidPassword(CharSequence password) {
     if (password.length() < 6 && password.length() > 0) return false;
+    return true;
+  }
+
+  private boolean isValidUserName(CharSequence name) {
+    if (name.length() > 5) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private boolean saveUserInfoToPreferences(FirebaseUser fireUser) {
+    String email = fireUser.getEmail();
+    String displayedName = fireUser.getDisplayName();
+    String givenName = null;
+    String familyName = null;
+    String photoUrl = String.valueOf(fireUser.getPhotoUrl());
+    User user = new User(email, displayedName, familyName, givenName, photoUrl);
+
+    mDataManager.getPrefs().setUserInJson(user);
+    mDataManager.getPrefs().setUserLoggedIn(true);
     return true;
   }
 }

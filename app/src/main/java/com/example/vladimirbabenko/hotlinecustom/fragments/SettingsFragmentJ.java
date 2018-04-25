@@ -31,7 +31,7 @@ public class SettingsFragmentJ extends Fragment {
   @BindView(R.id.btSignOutSettingsFragment) Button btSignOut;
   @BindView(R.id.tvBuildVersionSettingsFragment) TextView tvBuildVersion;
   @BindView(R.id.btBattaryState) Button btBattaryState;
-  @BindView(R.id.btTestEventBus) Button btTestEventBus;
+
 
   private DataManager mDataManager;
   private Bus bus;
@@ -65,11 +65,6 @@ public class SettingsFragmentJ extends Fragment {
 
     });
 
-
-
-    btTestEventBus.setOnClickListener( view->{
-      bus.post(new Events.BascketEvent(+1));
-    });
   }
 
   /*

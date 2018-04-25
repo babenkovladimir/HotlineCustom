@@ -46,6 +46,7 @@ class MainScreenActivity : BaseActivity() {
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_main_screen, menu)
     val count = dataManager.getFromBasket().size
+    Toast.makeText(applicationContext, "onCreateOptionsMenu, basketSize = " + count, Toast.LENGTH_SHORT).show()
     if (count < 1) {
       ActionItemBadge.hide(menu?.findItem(R.id.miBascket))
     } else {

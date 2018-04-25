@@ -12,6 +12,6 @@ class GlobalBus private constructor():Bus() {
   }
 
   companion object {
-    val instance: GlobalBus by lazy {Holder.INSTANCE }
+    val instance: GlobalBus by lazy { Holder.INSTANCE }
   }
 }
