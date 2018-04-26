@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:background="@drawable/umbrella_sign_in_background"
+    android:padding="24dp"
+
+    >
+
+  <ImageView
+      android:id="@+id/ivSignInFragmentLogo"
+      android:layout_width="match_parent"
+      android:layout_height="64dp"
+      android:contentDescription="Umbrella signIn logo"
+      android:src="@drawable/hotline_logo"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <TextView
+      android:id="@+id/tvSignInFragmentTitle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="Wellcome"
+      android:textSize="24sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/ivSignInFragmentLogo"
+      />
+
+
+  <EditText
+      android:id="@+id/etFragmentSignInEmail"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:cursorVisible="false"
+      android:hint="email"
+      android:inputType="textEmailAddress"
+      android:textColor="@android:color/black"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tvSignInFragmentTitle"
+      />
+
+
+  <!--It's possible to use android:inputType="numberPassword" -->
+
+
+  <EditText
+      android:id="@+id/etFragmentSignInPassword"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:cursorVisible="false"
+      android:hint="password"
+      android:inputType="numberPassword"
+      android:textColor="@android:color/black"
+      app:layout_constraintBottom_toTopOf="@+id/btFragmentSignIn"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/etFragmentSignInEmail"
+      />
+
+
+  <Button
+      android:id="@+id/btFragmentSignIn"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:backgroundTint="@color/colorRed"
+      android:text="Sign in"
+      app:layout_constraintBottom_toBottomOf="parent"
+      />
+
+
+</android.support.constraint.ConstraintLayout>

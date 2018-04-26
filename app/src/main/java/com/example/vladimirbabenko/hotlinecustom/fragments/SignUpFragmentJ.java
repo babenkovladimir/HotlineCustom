@@ -1,5 +1,7 @@
 package com.example.vladimirbabenko.hotlinecustom.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.vladimirbabenko.hotlinecustom.MainScreenActivity;
+import com.example.vladimirbabenko.hotlinecustom.base.App;
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
 import com.example.vladimirbabenko.hotlinecustom.entity.User;
 import com.example.vladimirbabenko.hotlinecustom.j.MainScreenActivityJ;
@@ -85,7 +88,7 @@ public class SignUpFragmentJ extends DialogFragment {
         etPassword.setError(null);
       }
 
-      if (!isValidPassword(etUserName.getText())) {
+      if (!isValidUserName(etUserName.getText())) {
         nameError = true;
         etUserName.setError("name is short");
       } else {
@@ -99,51 +102,40 @@ public class SignUpFragmentJ extends DialogFragment {
         mAuth.createUserWithEmailAndPassword(etEmail.getText().toString(),
             etPassword.getText().toString())
             .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+
               @Override public void onComplete(@NonNull Task<AuthResult> task) {
-
-                FirebaseUser user = mAuth.getCurrentUser();
-
-                UserProfileChangeRequest profileUpdates =
-                    new UserProfileChangeRequest.Builder().setDisplayName(
-                        etUserName.getText().toString()).build();
-
-                user.updateProfile(profileUpdates);
-
-                signInUser(etEmail.getText().toString(), etPassword.getText().toString());
+                if (task.isSuccessful()) {
+                  signInUser(etEmail.getText().toString(), etPassword.getText().toString());
+                }
               }
             })
             .addOnFailureListener(getActivity(), new OnFailureListener() {
               @Override public void onFailure(@NonNull Exception e) {
-                // Todo somethinck?
-                Log.e("TAG", "createUserWithEmail:error " + e.getMessage());
-                dismiss();//????
+                showErrorDialog(e.getMessage());
               }
             });
-
-        //startActivity(new Intent(getContext(), MainScreenActivityJ.class));
       }
     });
   }
 
   public void signInUser(String email, String password) {
-
     mAuth.signInWithEmailAndPassword(email, password)
         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
           @Override public void onComplete(@NonNull Task<AuthResult> task) {
             if (task.isSuccessful()) {
-              // Sign in success, update UI with the signed-in user's information
-
-              Log.d("TAGF", "signInWithEmail:success");
               FirebaseUser fireUser = mAuth.getCurrentUser();
 
-              // TODO finish features for firebase authentication
+              UserProfileChangeRequest profileUpdates =
+                  new UserProfileChangeRequest.Builder().setDisplayName(
+                      etUserName.getText().toString()).build();
+              fireUser.updateProfile(profileUpdates);
+
               if (saveUserInfoToPreferences(fireUser)) {
-                getActivity().finishAffinity();
                 startActivity(new Intent(getActivity(), MainScreenActivity.class));
+                dismiss();
               }
             } else {
-              // If sign in fails, display a message to the user.
-              Log.d("TAGF", "signInWithEmail:failure" + task.getException());
+              Toast.makeText(getContext(), "Error!!!", Toast.LENGTH_SHORT).show();
               dismiss();
             }
           }
@@ -186,5 +178,19 @@ public class SignUpFragmentJ extends DialogFragment {
     mDataManager.getPrefs().setUserInJson(user);
     mDataManager.getPrefs().setUserLoggedIn(true);
     return true;
+  }
+
+  private void showErrorDialog(CharSequence message) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    AlertDialog dialog = builder.setTitle("Warning")
+        .setMessage(message)
+        .setCancelable(false)
+        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+          @Override public void onClick(DialogInterface dialog, int which) {
+            dismiss();
+          }
+        })
+        .create();
+    dialog.show();
   }
 }

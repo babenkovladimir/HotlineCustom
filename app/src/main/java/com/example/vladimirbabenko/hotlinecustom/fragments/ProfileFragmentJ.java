@@ -66,7 +66,7 @@ public class ProfileFragmentJ extends Fragment {
     Picasso
         .get()
         .load(currentUser.getFotoUrl())
-        .error(R.drawable.logo_activity_umbrella)
+        .error(R.drawable.mr_white)
         .into(mCircleImageView);
 
     setupUI();

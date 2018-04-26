@@ -23,6 +23,7 @@ import com.example.vladimirbabenko.hotlinecustom.utils.InternetConnectionHelper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Produce;
 
@@ -32,9 +33,9 @@ public class SettingsFragmentJ extends Fragment {
   @BindView(R.id.tvBuildVersionSettingsFragment) TextView tvBuildVersion;
   @BindView(R.id.btBattaryState) Button btBattaryState;
 
-
   private DataManager mDataManager;
   private Bus bus;
+  private FirebaseAuth mAuth;
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -60,34 +61,33 @@ public class SettingsFragmentJ extends Fragment {
     btSignOut.setOnClickListener(view -> signOut());
     tvBuildVersion.setText(String.format("Build version = %d", BuildConfig.VERSION_CODE));
 
-    btBattaryState.setOnClickListener(view->{
-      Toast.makeText(getContext(), "is internet "+ InternetConnectionHelper.Companion.isConnection(), Toast.LENGTH_SHORT).show();
-
+    btBattaryState.setOnClickListener(view -> {
+      Toast.makeText(getContext(),
+          "is internet " + InternetConnectionHelper.Companion.isConnection(), Toast.LENGTH_SHORT)
+          .show();
     });
-
   }
 
   /*
-   *This void cheks fo auth source
+   *This void cheks for auth source
    * */
   private void signOut() {
 
-    int src = 1;// source of auth
+    if (mDataManager.getPrefs().getUserByFireBase()) {
+      mAuth.signOut();
+      startActivity(new Intent(getContext(), LoginActivity.class));
+    } else {
 
-    switch (src) {
-      case 1: {
-        GoogleSignInOptions gso =
-            new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail()
-                .build();
-        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
-        mGoogleSignInClient.signOut();
-        getActivity().finishAffinity();
-        mDataManager.getPrefs().clearUserPreferences();
-        mDataManager.clearBascket();
-        startActivity(new Intent(getContext(), LoginActivity.class));
-      }
-      default:
-        break;
+      GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+          .requestEmail()
+          .build();
+      GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+      mGoogleSignInClient.signOut();
+      getActivity().finishAffinity();
+      mDataManager.getPrefs().clearUserPreferences();
+      mDataManager.clearBascket();
+      startActivity(new Intent(getContext(), LoginActivity.class));
     }
   }
 }
+

@@ -28,19 +28,29 @@
       />
 
   <LinearLayout
-      android:gravity="center"
       android:id="@+id/llSignInLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:contentDescription="SignIn layout"
-      android:orientation="horizontal"
-      app:layout_constraintBottom_toTopOf="@id/flBottomButtons">
+      android:gravity="center"
+      android:orientation="vertical"
+      app:layout_constraintBottom_toTopOf="@id/flBottomButtons"
+      >
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btSignInGoogleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        />
+    <Button
+        android:id="@+id/btSignIn"
+        android:layout_width="120dp"
+        android:layout_height="36dp"
+        android:text="Sign In"
+        android:background="@color/colorWhite"
+        android:elevation="2dp"
+        android:layout_marginBottom="2dp"
         />
 
 

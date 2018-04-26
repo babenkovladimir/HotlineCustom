@@ -15,6 +15,7 @@ internal enum class AppConstants(val key: String, val intKey: Int? = 0) {
   USER_FAMILY_NAME("USER_FAMILY_NAME"),
   USER_FHOTO_URL("USER_FHOTO_URL"),
   USER_FROM_JSON("USER_FROM_JSON"),
+  USER_FIREBASE_AUTH("USER_FIREBASE_AUTH"),
 
   // Bundle key
   CAR_PART_BUNDLE("CAR_PART_BUNDLE"),

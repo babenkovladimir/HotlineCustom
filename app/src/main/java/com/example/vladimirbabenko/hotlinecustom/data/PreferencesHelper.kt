@@ -14,11 +14,13 @@ class PreferencesHelper(context: Context) : BasePreferencesHelper(context) {
   fun clearUserPreferences() {
     userId = ""
     userLoggedIn = false
+    userByFireBase = false
     userEmail = ""
     userFamilyName = ""
     userGivenName = ""
     userDisplayName = ""
     userPhotoUrl = ""
+
   }
 
   var userLoggedIn: Boolean
@@ -65,6 +67,9 @@ class PreferencesHelper(context: Context) : BasePreferencesHelper(context) {
   get
   fun modifyBascketSize(value: Int) = setInt(AppConstants.BASKETSIZE.key, bascketSize+value)
 
+  var userByFireBase:Boolean
+  get() = getBoolean(AppConstants.USER_FIREBASE_AUTH.key)
+  set(value) = setBoolean(AppConstants.USER_FIREBASE_AUTH.key, value)
 
 }
 

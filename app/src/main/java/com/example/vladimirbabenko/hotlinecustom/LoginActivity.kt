@@ -10,6 +10,7 @@ import android.view.WindowManager
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
 import com.example.vladimirbabenko.hotlinecustom.entity.User
 import com.example.vladimirbabenko.hotlinecustom.fragments.SignUpFragmentJ
+import com.example.vladimirbabenko.hotlinecustom.fragments.sign_in_fragment_mvp.SignInFragment
 import com.example.vladimirbabenko.hotlinecustom.j.MainScreenActivityJ
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -18,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import kotlinx.android.synthetic.main.activity_login.btSignIn
 import kotlinx.android.synthetic.main.activity_login.btSignInGoogleButton
 import kotlinx.android.synthetic.main.activity_login.btSignUp
 import kotlinx.android.synthetic.main.activity_login.btTerms
@@ -31,8 +33,11 @@ class LoginActivity : BaseActivity() {
     setupUI()
   }
 
-  private fun setupUI() {
 
+ /*
+ * Setup listners to buttons
+ * */
+  private fun setupUI() {
     btSignInGoogleButton.setOnClickListener(object : View.OnClickListener {
       override fun onClick(p0: View?) {
         googleSignIn()
@@ -43,6 +48,12 @@ class LoginActivity : BaseActivity() {
     btTerms.setOnClickListener({
       startActivity(Intent(applicationContext, TermsActivity::class.java))
     })
+
+    btSignIn.setOnClickListener(){
+      val manager = supportFragmentManager
+      val fragment = SignInFragment.newInstance(null)
+      fragment.show(manager, "SignInFragment")
+    }
   }
 
   /*

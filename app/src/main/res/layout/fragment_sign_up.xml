@@ -15,7 +15,7 @@
       android:layout_width="match_parent"
       android:layout_height="64dp"
       android:contentDescription="Umbrella signIn logo"
-      android:src="@drawable/umbrella_sign_in_logo"
+      android:src="@drawable/hotline_logo"
       app:layout_constraintTop_toTopOf="parent"
       />
 
@@ -99,7 +99,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:backgroundTint="@color/colorRed"
-      android:text="go to hell"
+      android:text="Sign Up"
       app:layout_constraintBottom_toBottomOf="parent"
       />
 
