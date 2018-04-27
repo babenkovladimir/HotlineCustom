@@ -33,10 +33,9 @@ class LoginActivity : BaseActivity() {
     setupUI()
   }
 
-
- /*
- * Setup listners to buttons
- * */
+  /*
+  * Setup listners to buttons
+  * */
   private fun setupUI() {
     btSignInGoogleButton.setOnClickListener(object : View.OnClickListener {
       override fun onClick(p0: View?) {
@@ -45,15 +44,16 @@ class LoginActivity : BaseActivity() {
     })
     btSignInGoogleButton.setSize(SignInButton.SIZE_WIDE)
     btSignUp.setOnClickListener({ showSignUpFragment() })
-    btTerms.setOnClickListener({
-      startActivity(Intent(applicationContext, TermsActivity::class.java))
-    })
 
-    btSignIn.setOnClickListener(){
+
+    btSignIn.setOnClickListener() {
       val manager = supportFragmentManager
       val fragment = SignInFragment.newInstance(null)
       fragment.show(manager, "SignInFragment")
     }
+    btTerms.setOnClickListener({
+      startActivity(Intent(applicationContext, TermsActivity::class.java))
+    })
   }
 
   /*
@@ -105,7 +105,8 @@ class LoginActivity : BaseActivity() {
   private fun saveToPrefs(account: GoogleSignInAccount) {
     with(account) {
       with(prefs) {
-        userInJson = User(id.toString(),email!!, displayName, familyName, givenName, photoUrl.toString())
+        userInJson =
+            User(id.toString(), email!!, displayName, familyName, givenName, photoUrl.toString())
 
         userLoggedIn = true
         userEmail = email!!

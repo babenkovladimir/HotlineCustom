@@ -11,7 +11,7 @@
     >
 
   <ImageView
-      android:id="@+id/ivSignInFragmentLogo"
+      android:id="@+id/ivSignUpFragmentLogo"
       android:layout_width="match_parent"
       android:layout_height="64dp"
       android:contentDescription="Umbrella signIn logo"
@@ -20,7 +20,7 @@
       />
 
   <TextView
-      android:id="@+id/tvSignInFragmentTitle"
+      android:id="@+id/tvSignUpFragmentTitle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
@@ -28,19 +28,19 @@
       android:textSize="24sp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/ivSignInFragmentLogo"
+      app:layout_constraintTop_toBottomOf="@id/ivSignUpFragmentLogo"
       />
 
 
   <LinearLayout
-      android:id="@+id/llSignInFragmentInputFieds"
+      android:id="@+id/llSignUpFragmentInputFieds"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="16dp"
       android:layout_marginTop="48dp"
       android:orientation="vertical"
-      app:layout_constraintBottom_toTopOf="@id/btFragmentSignIn"
-      app:layout_constraintTop_toBottomOf="@id/tvSignInFragmentTitle"
+      app:layout_constraintBottom_toTopOf="@id/btFragmentSignUp"
+      app:layout_constraintTop_toBottomOf="@id/tvSignUpFragmentTitle"
       >
 
     <android.support.design.widget.TextInputLayout
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         >
       <android.support.design.widget.TextInputEditText
-          android:id="@+id/etFragmentSignUserName"
+          android:id="@+id/etFragmentSignUpUserName"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:cursorVisible="false"
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         >
       <android.support.design.widget.TextInputEditText
-          android:id="@+id/etFragmentSignInEmail"
+          android:id="@+id/etFragmentSignUpEmail"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:cursorVisible="false"
@@ -83,7 +83,7 @@
         app:passwordToggleEnabled="true"
         >
       <android.support.design.widget.TextInputEditText
-          android:id="@+id/etFragmentSignInPassword"
+          android:id="@+id/etFragmentSignUpPassword"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:cursorVisible="false"
@@ -95,7 +95,7 @@
   </LinearLayout>
 
   <Button
-      android:id="@+id/btFragmentSignIn"
+      android:id="@+id/btFragmentSignUp"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:backgroundTint="@color/colorRed"

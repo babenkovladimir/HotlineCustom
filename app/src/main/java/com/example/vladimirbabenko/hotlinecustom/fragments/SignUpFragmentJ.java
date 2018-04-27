@@ -34,10 +34,10 @@ import java.util.concurrent.Executor;
 
 public class SignUpFragmentJ extends DialogFragment {
 
-  @BindView(R.id.etFragmentSignInEmail) EditText etEmail;
-  @BindView(R.id.etFragmentSignInPassword) EditText etPassword;
-  @BindView(R.id.etFragmentSignUserName) EditText etUserName;
-  @BindView(R.id.btFragmentSignIn) Button btSignIn;
+  @BindView(R.id.etFragmentSignUpEmail) EditText etEmail;
+  @BindView(R.id.etFragmentSignUpPassword) EditText etPassword;
+  @BindView(R.id.etFragmentSignUpUserName) EditText etUserName;
+  @BindView(R.id.btFragmentSignUp) Button btSignIn;
 
   private DataManager mDataManager;
   private FirebaseAuth mAuth;
@@ -158,7 +158,7 @@ public class SignUpFragmentJ extends DialogFragment {
   }
 
   private boolean isValidUserName(CharSequence name) {
-    if (name.length() > 5) {
+    if (name.length() > 4) {
       return true;
     } else {
       return false;
@@ -177,6 +177,7 @@ public class SignUpFragmentJ extends DialogFragment {
     mDataManager.getPrefs().setUserEmail(email);
     mDataManager.getPrefs().setUserInJson(user);
     mDataManager.getPrefs().setUserLoggedIn(true);
+    mDataManager.getPrefs().setUserByFireBase(true);
     return true;
   }
 

@@ -1,16 +1,19 @@
 package com.example.vladimirbabenko.hotlinecustom.base.mvp
 
+import com.example.vladimirbabenko.hotlinecustom.data.DataManager
+
 abstract class BasePresenter<V : IView> {
 
   private var view: V? = null
+  protected val mDataManager = DataManager.create
 
   fun getView() = view
 
-  fun bind(v: V) {
+  open fun bind(v: V) {
     this.view = v
   }
 
-  fun unbind() {
+  open fun unbind() {
     this.view = null
   }
 }

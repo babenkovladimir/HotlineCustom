@@ -23,7 +23,8 @@
     <activity
         android:name=".LoginActivity"
         android:label="Login"
-        android:screenOrientation="portrait">
+        android:screenOrientation="portrait"
+        >
     </activity>
     <activity
         android:name=".j.LoginActivityJ"

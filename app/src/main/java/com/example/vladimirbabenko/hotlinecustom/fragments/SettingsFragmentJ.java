@@ -42,6 +42,7 @@ public class SettingsFragmentJ extends Fragment {
     mDataManager = DataManager.Companion.getCreate();
     bus = GlobalBus.Companion.getInstance();
     bus.register(this);
+    mAuth = FirebaseAuth.getInstance();
   }
 
   @Nullable @Override

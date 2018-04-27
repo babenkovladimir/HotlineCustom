@@ -2,6 +2,7 @@ package com.example.vladimirbabenko.hotlinecustom
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -18,15 +19,14 @@ class MainActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
 
     if (dataManager.prefs.userByFireBase) {
-      mAuthStateListner = object : FirebaseAuth.AuthStateListener {
+      mAuth.addAuthStateListener(object : FirebaseAuth.AuthStateListener {
         override fun onAuthStateChanged(firebaseAuth: FirebaseAuth) {
           val user = firebaseAuth.currentUser
-
+          Log.d("TAGFIREUSER","current user = "+ user.toString())
           if (user == null) dataManager.prefs.clearUserPreferences()
         }
       }
-
-      mAuth.addAuthStateListener(mAuthStateListner)
+      )
     }
 
     val isUserLoggedIn: Boolean = dataManager.prefs.userLoggedIn

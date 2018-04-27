@@ -34,9 +34,8 @@ class App : Application() {
   }
 
   private fun registerNetworkChangeReceiver() {
-     networkChangeReceiver=
-         NetworkChangeReceiverJ()
-    val intentFilter=IntentFilter()
+    networkChangeReceiver = NetworkChangeReceiverJ()
+    val intentFilter = IntentFilter()
     intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
     registerReceiver(networkChangeReceiver, intentFilter)
   }
