@@ -26,7 +26,7 @@ public class SomeFragmentJ extends Fragment {
       @Nullable Bundle savedInstanceState) {
 
     View view = null;
-    view = inflater.inflate(R.layout.fragment_some, container, false);
+    view = inflater.inflate(R.layout.fragment_video_card, container, false);
     ButterKnife.bind(this, view);
 
     return view;
