@@ -5,18 +5,15 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.Window
-import android.view.WindowManager
 import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.bascket_activity_mvp.BascketActivity
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
 import com.example.vladimirbabenko.hotlinecustom.event_bus.Events.BascketEvent
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
-import com.example.vladimirbabenko.hotlinecustom.fragments.MainScreenFragmentJ
-import com.example.vladimirbabenko.hotlinecustom.fragments.ProfileFragmentJ
+import com.example.vladimirbabenko.hotlinecustom.fragments.MainScreenFragment
+import com.example.vladimirbabenko.hotlinecustom.fragments.ProfileFragment
 import com.example.vladimirbabenko.hotlinecustom.fragments.SettingsFragmentJ
 import com.mikepenz.actionitembadge.library.ActionItemBadge
 import com.squareup.otto.Subscribe
@@ -29,8 +26,8 @@ class MainScreenActivity : BaseActivity() {
   val PROFILE_FRAGMENT_TAG: String = "PROFILE_FRAGMENT_TAG"
   val SETTINGS_FRAGMENT_TAG: String = "SETTINGS_FRAGMENT_TAG"
 
-  val mainScreenFragment: MainScreenFragmentJ by lazy { MainScreenFragmentJ() }
-  val profileFragment: ProfileFragmentJ by lazy { ProfileFragmentJ() }
+  val mainScreenFragment: MainScreenFragment by lazy { MainScreenFragment.newInstance(null) }
+  val profileFragment: ProfileFragment by lazy { ProfileFragment.newInstance(null) }
   val settingsFragment: SettingsFragmentJ by lazy { SettingsFragmentJ() } //lateinit var navigationView:NavigationView
 
   val bus = GlobalBus.instance

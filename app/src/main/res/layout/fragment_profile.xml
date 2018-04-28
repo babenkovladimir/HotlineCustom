@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ProfileFragmentJ"
+    tools:context=".fragments.j.ProfileFragmentJ"
     >
 
   <de.hdodenhof.circleimageview.CircleImageView
@@ -113,31 +113,31 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="10"
-        android:orientation="horizontal"
-        >
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="10"-->
+        <!--android:orientation="horizontal"-->
+        <!--&gt;-->
 
-      <TextView
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="2"
-          android:text="Fireb m "
-          android:textColor="@android:color/black"
-          android:textSize="16sp"
-          />
-      <TextView
-          android:id="@+id/tvProfileEmailFirebase"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="8"
-          android:hint="Namdfbzdfbze"
-          android:textColorHint="@color/colorRed"
-          />
+      <!--<TextView-->
+          <!--android:layout_width="0dp"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_weight="2"-->
+          <!--android:text="Fireb m "-->
+          <!--android:textColor="@android:color/black"-->
+          <!--android:textSize="16sp"-->
+          <!--/>-->
+      <!--<TextView-->
+          <!--android:id="@+id/tvProfileEmailFirebase"-->
+          <!--android:layout_width="0dp"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_weight="8"-->
+          <!--android:hint="Namdfbzdfbze"-->
+          <!--android:textColorHint="@color/colorRed"-->
+          <!--/>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 
   </LinearLayout>

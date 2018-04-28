@@ -8,8 +8,8 @@ import android.widget.FrameLayout;
 import butterknife.BindView;
 import com.example.vladimirbabenko.hotlinecustom.R;
 import com.example.vladimirbabenko.hotlinecustom.base.j.BaseActivityJ;
-import com.example.vladimirbabenko.hotlinecustom.fragments.MainScreenFragmentJ;
-import com.example.vladimirbabenko.hotlinecustom.fragments.ProfileFragmentJ;
+import com.example.vladimirbabenko.hotlinecustom.fragments.j.MainScreenFragmentJ;
+import com.example.vladimirbabenko.hotlinecustom.fragments.j.ProfileFragmentJ;
 import com.example.vladimirbabenko.hotlinecustom.fragments.SettingsFragmentJ;
 
 public class MainScreenActivityJ extends BaseActivityJ {

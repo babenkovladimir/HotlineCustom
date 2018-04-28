@@ -1,4 +1,4 @@
-package com.example.vladimirbabenko.hotlinecustom.fragments;
+package com.example.vladimirbabenko.hotlinecustom.fragments.j;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,7 +23,7 @@ public class ProfileFragmentJ extends Fragment {
   @BindView(R.id.tvProfileId) TextView tvId;
   @BindView(R.id.tvProfileName) TextView tvName;
   @BindView(R.id.tvProfileEmail) TextView tvEmail;
-  @BindView(R.id.tvProfileEmailFirebase) TextView tvFireBaseEmail;
+//  @BindView(R.id.tvProfileEmailFirebase) TextView tvFireBaseEmail;
   @BindView(R.id.fabChangeProfileInformation) FloatingActionButton fab;
 
   private DataManager mDataManager;
@@ -60,7 +60,7 @@ public class ProfileFragmentJ extends Fragment {
     tvName.setText(currentUser.getGivenName());
     tvName.setText(currentUser.getDisplayedName());
     tvEmail.setText(currentUser.getEmail());
-    tvFireBaseEmail.setText(mDataManager.getPrefs().getUserEmail());
+    //tvFireBaseEmail.setText(mDataManager.getPrefs().getUserEmail());
 
 
     Picasso
