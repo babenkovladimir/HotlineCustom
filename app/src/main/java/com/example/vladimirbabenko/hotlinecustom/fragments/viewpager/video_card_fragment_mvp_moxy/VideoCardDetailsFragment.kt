@@ -1,4 +1,4 @@
-package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment
+package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.video_card_fragment_mvp_moxy
 
 import android.content.Intent
 import android.net.Uri
@@ -9,11 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
-import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
+import com.example.vladimirbabenko.hotlinecustom.entity.VideoCard
 import com.example.vladimirbabenko.hotlinecustom.event_bus.Events
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
-import com.example.vladimirbabenko.hotlinecustom.utils.NotebookMapper
+import com.example.vladimirbabenko.hotlinecustom.utils.VideoCardMapper
+import com.squareup.otto.Bus
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btCarPartCloseDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btStarButton
@@ -24,20 +25,14 @@ import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPartIdD
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvCarPriceDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.tvPartNameDetails
 
-class NoteBookDetailsFragment() : DialogFragment() {
+class VideoCardDetailsFragment : DialogFragment() {
 
+  lateinit var bus: Bus
   val dataManager = DataManager.create
-  val bus = GlobalBus.instance
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-  bus.register(this)
-    isCancelable = true
-  }
 
   companion object {
-    fun newInstance(bundle: Bundle?): NoteBookDetailsFragment {
-      val fragment = NoteBookDetailsFragment()
+    fun newInstance(bundle: Bundle?): VideoCardDetailsFragment {
+      val fragment = VideoCardDetailsFragment()
       fragment.arguments = bundle
       return fragment
     }
@@ -45,52 +40,57 @@ class NoteBookDetailsFragment() : DialogFragment() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?): View? {
+    bus = GlobalBus.instance
+    bus.register(this)
+    isCancelable = true
+    return inflater.inflate(R.layout.fragment_car_part_dialog, container, false)
+  }
 
-    val view = inflater.inflate(R.layout.fragment_car_part_dialog, container, false)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
 
-    val noteBook = arguments?.getParcelable(AppConstants.NOTEBOOK_PART_BUNDL.key) as? NoteBook
+    val videoCard = arguments?.getParcelable(AppConstants.VIDEO_CARD_BUNDLE.key) as VideoCard
+    val isSelected = arguments?.getBoolean("isInBascket", false)
 
-    view.tvPartNameDetails.text = noteBook?.model
-    view.tvCarPartDetailsDescription.text = noteBook?.description
-    view.tvCarPriceDetails.text = "$ " + noteBook?.price.toString()
-    view.tvCarPartIdDetails.text = "id:${noteBook?.id.toString()}"
-    view.btStarButton.isSelected = arguments!!.getBoolean("NotebookIsInBascket")
+    with(videoCard) {
+      with(view) {
+        tvPartNameDetails.text = name
+        tvCarPriceDetails.text = "S " + price
+        tvCarPartIdDetails.text = "id: " + videoCard.id
+        tvCarPartDetailsDescription.text = description
+        btStarButton.isSelected = isSelected!!
 
-    Picasso
-      .get()
-      .load(noteBook?.photUrl)
-      .fit()
-      .placeholder(R.drawable.ic_launcher_background)
-      .into(view.ivCarPartImageDialog)
+        Picasso.get().load(videoCard.photoUrl).fit().placeholder(R.drawable.ic_launcher_background)
+          .into(ivCarPartImageDialog)
+      }
+    }
 
     view.btStarButton.setOnClickListener() {
       if (!it.isSelected) {
         it.isSelected = true
-        dataManager.addBascket(NotebookMapper().transform(noteBook!!))
+        dataManager.addBascket(VideoCardMapper().transform(videoCard))
         dataManager.prefs.modifyBascketSize(1)
         bus.post(Events.BascketEvent())
-        bus.post(Events.NotebookFragmentRefresh())
       } else {
         it.isSelected = false
-        dataManager.removeFromBascket(NotebookMapper().transform(noteBook!!))
+        dataManager.removeFromBascket(VideoCardMapper().transform(videoCard))
         dataManager.prefs.modifyBascketSize(-1)
         bus.post(Events.BascketEvent())
-        bus.post(Events.NotebookFragmentRefresh())
       }
     }
 
     view.etWikiLink.setOnClickListener({
       val intent = Intent()
       intent.action = Intent.ACTION_VIEW
-      val uri = Uri.parse("https://en.wikipedia.org/wiki/" + noteBook?.brand)
+      val uri = Uri.parse("https://en.wikipedia.org/wiki/" + videoCard.name)
       intent.data = uri
       context?.startActivity(intent)
     })
+
     view.btCarPartCloseDetails.setOnClickListener() {
-      bus.post(Events.CarFragmentRefresh())
+      bus.post(Events.VideoCardRefreshFragment())
       dismiss()
     }
-    return view
   }
 
   override fun onDestroy() {

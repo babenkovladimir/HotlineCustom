@@ -1,12 +1,14 @@
 package com.example.vladimirbabenko.hotlinecustom.event_bus
 
-class Events {
+sealed class Events {
 
   class BascketEvent(val increment:Int? = 0)
 
   class CarFragmentRefresh()
 
   class NotebookFragmentRefresh()
+
+  class VideoCardRefreshFragment()
 
   class PriceCorrectionEvent(increment : Int)
 }

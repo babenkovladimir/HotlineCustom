@@ -17,7 +17,6 @@ import com.example.vladimirbabenko.hotlinecustom.BuildConfig;
 import com.example.vladimirbabenko.hotlinecustom.LoginActivity;
 import com.example.vladimirbabenko.hotlinecustom.R;
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
-import com.example.vladimirbabenko.hotlinecustom.event_bus.Events;
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus;
 import com.example.vladimirbabenko.hotlinecustom.utils.InternetConnectionHelper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -25,7 +24,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.otto.Bus;
-import com.squareup.otto.Produce;
 
 public class SettingsFragmentJ extends Fragment {
 

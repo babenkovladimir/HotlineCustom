@@ -14,8 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.vladimirbabenko.hotlinecustom.R;
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
-import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment.NoteBookRecyclerViewAdapter;
-import java.util.List;
+import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment_god_object.NoteBookRecyclerViewAdapter;
 
 public class NoteBookListFragmentJ extends Fragment {
 

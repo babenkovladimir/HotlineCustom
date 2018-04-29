@@ -4,7 +4,7 @@ import com.example.vladimirbabenko.hotlinecustom.entity.VideoCard
 
 class RepositoryMockVidoCard : IRepositoryMock<VideoCard> {
 
-  val id = Array<Int>(10, { count -> (3.1415926535897 * count) as Int })
+  val id = Array<Int>(10, { count -> (12355478.1415926535897 * count + count).toInt() })
   val name =
     listOf<String>("GTX 750i", "GF1050Ti", "GF1070Ti", "Rx560", "Rx580", "Quatro", "GF1180",
       "GeForce MX440", "Voodoo", "Radeon 196Pro")

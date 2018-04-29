@@ -20,8 +20,8 @@ import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.event_bus.Events
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
-import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment.NoteBookDetailsFragment
-import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment.NoteBookRecyclerViewAdapter
+import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment_god_object.NoteBookDetailsFragment
+import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.notebook_fragment_god_object.NoteBookRecyclerViewAdapter
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.example.vladimirbabenko.hotlinecustom.utils.ItemClickSupport
 import com.squareup.otto.Subscribe

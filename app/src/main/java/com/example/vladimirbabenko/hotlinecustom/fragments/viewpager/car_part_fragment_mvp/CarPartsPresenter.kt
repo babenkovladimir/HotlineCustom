@@ -23,10 +23,7 @@ class CarPartsPresenter() : BasePresenter<CarPartsFragment>() {
   }
 
   fun getChosenList(): MutableList<Int>{
-    var chosenList = mutableListOf<Int>()
-    val items = dataManager.getFromBasket()
-    for(item in items) chosenList.add(item.id)
-    return chosenList
+    return dataManager.getChosenList()
   }
 
 }

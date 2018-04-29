@@ -1,14 +1,12 @@
 package com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.car_part_fragment_mvp
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.entity.BascketItem
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
-import com.example.vladimirbabenko.hotlinecustom.utils.CarPartMapper
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_car_part.view.btCarPartStar
 import kotlinx.android.synthetic.main.item_car_part.view.ivCarPartImage
@@ -46,13 +44,15 @@ class CarRVAdapter : RecyclerView.Adapter<CarRVAdapter.CarViewHolder>() {
 
     fun bind(carPart: CarPart, isInBasket: Boolean) {
 
-      Picasso.get().load(carPart.partPhotoUrl).fit().placeholder(R.drawable.ic_launcher_foreground)
-        .into(itemView.ivCarPartImage)
+      with(itemView) {
+        Picasso.get().load(carPart.partPhotoUrl).fit()
+          .placeholder(R.drawable.ic_launcher_foreground).into(ivCarPartImage)
 
-      itemView.tvCarParId.text = carPart.id.toString()
-      itemView.tvCarPartName.text = carPart.name
-      itemView.tvCarPartPrice.text = "price: ${carPart.partPrice}"
-      itemView.btCarPartStar.isSelected = isInBasket
+        tvCarParId.text = carPart.id.toString()
+        tvCarPartName.text = carPart.name
+        tvCarPartPrice.text = "price: ${carPart.partPrice}"
+        btCarPartStar.isSelected = isInBasket
+      }
     }
   }
 }
