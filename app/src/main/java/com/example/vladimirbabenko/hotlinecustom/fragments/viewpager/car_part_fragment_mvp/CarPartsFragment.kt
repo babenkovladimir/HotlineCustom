@@ -117,7 +117,7 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
   override fun handleSingleClick(position: Int?, carPart: CarPart, isInBascket: Boolean) {
     val bundle = Bundle()
     bundle.putParcelable(AppConstants.CAR_PART_BUNDLE.key, carPart)
-    bundle.putBoolean("IsInBascket", isInBascket)
+    bundle.putBoolean(AppConstants.IS_IN_BASKET.key, isInBascket)
 
     val partDetailsFragment = PartDetailsFragment.newInstance(bundle)
     val manager = childFragmentManager

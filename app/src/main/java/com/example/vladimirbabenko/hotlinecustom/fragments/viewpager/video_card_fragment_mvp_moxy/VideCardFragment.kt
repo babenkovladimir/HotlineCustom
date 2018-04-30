@@ -10,6 +10,8 @@ import android.widget.LinearLayout
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.VideoCard
@@ -65,7 +67,9 @@ class VideCardFragment() : MvpAppCompatFragment(), IVideoCardView {
     ItemClickSupport.addTo(recyclerViev)
       .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
         override fun onItemClicked(recyclerView: RecyclerView?, position: Int, v: View?) {
-          presenter.handleSingleClick(position)
+          YoYo.with(Techniques.ZoomIn)
+            .onEnd({ presenter.handleSingleClick(position) }) // Обращение к преентеру показать
+            .duration(200).playOn(v)
         }
       })
   }
@@ -79,7 +83,7 @@ class VideCardFragment() : MvpAppCompatFragment(), IVideoCardView {
   override fun singleClickShowDialogFragment(videoCard: VideoCard, isInBuscket: Boolean) {
     val bundle = Bundle()
     bundle.putParcelable(AppConstants.VIDEO_CARD_BUNDLE.key, videoCard)
-    bundle.putBoolean("isInBascket", isInBuscket)
+    bundle.putBoolean(AppConstants.IS_IN_BASKET.key, isInBuscket)
     val fragment = VideoCardDetailsFragment.newInstance(bundle)
     fragment.show(childFragmentManager, "VideoCardDetailsFragment")
   }

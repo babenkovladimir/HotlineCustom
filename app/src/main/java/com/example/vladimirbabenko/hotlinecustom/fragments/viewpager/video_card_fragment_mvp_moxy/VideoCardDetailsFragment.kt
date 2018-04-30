@@ -50,7 +50,7 @@ class VideoCardDetailsFragment : DialogFragment() {
     super.onViewCreated(view, savedInstanceState)
 
     val videoCard = arguments?.getParcelable(AppConstants.VIDEO_CARD_BUNDLE.key) as VideoCard
-    val isSelected = arguments?.getBoolean("isInBascket", false)
+    val isSelected = arguments?.getBoolean(AppConstants.IS_IN_BASKET.key, false)
 
     with(videoCard) {
       with(view) {
