@@ -1,16 +1,16 @@
-package com.example.vladimirbabenko.hotlinecustom
+package com.example.vladimirbabenko.hotlinecustom.login
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.util.Log
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
+import com.example.vladimirbabenko.hotlinecustom.R.layout
+import com.example.vladimirbabenko.hotlinecustom.TermsActivity
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
 import com.example.vladimirbabenko.hotlinecustom.entity.User
 import com.example.vladimirbabenko.hotlinecustom.fragments.SignUpFragmentJ
-import com.example.vladimirbabenko.hotlinecustom.fragments.sign_in_fragment_mvp.SignInFragment
+import com.example.vladimirbabenko.hotlinecustom.login.sign_in_fragment_mvp.SignInFragment
 import com.example.vladimirbabenko.hotlinecustom.j.MainScreenActivityJ
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -28,7 +28,7 @@ class LoginActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_login)
+    setContentView(layout.activity_login)
 
     setupUI()
   }
@@ -102,9 +102,16 @@ class LoginActivity : BaseActivity() {
     }
   }
 
+
+  /*
+  *   This fun saves user three times
+  *     - to preferences by fields
+  *     - to preferences by json
+  *     - to Realm DB
+  * */
   private fun saveToPrefs(account: GoogleSignInAccount) {
     with(account) {
-      with(prefs) {
+      with(dataManager.prefs) {
         userInJson =
             User(id.toString(), email!!, displayName, familyName, givenName, photoUrl.toString())
 
@@ -114,7 +121,11 @@ class LoginActivity : BaseActivity() {
         userFamilyName = familyName!!
         userGivenName = givenName!!
         userPhotoUrl = photoUrl.toString()!!
+
+        val user = User(id.toString(), email!!, displayName, familyName, givenName, photoUrl.toString())
+        dataManager.setUser(user)
       }
+
     }
   }
 

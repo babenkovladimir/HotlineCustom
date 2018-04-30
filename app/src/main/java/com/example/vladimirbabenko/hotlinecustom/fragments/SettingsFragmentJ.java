@@ -14,7 +14,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.vladimirbabenko.hotlinecustom.BuildConfig;
-import com.example.vladimirbabenko.hotlinecustom.LoginActivity;
+import com.example.vladimirbabenko.hotlinecustom.login.LoginActivity;
 import com.example.vladimirbabenko.hotlinecustom.R;
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus;

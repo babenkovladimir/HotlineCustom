@@ -6,6 +6,8 @@ import android.content.IntentFilter
 import android.os.Build
 import com.example.vladimirbabenko.hotlinecustom.utils.BattaryChargingReceiver
 import com.example.vladimirbabenko.hotlinecustom.utils.j.NetworkChangeReceiverJ
+import io.realm.Realm
+import io.realm.RealmConfiguration
 
 class App : Application() {
 
@@ -28,9 +30,9 @@ class App : Application() {
     super.onCreate()
     val context: Context = App.applicationContext()
 
-
     registerChargingReceiver()
     registerNetworkChangeReceiver()
+    initRealmDatabase()
   }
 
   private fun registerNetworkChangeReceiver() {
@@ -49,5 +51,14 @@ class App : Application() {
       intentFilter.addAction("vladimir.babenko.hotline.custom.chek.charge.state");
       registerReceiver(battaryChargingReceiver, intentFilter)
     }
+  }
+
+  private fun initRealmDatabase(){
+    Realm.init(this)
+    val realmConfig = RealmConfiguration.Builder()
+      .name("hotline.realm")
+      .schemaVersion(0)
+      .build()
+    Realm.setDefaultConfiguration(realmConfig)
   }
 }

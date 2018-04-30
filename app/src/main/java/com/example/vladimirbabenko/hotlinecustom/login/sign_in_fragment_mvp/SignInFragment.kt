@@ -1,4 +1,4 @@
-package com.example.vladimirbabenko.hotlinecustom.fragments.sign_in_fragment_mvp
+package com.example.vladimirbabenko.hotlinecustom.login.sign_in_fragment_mvp
 
 import android.content.Intent
 import android.os.Bundle

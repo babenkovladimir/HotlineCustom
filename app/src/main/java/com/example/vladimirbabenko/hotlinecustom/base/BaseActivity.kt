@@ -10,17 +10,12 @@ import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager.Companion
 import com.example.vladimirbabenko.hotlinecustom.data.PreferencesHelper
 
-open abstract class BaseActivity() : AppCompatActivity() {
+abstract class BaseActivity() : AppCompatActivity() {
 
-  //  val dataManager: DataManager = DataManager(this)
-  //  val prefs: PreferencesHelper = dataManager.prefs
   lateinit var dataManager: DataManager
-  lateinit var prefs: PreferencesHelper
 
   init {
     Log.d("TAG", "BASE ACTIVITI INIT BLOCK")
-    //dataManager = DataManager(this)
-    //prefs = dataManager.prefs
   }
 
   open val TAG: String = "TAG"
@@ -29,8 +24,7 @@ open abstract class BaseActivity() : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_base)
     dataManager = DataManager.create
-    Log.d("TAG","BAseActivivti onCreate dataManager = "+dataManager)
-    prefs = dataManager.prefs
+    Log.d("TAG", "BAseActivivti onCreate dataManager = " + dataManager)
   }
 
   fun Context.extendedToast(message: String) {

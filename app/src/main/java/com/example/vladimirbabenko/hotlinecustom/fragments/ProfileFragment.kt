@@ -2,6 +2,7 @@ package com.example.vladimirbabenko.hotlinecustom.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,17 +32,17 @@ class ProfileFragment : Fragment() {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    val user = dataManager.prefs.userInJson
-
-    with(user) {
-      with(view) {
-        tvProfileId.text = user.id
-        tvProfileName.text = displayedName
-        tvProfileEmail.text = email
-      }
-    }
-
-    Picasso.get().load(user.fotoUrl).error(R.drawable.mr_white).into(view.civCircleImageView)
+    super.onViewCreated(view, savedInstanceState) //    val user = dataManager.prefs.userInJson
+    val user = dataManager.getUser()
+    Log.d("TAGPROFIREREALM", "realmYser = "+ user.toString())
+//    with(user) {
+//      with(view) {
+//        tvProfileId.text = user.id
+//        tvProfileName.text = displayedName
+//        tvProfileEmail.text = email
+//      }
+//    }
+//
+//    Picasso.get().load(user.fotoUrl).error(R.drawable.mr_white).into(view.civCircleImageView)
   }
 }

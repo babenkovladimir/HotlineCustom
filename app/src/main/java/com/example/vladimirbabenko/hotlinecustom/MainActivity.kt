@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
+import com.example.vladimirbabenko.hotlinecustom.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : BaseActivity() {

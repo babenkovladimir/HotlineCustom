@@ -12,6 +12,8 @@ import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockVidoCa
 import com.example.vladimirbabenko.hotlinecustom.entity.BascketItem
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
+import com.example.vladimirbabenko.hotlinecustom.entity.User
+import com.example.vladimirbabenko.hotlinecustom.entity.UserRealm
 import com.example.vladimirbabenko.hotlinecustom.entity.VideoCard
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
@@ -22,6 +24,8 @@ class DataManager private constructor(context: Context) {
   private val mRepositoryMockNoteBookS = RepositoryMockNoteBookS()
   private val mRepositoryMockCarParts = RepositoryMockCarParts()
   private val mRepositoryMockVidoCard = RepositoryMockVidoCard()
+
+  private val realmHelper = RealmHelper()
 
   private val casheNoteBook: CasheNotebookJ =
     CasheNotebookJ(context, AppConstants.CASHE_NOTEBOOK_PREF_KEY.key,
@@ -52,6 +56,7 @@ class DataManager private constructor(context: Context) {
   fun fetchCarMocks(): List<CarPart> = mRepositoryMockCarParts.fetchMocks()
   fun fetchVidioCardMocks(): List<VideoCard> = mRepositoryMockVidoCard.fetchMocks()
 
+  // Cashe
   fun getCasheNotebook() = casheNoteBook.getList()
   fun saveCasheNoteBook(list: List<NoteBook>) = casheNoteBook.saveList(list)
 
@@ -61,7 +66,7 @@ class DataManager private constructor(context: Context) {
   fun getCasheVideoCard() = casheVideoCard.getList()
   fun saveCasheVideoCard(list: List<VideoCard>) = casheVideoCard.saveList(list)
 
-  // Bascket fun
+  // Bascket
   fun addBascket(id: BascketItem) = bascketHelper.put(id)
 
   fun getFromBasket(): MutableSet<BascketItem> = bascketHelper.get()
@@ -76,6 +81,16 @@ class DataManager private constructor(context: Context) {
     for (item in items) chosenList.add(item.id)
     return chosenList
   }
+
+  fun setUser(user: User): Unit{
+    realmHelper.saveUserRealm(user)
+  }
+
+  fun getUser(): UserRealm? {
+    return realmHelper.getUser()
+  }
+
+
 }
 
 
