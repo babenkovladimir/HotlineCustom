@@ -1,4 +1,4 @@
-package com.example.vladimirbabenko.hotlinecustom.fragments;
+package com.example.vladimirbabenko.hotlinecustom.fragments.j;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,14 +46,13 @@ public class SettingsFragmentJ extends Fragment {
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_settings, container, false);
+  }
 
-    View view = null;
-    view = inflater.inflate(R.layout.fragment_settings, container, false);
+  @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
-
     setuoUI();
-
-    return view;
   }
 
   private void setuoUI() {
@@ -74,17 +73,21 @@ public class SettingsFragmentJ extends Fragment {
 
     if (mDataManager.getPrefs().getUserByFireBase()) {
       mAuth.signOut();
+      mDataManager.getPrefs().clearUserPreferences();
+      mDataManager.clearUser();
       startActivity(new Intent(getContext(), LoginActivity.class));
     } else {
 
       GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
           .requestEmail()
           .build();
+
       GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
       mGoogleSignInClient.signOut();
       getActivity().finishAffinity();
       mDataManager.getPrefs().clearUserPreferences();
       mDataManager.clearBascket();
+      mDataManager.clearUser();
       startActivity(new Intent(getContext(), LoginActivity.class));
     }
   }

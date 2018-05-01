@@ -9,7 +9,8 @@ import com.example.vladimirbabenko.hotlinecustom.R.layout
 import com.example.vladimirbabenko.hotlinecustom.TermsActivity
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
 import com.example.vladimirbabenko.hotlinecustom.entity.User
-import com.example.vladimirbabenko.hotlinecustom.fragments.SignUpFragmentJ
+import com.example.vladimirbabenko.hotlinecustom.entity.UserRealm
+import com.example.vladimirbabenko.hotlinecustom.fragments.SignUpFragment
 import com.example.vladimirbabenko.hotlinecustom.login.sign_in_fragment_mvp.SignInFragment
 import com.example.vladimirbabenko.hotlinecustom.j.MainScreenActivityJ
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
@@ -102,7 +103,6 @@ class LoginActivity : BaseActivity() {
     }
   }
 
-
   /*
   *   This fun saves user three times
   *     - to preferences by fields
@@ -122,8 +122,12 @@ class LoginActivity : BaseActivity() {
         userGivenName = givenName!!
         userPhotoUrl = photoUrl.toString()!!
 
-        val user = User(id.toString(), email!!, displayName, familyName, givenName, photoUrl.toString())
-        dataManager.setUser(user)
+        val userRealm =
+          UserRealm(AppConstants.REALM_USER_ID.key, id.toString(), email!!, displayName, familyName, givenName,
+            photoUrl.toString())
+
+        // Using RealmObject
+        dataManager.setUser(userRealm)
       }
 
     }
@@ -131,8 +135,8 @@ class LoginActivity : BaseActivity() {
 
   private fun showSignUpFragment(): Unit { // Compiling :-)
     //val signUpFragment: SignUpFragmentJ by lazy { SignUpFragmentJ.newInstance(null) }
-    val signUpFragment: SignUpFragmentJ = SignUpFragmentJ.newInstance(null)
+    val signUpFragment = SignUpFragment.newInstance()
     val manager: FragmentManager = supportFragmentManager
-    signUpFragment.show(manager, "SignUpFragmentJ")
+    signUpFragment.show(manager, "SignUpFragment")
   }
 }

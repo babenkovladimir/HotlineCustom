@@ -24,7 +24,7 @@ abstract class BaseActivity() : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_base)
     dataManager = DataManager.create
-    Log.d("TAG", "BAseActivivti onCreate dataManager = " + dataManager)
+    Log.d("TAG", "BaseActivivti onCreate dataManager = " + dataManager)
   }
 
   fun Context.extendedToast(message: String) {

@@ -1,4 +1,4 @@
-package com.example.vladimirbabenko.hotlinecustom.fragments;
+package com.example.vladimirbabenko.hotlinecustom.fragments.j;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +17,11 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.vladimirbabenko.hotlinecustom.MainScreenActivity;
-import com.example.vladimirbabenko.hotlinecustom.base.App;
+import com.example.vladimirbabenko.hotlinecustom.R;
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager;
 import com.example.vladimirbabenko.hotlinecustom.entity.User;
-import com.example.vladimirbabenko.hotlinecustom.j.MainScreenActivityJ;
-import com.example.vladimirbabenko.hotlinecustom.R;
+import com.example.vladimirbabenko.hotlinecustom.entity.UserRealm;
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -30,7 +29,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import java.util.concurrent.Executor;
 
 public class SignUpFragmentJ extends DialogFragment {
 
@@ -128,12 +126,17 @@ public class SignUpFragmentJ extends DialogFragment {
               UserProfileChangeRequest profileUpdates =
                   new UserProfileChangeRequest.Builder().setDisplayName(
                       etUserName.getText().toString()).build();
-              fireUser.updateProfile(profileUpdates);
-
-              if (saveUserInfoToPreferences(fireUser)) {
-                startActivity(new Intent(getActivity(), MainScreenActivity.class));
-                dismiss();
-              }
+              fireUser.updateProfile(profileUpdates)
+                  .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override public void onComplete(@NonNull Task<Void> task) {
+                      if (task.isSuccessful()) {
+                        if (saveUserInfoToPreferences(fireUser)) {
+                          startActivity(new Intent(getActivity(), MainScreenActivity.class));
+                          dismiss();
+                        }
+                      }
+                    }
+                  });
             } else {
               Toast.makeText(getContext(), "Error!!!", Toast.LENGTH_SHORT).show();
               dismiss();
@@ -178,6 +181,12 @@ public class SignUpFragmentJ extends DialogFragment {
     mDataManager.getPrefs().setUserInJson(user);
     mDataManager.getPrefs().setUserLoggedIn(true);
     mDataManager.getPrefs().setUserByFireBase(true);
+
+    UserRealm userRealm =
+        new UserRealm(AppConstants.REALM_USER_ID.getKey(), id, email, displayedName, familyName,
+            givenName, photoUrl);
+    mDataManager.setUser(userRealm);
+
     return true;
   }
 

@@ -10,7 +10,7 @@ import com.example.vladimirbabenko.hotlinecustom.R;
 import com.example.vladimirbabenko.hotlinecustom.base.j.BaseActivityJ;
 import com.example.vladimirbabenko.hotlinecustom.fragments.j.MainScreenFragmentJ;
 import com.example.vladimirbabenko.hotlinecustom.fragments.j.ProfileFragmentJ;
-import com.example.vladimirbabenko.hotlinecustom.fragments.SettingsFragmentJ;
+import com.example.vladimirbabenko.hotlinecustom.fragments.j.SettingsFragmentJ;
 
 public class MainScreenActivityJ extends BaseActivityJ {
 

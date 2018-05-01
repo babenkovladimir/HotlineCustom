@@ -10,7 +10,7 @@ import butterknife.BindView;
 import com.example.vladimirbabenko.hotlinecustom.R;
 import com.example.vladimirbabenko.hotlinecustom.base.j.BaseActivityJ;
 import com.example.vladimirbabenko.hotlinecustom.entity.User;
-import com.example.vladimirbabenko.hotlinecustom.fragments.SignUpFragmentJ;
+import com.example.vladimirbabenko.hotlinecustom.fragments.j.SignUpFragmentJ;
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;

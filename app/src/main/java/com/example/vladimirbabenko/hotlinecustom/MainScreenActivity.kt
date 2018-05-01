@@ -14,7 +14,7 @@ import com.example.vladimirbabenko.hotlinecustom.event_bus.Events.BascketEvent
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.fragments.MainScreenFragment
 import com.example.vladimirbabenko.hotlinecustom.fragments.ProfileFragment
-import com.example.vladimirbabenko.hotlinecustom.fragments.SettingsFragmentJ
+import com.example.vladimirbabenko.hotlinecustom.fragments.SettingsFragment
 import com.mikepenz.actionitembadge.library.ActionItemBadge
 import com.squareup.otto.Subscribe
 import kotlinx.android.synthetic.main.activity_main_screen.navigationView
@@ -26,9 +26,9 @@ class MainScreenActivity : BaseActivity() {
   val PROFILE_FRAGMENT_TAG: String = "PROFILE_FRAGMENT_TAG"
   val SETTINGS_FRAGMENT_TAG: String = "SETTINGS_FRAGMENT_TAG"
 
-  val mainScreenFragment: MainScreenFragment by lazy { MainScreenFragment.newInstance(null) }
-  val profileFragment: ProfileFragment by lazy { ProfileFragment.newInstance(null) }
-  val settingsFragment: SettingsFragmentJ by lazy { SettingsFragmentJ() } //lateinit var navigationView:NavigationView
+  val mainScreenFragment: MainScreenFragment by lazy { MainScreenFragment.newInstance() }
+  val profileFragment: ProfileFragment by lazy { ProfileFragment.newInstance() }
+  val settingsFragment: SettingsFragment by lazy { SettingsFragment.newInstance() } //lateinit var navigationView:NavigationView
 
   val bus = GlobalBus.instance
 

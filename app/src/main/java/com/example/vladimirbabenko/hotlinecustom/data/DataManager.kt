@@ -25,6 +25,7 @@ class DataManager private constructor(context: Context) {
   private val mRepositoryMockCarParts = RepositoryMockCarParts()
   private val mRepositoryMockVidoCard = RepositoryMockVidoCard()
 
+  // Realm Helper class
   private val realmHelper = RealmHelper()
 
   private val casheNoteBook: CasheNotebookJ =
@@ -58,6 +59,7 @@ class DataManager private constructor(context: Context) {
 
   // Cashe
   fun getCasheNotebook() = casheNoteBook.getList()
+
   fun saveCasheNoteBook(list: List<NoteBook>) = casheNoteBook.saveList(list)
 
   fun getCasheCarPart() = casheCarPart.getList()
@@ -75,14 +77,15 @@ class DataManager private constructor(context: Context) {
     bascketHelper.removeFromBaskcet(bascketItem)
   }
 
-  fun getChosenList(): MutableList<Int>{
+  fun getChosenList(): MutableList<Int> {
     var chosenList = mutableListOf<Int>()
     val items = getFromBasket()
     for (item in items) chosenList.add(item.id)
     return chosenList
   }
 
-  fun setUser(user: User): Unit{
+  // Realm database functions
+  fun setUser(user: UserRealm): Unit {
     realmHelper.saveUserRealm(user)
   }
 
@@ -90,7 +93,9 @@ class DataManager private constructor(context: Context) {
     return realmHelper.getUser()
   }
 
-
+  fun clearUser() {
+    realmHelper.clearUser()
+  }
 }
 
 

@@ -37,6 +37,12 @@ internal enum class AppConstants(val key: String, val intKey: Int? = 0) {
   BASCKET_JSON_KEY("BASCKET_JSON_KEY"),
   BASKETSIZE("BASKETSIZE"),
 
-  IS_INTERNET_CONNECTED_KEY("IS_INTERNET_CONNECTED_KEY");
+  IS_INTERNET_CONNECTED_KEY("IS_INTERNET_CONNECTED_KEY"),
+
+  // Realm constants
+  REALM_USER_ID("REALM_USER_ID")
+  ;
+
+
 
 }

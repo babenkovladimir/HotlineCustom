@@ -5,6 +5,8 @@ import android.util.Log
 import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.base.mvp.BasePresenter
 import com.example.vladimirbabenko.hotlinecustom.entity.User
+import com.example.vladimirbabenko.hotlinecustom.entity.UserRealm
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -43,7 +45,7 @@ class SignInPresenter() : BasePresenter<SignInFragment>() {
         }
       })
   }
-  
+
   private fun saveUserInfoToPreferences(fireUser: FirebaseUser?): Boolean {
     with(fireUser!!) {
       val id = uid
@@ -59,8 +61,12 @@ class SignInPresenter() : BasePresenter<SignInFragment>() {
       mDataManager.prefs.userInJson = user
       mDataManager.prefs.userLoggedIn = true
       mDataManager.prefs.userByFireBase = true
-    }
 
+      val userRealm =
+        UserRealm(AppConstants.REALM_USER_ID.key, id, email, displayedName, familyName, givenName,
+          photoUrl)
+      mDataManager.setUser(user = userRealm)
+    }
     return true
   }
 

@@ -19,7 +19,7 @@ class ProfileFragment : Fragment() {
   private val dataManager = DataManager.create
 
   companion object {
-    fun newInstance(bundle: Bundle?): ProfileFragment {
+    fun newInstance(bundle: Bundle? = null): ProfileFragment {
       val fragment = ProfileFragment()
       fragment.arguments = bundle
       return fragment
@@ -31,18 +31,19 @@ class ProfileFragment : Fragment() {
     return inflater.inflate(R.layout.fragment_profile, container, false)
   }
 
+  // Fun gets userInfo from Realm
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState) //    val user = dataManager.prefs.userInJson
-    val user = dataManager.getUser()
-    Log.d("TAGPROFIREREALM", "realmYser = "+ user.toString())
-//    with(user) {
-//      with(view) {
-//        tvProfileId.text = user.id
-//        tvProfileName.text = displayedName
-//        tvProfileEmail.text = email
-//      }
-//    }
-//
-//    Picasso.get().load(user.fotoUrl).error(R.drawable.mr_white).into(view.civCircleImageView)
+    super.onViewCreated(view, savedInstanceState) // val user = dataManager.prefs.userInJson
+    val userRealm = dataManager.getUser()
+
+    with(userRealm) {
+      with(view) {
+        tvProfileId.text = userRealm?.userId
+        tvProfileName.text = userRealm?.displayedName
+        tvProfileEmail.text = userRealm?.email
+      }
+    }
+
+    Picasso.get().load(userRealm?.fotoUrl).error(R.drawable.mr_white).into(view.civCircleImageView)
   }
 }
