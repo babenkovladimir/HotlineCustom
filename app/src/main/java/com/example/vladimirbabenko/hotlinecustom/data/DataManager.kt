@@ -6,6 +6,7 @@ import com.example.vladimirbabenko.hotlinecustom.base.App
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheCarPart
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheNotebookJ
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheVideoCard
+import com.example.vladimirbabenko.hotlinecustom.data.mocks.FirebaseDBHelper
 import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockCarParts
 import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockNoteBookS
 import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockVidoCard
@@ -15,6 +16,7 @@ import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.entity.User
 import com.example.vladimirbabenko.hotlinecustom.entity.UserRealm
 import com.example.vladimirbabenko.hotlinecustom.entity.VideoCard
+import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.video_card_fragment_mvp_moxy.`IVideoCardView$$State`.RefreshChosenListCommand
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
 
@@ -27,6 +29,10 @@ class DataManager private constructor(context: Context) {
 
   // Realm Helper class
   private val realmHelper = RealmHelper()
+
+  // FirebaseDB
+
+  private val firebaseHelper:FirebaseDBHelper by lazy { FirebaseDBHelper(getUser()!!.userId) }
 
   private val casheNoteBook: CasheNotebookJ =
     CasheNotebookJ(context, AppConstants.CASHE_NOTEBOOK_PREF_KEY.key,
@@ -84,6 +90,11 @@ class DataManager private constructor(context: Context) {
     return chosenList
   }
 
+  fun getChosenListF(): MutableList<Int>? {
+
+    return firebaseHelper.getChosenList()?.toMutableList()
+  }
+
   // Realm database functions
   fun setUser(user: UserRealm): Unit {
     realmHelper.saveUserRealm(user)
@@ -95,6 +106,16 @@ class DataManager private constructor(context: Context) {
 
   fun clearUser() {
     realmHelper.clearUser()
+  }
+
+  // Firebase database fucntions
+
+  fun saveToFirebase() {
+    firebaseHelper.saveStringToDb()
+  }
+
+  fun saveChosenListtoFirebase(chosenList: List<Int>) {
+    firebaseHelper.saveChosenList(chosenList)
   }
 }
 

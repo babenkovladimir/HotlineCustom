@@ -6,9 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_profile.fabChangeProfileInformation
 import kotlinx.android.synthetic.main.fragment_profile.view.civCircleImageView
 import kotlinx.android.synthetic.main.fragment_profile.view.tvProfileEmail
 import kotlinx.android.synthetic.main.fragment_profile.view.tvProfileId
@@ -45,5 +47,12 @@ class ProfileFragment : Fragment() {
     }
 
     Picasso.get().load(userRealm?.fotoUrl).error(R.drawable.mr_white).into(view.civCircleImageView)
+
+    fabChangeProfileInformation.setOnClickListener(){
+      Toast.makeText(context, "Firebase is called", Toast.LENGTH_SHORT).show()
+      dataManager.saveToFirebase()
+
+      dataManager.saveChosenListtoFirebase(dataManager.getChosenList())
+    }
   }
 }

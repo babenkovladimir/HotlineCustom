@@ -82,6 +82,7 @@ class SettingsFragment : Fragment() {
       mAuth.signOut()
       dataManager.prefs.clearUserPreferences()
       dataManager.clearUser()
+      dataManager.clearBascket()
       startActivity(Intent(context, LoginActivity::class.java))
     } else {
 
