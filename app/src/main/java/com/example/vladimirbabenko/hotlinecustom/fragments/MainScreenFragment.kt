@@ -16,7 +16,7 @@ class MainScreenFragment() : Fragment() {
   val dataManager = DataManager.create
 
   companion object {
-    fun newInstance(bundle: Bundle?): MainScreenFragment {
+    fun newInstance(bundle: Bundle? = null): MainScreenFragment {
       val fragment = MainScreenFragment()
       fragment.arguments = bundle
       return fragment
@@ -39,7 +39,5 @@ class MainScreenFragment() : Fragment() {
 
     viewPager.adapter = adapter
     tabLayout.setupWithViewPager(viewPager)
-
-
   }
 }
