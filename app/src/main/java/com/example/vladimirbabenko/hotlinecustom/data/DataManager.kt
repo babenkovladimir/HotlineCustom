@@ -6,17 +6,14 @@ import com.example.vladimirbabenko.hotlinecustom.base.App
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheCarPart
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheNotebookJ
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheVideoCard
-import com.example.vladimirbabenko.hotlinecustom.data.mocks.FirebaseDBHelper
 import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockCarParts
 import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockNoteBookS
 import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockVidoCard
 import com.example.vladimirbabenko.hotlinecustom.entity.BascketItem
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
-import com.example.vladimirbabenko.hotlinecustom.entity.User
 import com.example.vladimirbabenko.hotlinecustom.entity.UserRealm
 import com.example.vladimirbabenko.hotlinecustom.entity.VideoCard
-import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.video_card_fragment_mvp_moxy.`IVideoCardView$$State`.RefreshChosenListCommand
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
 
@@ -32,7 +29,9 @@ class DataManager private constructor(context: Context) {
 
   // FirebaseDB
 
-  private val firebaseHelper:FirebaseDBHelper by lazy { FirebaseDBHelper(getUser()!!.userId) }
+  private val firebaseHelper: FirebaseDBHelper by lazy {
+    FirebaseDBHelper(getUser()!!.userId)
+  }
 
   private val casheNoteBook: CasheNotebookJ =
     CasheNotebookJ(context, AppConstants.CASHE_NOTEBOOK_PREF_KEY.key,
@@ -59,9 +58,20 @@ class DataManager private constructor(context: Context) {
     val create: DataManager by lazy { DataManager(App.applicationContext()) }
   }
 
+  // Application mocks
+
   fun fetchMocks(): List<NoteBook> = mRepositoryMockNoteBookS.fetchMocks()
   fun fetchCarMocks(): List<CarPart> = mRepositoryMockCarParts.fetchMocks()
   fun fetchVidioCardMocks(): List<VideoCard> = mRepositoryMockVidoCard.fetchMocks()
+
+  // Realm user
+  fun getUser(): UserRealm? {
+    return realmHelper.getUser()
+  }
+
+  fun clearUser() {
+    realmHelper.clearUser()
+  }
 
   // Cashe
   fun getCasheNotebook() = casheNoteBook.getList()
@@ -100,18 +110,10 @@ class DataManager private constructor(context: Context) {
     realmHelper.saveUserRealm(user)
   }
 
-  fun getUser(): UserRealm? {
-    return realmHelper.getUser()
-  }
-
-  fun clearUser() {
-    realmHelper.clearUser()
-  }
-
   // Firebase database fucntions
 
-  fun saveToFirebase() {
-    firebaseHelper.saveStringToDb()
+  fun saveToFirebase(userName: String) {
+    firebaseHelper.saveUserName(userName = userName)
   }
 
   fun saveChosenListtoFirebase(chosenList: List<Int>) {

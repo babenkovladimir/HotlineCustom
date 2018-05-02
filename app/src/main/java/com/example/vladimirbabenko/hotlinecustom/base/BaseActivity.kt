@@ -1,18 +1,18 @@
 package com.example.vladimirbabenko.hotlinecustom.base
 
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
-import com.example.vladimirbabenko.hotlinecustom.data.DataManager.Companion
-import com.example.vladimirbabenko.hotlinecustom.data.PreferencesHelper
+import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 
 abstract class BaseActivity() : AppCompatActivity() {
 
   lateinit var dataManager: DataManager
+  val bus:GlobalBus = GlobalBus.instance
 
   init {
     Log.d("TAG", "BASE ACTIVITI INIT BLOCK")
@@ -24,6 +24,7 @@ abstract class BaseActivity() : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_base)
     dataManager = DataManager.create
+    bus.register(this)
     Log.d("TAG", "BaseActivivti onCreate dataManager = " + dataManager)
   }
 
@@ -33,5 +34,10 @@ abstract class BaseActivity() : AppCompatActivity() {
 
   fun Context.logd(message: String) {
     Log.d("TAG", message)
+  }
+
+  override fun onDestroy() {
+    bus.unregister(this)
+    super.onDestroy()
   }
 }

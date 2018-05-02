@@ -11,7 +11,6 @@ import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.bascket_activity_mvp.BascketActivity
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
 import com.example.vladimirbabenko.hotlinecustom.event_bus.Events.BascketEvent
-import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.fragments.MainScreenFragment
 import com.example.vladimirbabenko.hotlinecustom.fragments.ProfileFragment
 import com.example.vladimirbabenko.hotlinecustom.fragments.SettingsFragment
@@ -30,12 +29,12 @@ class MainScreenActivity : BaseActivity() {
   val profileFragment: ProfileFragment by lazy { ProfileFragment.newInstance() }
   val settingsFragment: SettingsFragment by lazy { SettingsFragment.newInstance() } //lateinit var navigationView:NavigationView
 
-  val bus = GlobalBus.instance
+  //val bus = GlobalBus.instance //
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main_screen)
-    bus.register(this);
+    //bus.register(this);
 
     setupUI(savedInstanceState)
   }
@@ -60,7 +59,7 @@ class MainScreenActivity : BaseActivity() {
   }
 
   override fun onDestroy() {
-    bus.unregister(this);
+    //bus.unregister(this);
     super.onDestroy()
   }
 
