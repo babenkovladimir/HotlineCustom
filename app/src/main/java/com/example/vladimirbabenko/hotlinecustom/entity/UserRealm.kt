@@ -5,9 +5,7 @@ import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 import io.realm.annotations.Required
 
-@RealmClass open class UserRealm
-
-  constructor(
+@RealmClass open class UserRealm(
     @Required @PrimaryKey var id: String = "",
     @Required var userId: String = "",
     @Required var email: String? = "",

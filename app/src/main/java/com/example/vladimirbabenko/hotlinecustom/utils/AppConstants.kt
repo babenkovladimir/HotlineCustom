@@ -41,8 +41,4 @@ internal enum class AppConstants(val key: String, val intKey: Int? = 0) {
 
   // Realm constants
   REALM_USER_ID("REALM_USER_ID")
-  ;
-
-
-
 }

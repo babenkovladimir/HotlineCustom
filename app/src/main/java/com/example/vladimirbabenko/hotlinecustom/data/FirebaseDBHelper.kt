@@ -1,6 +1,8 @@
 package com.example.vladimirbabenko.hotlinecustom.data
 
 import android.util.Log
+import com.example.vladimirbabenko.hotlinecustom.data.`interface`.ICloudDb
+import com.example.vladimirbabenko.hotlinecustom.entity.CloudBasketItem
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -8,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
 
-class FirebaseDBHelper(val userId: String) {
+class FirebaseDBHelper(val userId: String): ICloudDb<>{
 
   var database: FirebaseDatabase
   var ref: DatabaseReference
@@ -24,7 +26,7 @@ class FirebaseDBHelper(val userId: String) {
     ref.child("users".toString()).child(userId).child("someData".toString()).setValue(userName)
   }
 
-  fun saveChosenList(chosenList: List<Int>) {
+  fun saveChosenList(chosenList: List<CloudBasketItem>) {
     ref.child("users".toString()).child(userId).child("chosenList".toString()).setValue(chosenList)
   }
 
@@ -45,4 +47,10 @@ class FirebaseDBHelper(val userId: String) {
       })
     return list
   }
+
+
+  override fun removeFromBasket(itemId: String) {
+
+  }
+
 }

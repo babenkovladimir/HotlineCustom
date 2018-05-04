@@ -7,7 +7,7 @@ import io.realm.annotations.RealmClass
 import io.realm.annotations.Required
 
 @RealmClass
-open class VideoCardRealm constructor(
+open class VideoCardRealm(
   @Required @PrimaryKey  var id: String? = "",
   var name: String? = "",
   var memorySize: Int? = null,
