@@ -183,7 +183,7 @@ public class SignUpFragmentJ extends DialogFragment {
     mDataManager.getPrefs().setUserByFireBase(true);
 
     UserRealm userRealm =
-        new UserRealm(AppConstants.REALM_USER_ID.getKey(), id, email, displayedName, familyName,
+        new UserRealm(AppConstants.REALM_USER_ID.getIntKey(), id, email, displayedName, familyName,
             givenName, photoUrl);
     mDataManager.setUser(userRealm);
 

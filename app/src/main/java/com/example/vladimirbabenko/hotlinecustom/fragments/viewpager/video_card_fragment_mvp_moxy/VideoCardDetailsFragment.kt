@@ -13,7 +13,7 @@ import com.example.vladimirbabenko.hotlinecustom.entity.VideoCard
 import com.example.vladimirbabenko.hotlinecustom.event_bus.Events
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
-import com.example.vladimirbabenko.hotlinecustom.utils.VideoCardMapper
+import com.example.vladimirbabenko.hotlinecustom.utils.mappers.VideoCardMapper
 import com.squareup.otto.Bus
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btCarPartCloseDetails
@@ -68,12 +68,14 @@ class VideoCardDetailsFragment : DialogFragment() {
     view.btStarButton.setOnClickListener() {
       if (!it.isSelected) {
         it.isSelected = true
-        dataManager.addBascket(VideoCardMapper().transform(videoCard))
+        dataManager.addBascket(
+          VideoCardMapper().transform(videoCard))
         dataManager.prefs.modifyBascketSize(1)
         bus.post(Events.BascketEvent())
       } else {
         it.isSelected = false
-        dataManager.removeFromBascket(VideoCardMapper().transform(videoCard))
+        dataManager.removeFromBascket(
+          VideoCardMapper().transform(videoCard))
         dataManager.prefs.modifyBascketSize(-1)
         bus.post(Events.BascketEvent())
       }

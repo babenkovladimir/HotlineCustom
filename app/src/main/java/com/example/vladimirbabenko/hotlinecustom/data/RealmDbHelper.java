@@ -27,6 +27,13 @@ public class RealmDbHelper {
     realm.commitTransaction();
   }
 
+  public <T extends RealmObject> void saveAll(List<T> list) {
+    Realm realm = Realm.getInstance(mConfiguration);
+    realm.beginTransaction();
+    realm.copyToRealmOrUpdate(list);
+    realm.commitTransaction();
+  }
+
   public <T extends RealmObject> List<T> getAll(Class<T> clazz) {
     List<T> list = new ArrayList<T>();
     Realm realm = Realm.getInstance(mConfiguration);
@@ -36,6 +43,7 @@ public class RealmDbHelper {
     return list;
   }
 
+  // Метод возвращает элемент по id. Принимает на вход класс объекта и шв, по которому он будет браться из бд
   public <T extends RealmObject> T getElementById(Class<T> clazz, int id) {
 
     Realm realm = Realm.getInstance(mConfiguration);
@@ -54,7 +62,9 @@ public class RealmDbHelper {
     return t;
   }
 
-  public <T extends RealmObject> List<T> getElementsFromDBByQuery(Class<T> clazz, String field, String value) {
+  // Метод возвращает списох объектов по id
+  public <T extends RealmObject> List<T> getElementsFromDBByQuery(Class<T> clazz, String field,
+      String value) {
 
     Realm realm = Realm.getInstance(mConfiguration);
     RealmQuery<T> query = realm.where(clazz).equalTo(field, value);
@@ -66,6 +76,7 @@ public class RealmDbHelper {
     return list;
   }
 
+  // метод удаляет таблицу из базы данных
   public <T extends RealmObject> void dropRealmTable(Class<T> clazz) {
     RealmResults<T> results = Realm.getInstance(mConfiguration).where(clazz).findAll();
 

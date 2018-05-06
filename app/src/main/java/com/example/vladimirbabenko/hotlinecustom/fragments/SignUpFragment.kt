@@ -158,7 +158,7 @@ class SignUpFragment : DialogFragment() {
     dataManager.prefs.userByFireBase = true
 
     val userRealm =
-      UserRealm(REALM_USER_ID.key, id, email, displayedName, familyName, givenName, photoUrl)
+      UserRealm(REALM_USER_ID.intKey, id, email, displayedName, familyName, givenName, photoUrl)
     dataManager.setUser(userRealm)
 
     return true

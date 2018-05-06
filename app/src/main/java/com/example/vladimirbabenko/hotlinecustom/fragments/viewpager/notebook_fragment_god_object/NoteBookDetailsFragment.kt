@@ -13,7 +13,7 @@ import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.event_bus.Events
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
-import com.example.vladimirbabenko.hotlinecustom.utils.NotebookMapper
+import com.example.vladimirbabenko.hotlinecustom.utils.mappers.NotebookMapper
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btCarPartCloseDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btStarButton
@@ -66,13 +66,15 @@ class NoteBookDetailsFragment() : DialogFragment() {
     view.btStarButton.setOnClickListener() {
       if (!it.isSelected) {
         it.isSelected = true
-        dataManager.addBascket(NotebookMapper().transform(noteBook!!))
+        dataManager.addBascket(
+          NotebookMapper().transform(noteBook!!))
         dataManager.prefs.modifyBascketSize(1)
         bus.post(Events.BascketEvent())
         bus.post(Events.NotebookFragmentRefresh())
       } else {
         it.isSelected = false
-        dataManager.removeFromBascket(NotebookMapper().transform(noteBook!!))
+        dataManager.removeFromBascket(
+          NotebookMapper().transform(noteBook!!))
         dataManager.prefs.modifyBascketSize(-1)
         bus.post(Events.BascketEvent())
         bus.post(Events.NotebookFragmentRefresh())

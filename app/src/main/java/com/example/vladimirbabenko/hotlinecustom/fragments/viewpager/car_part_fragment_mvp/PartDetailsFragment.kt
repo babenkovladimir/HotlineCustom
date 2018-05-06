@@ -11,10 +11,9 @@ import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
 import com.example.vladimirbabenko.hotlinecustom.event_bus.Events
-import com.example.vladimirbabenko.hotlinecustom.event_bus.Events.BascketEvent
 import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
-import com.example.vladimirbabenko.hotlinecustom.utils.CarPartMapper
+import com.example.vladimirbabenko.hotlinecustom.utils.mappers.CarPartMapper
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btCarPartCloseDetails
 import kotlinx.android.synthetic.main.fragment_car_part_dialog.view.btStarButton
@@ -69,12 +68,14 @@ class PartDetailsFragment : DialogFragment() {
     view.btStarButton.setOnClickListener() {
       if (!it.isSelected) {
         it.isSelected = true
-        dataManager.addBascket(CarPartMapper().transform(carPart!!))
+        dataManager.addBascket(
+          CarPartMapper().transform(carPart!!))
         dataManager.prefs.modifyBascketSize(1)
         bus.post(Events.BascketEvent())
       } else {
         it.isSelected = false
-        dataManager.removeFromBascket(CarPartMapper().transform(carPart!!))
+        dataManager.removeFromBascket(
+          CarPartMapper().transform(carPart!!))
         dataManager.prefs.modifyBascketSize(-1)
         bus.post(Events.BascketEvent())
       }

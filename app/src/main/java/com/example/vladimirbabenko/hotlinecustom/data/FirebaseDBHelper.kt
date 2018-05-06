@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
 
-class FirebaseDBHelper(val userId: String): ICloudDb<>{
+class FirebaseDBHelper(val userId: String){
 
   var database: FirebaseDatabase
   var ref: DatabaseReference
@@ -30,27 +30,24 @@ class FirebaseDBHelper(val userId: String): ICloudDb<>{
     ref.child("users".toString()).child(userId).child("chosenList".toString()).setValue(chosenList)
   }
 
-  fun getChosenList(): List<Int>? {
-    var list: List<Int>? = emptyList<Int>()
+//  fun getChosenList(): List<Int>? {
+//    var list: List<Int>? = emptyList<Int>()
+//
+//    ref.child("users".toString()).child(userId).child("chosenList".toString())
+//      .addListenerForSingleValueEvent(object : ValueEventListener {
+//        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+//          val typeToken = GenericTypeIndicator<List<Int>>()
+//          list =
+//              dataSnapshot?.child("users".toString())?.child(userId)?.child("chosenList".toString())
+//                ?.getValue(typeToken)
+//        }
+//
+//        override fun onCancelled(p0: DatabaseError?) {
+//        }
+//      })
+//    return list
+//  }
 
-    ref.child("users".toString()).child(userId).child("chosenList".toString())
-      .addListenerForSingleValueEvent(object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
-          val typeToken = GenericTypeIndicator<List<Int>>()
-          list =
-              dataSnapshot?.child("users".toString())?.child(userId)?.child("chosenList".toString())
-                ?.getValue(typeToken)
-        }
 
-        override fun onCancelled(p0: DatabaseError?) {
-        }
-      })
-    return list
-  }
-
-
-  override fun removeFromBasket(itemId: String) {
-
-  }
 
 }

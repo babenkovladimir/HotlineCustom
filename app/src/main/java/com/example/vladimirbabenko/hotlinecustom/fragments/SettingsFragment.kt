@@ -75,7 +75,7 @@ class SettingsFragment : Fragment() {
   }
 
   /*
-   *This void cheks for auth source
+   *This void cheks for auth source and then clear all application data
    */
   fun signOut() {
     if (dataManager.prefs.userByFireBase) {

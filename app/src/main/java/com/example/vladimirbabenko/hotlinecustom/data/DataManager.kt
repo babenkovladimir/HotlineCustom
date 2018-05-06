@@ -11,6 +11,7 @@ import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockNoteBo
 import com.example.vladimirbabenko.hotlinecustom.data.mocks.RepositoryMockVidoCard
 import com.example.vladimirbabenko.hotlinecustom.entity.BascketItem
 import com.example.vladimirbabenko.hotlinecustom.entity.CarPart
+import com.example.vladimirbabenko.hotlinecustom.entity.CloudBasketItem
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.entity.UserRealm
 import com.example.vladimirbabenko.hotlinecustom.entity.VideoCard
@@ -24,8 +25,12 @@ class DataManager private constructor(context: Context) {
   private val mRepositoryMockCarParts = RepositoryMockCarParts()
   private val mRepositoryMockVidoCard = RepositoryMockVidoCard()
 
-  // Realm Helper class
+  // Realm Helper class - мой хелпер класс
   private val realmHelper = RealmHelper()
+
+  // Realm DbHelper from Nikita
+
+  private val realmDbHelper: RealmDbHelper = RealmDbHelper()
 
   // FirebaseDB
 
@@ -64,19 +69,28 @@ class DataManager private constructor(context: Context) {
   fun fetchCarMocks(): List<CarPart> = mRepositoryMockCarParts.fetchMocks()
   fun fetchVidioCardMocks(): List<VideoCard> = mRepositoryMockVidoCard.fetchMocks()
 
-  // Realm user
-  fun getUser(): UserRealm? {
-    return realmHelper.getUser()
+  // Realm database functions
+
+  fun setUser(user: UserRealm): Unit { //realmHelper.saveUserRealm(user)
+    realmDbHelper.save(user)
   }
 
-  fun clearUser() {
-    realmHelper.clearUser()
+  fun getUser(): UserRealm? {
+    return realmDbHelper.getElementById(UserRealm::class.java,
+      AppConstants.REALM_USER_ID.intKey!!) //return realmHelper.getUser()
+  }
+
+  fun clearUser() { //realmHelper.clearUser()
+    realmDbHelper.dropRealmTable(UserRealm::class.java)
   }
 
   // Cashe
   fun getCasheNotebook() = casheNoteBook.getList()
 
-  fun saveCasheNoteBook(list: List<NoteBook>) = casheNoteBook.saveList(list)
+  fun saveCasheNoteBook(list: List<NoteBook>) {
+    casheNoteBook.saveList(list)
+    //realmDbHelper.saveAll(list)
+  }
 
   fun getCasheCarPart() = casheCarPart.getList()
   fun saveCasheCarPart(list: List<CarPart>) = casheCarPart.saveList(list)
@@ -100,15 +114,10 @@ class DataManager private constructor(context: Context) {
     return chosenList
   }
 
-  fun getChosenListF(): MutableList<Int>? {
-
-    return firebaseHelper.getChosenList()?.toMutableList()
-  }
-
-  // Realm database functions
-  fun setUser(user: UserRealm): Unit {
-    realmHelper.saveUserRealm(user)
-  }
+  //  fun getChosenListF(): MutableList<Int>? {
+  //
+  //    return firebaseHelper.getChosenList()?.toMutableList()
+  //  }
 
   // Firebase database fucntions
 
@@ -116,7 +125,7 @@ class DataManager private constructor(context: Context) {
     firebaseHelper.saveUserName(userName = userName)
   }
 
-  fun saveChosenListtoFirebase(chosenList: List<Int>) {
+  fun saveChosenListtoFirebase(chosenList: List<CloudBasketItem>) {
     firebaseHelper.saveChosenList(chosenList)
   }
 }

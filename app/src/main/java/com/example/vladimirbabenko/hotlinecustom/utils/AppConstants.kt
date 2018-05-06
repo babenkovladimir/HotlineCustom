@@ -40,5 +40,5 @@ internal enum class AppConstants(val key: String, val intKey: Int? = 0) {
   IS_INTERNET_CONNECTED_KEY("IS_INTERNET_CONNECTED_KEY"),
 
   // Realm constants
-  REALM_USER_ID("REALM_USER_ID")
+  REALM_USER_ID("REALM_USER_ID", 119)
 }

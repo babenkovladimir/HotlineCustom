@@ -63,7 +63,7 @@ class SignInPresenter() : BasePresenter<SignInFragment>() {
       mDataManager.prefs.userByFireBase = true
 
       val userRealm =
-        UserRealm(AppConstants.REALM_USER_ID.key, id, email, displayedName, familyName, givenName,
+        UserRealm(AppConstants.REALM_USER_ID.intKey, id, email, displayedName, familyName, givenName,
           photoUrl)
       mDataManager.setUser(user = userRealm)
     }

@@ -52,7 +52,7 @@ class ProfileFragment : Fragment() {
       Toast.makeText(context, "Firebase is called", Toast.LENGTH_SHORT).show()
 //      dataManager.saveToFirebase()
 
-      dataManager.saveChosenListtoFirebase(dataManager.getChosenList())
+      //dataManager.saveChosenListtoFirebase(dataManager.getChosenList())
     }
   }
 }

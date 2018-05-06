@@ -123,7 +123,7 @@ class LoginActivity : BaseActivity() {
         userPhotoUrl = photoUrl.toString()!!
 
         val userRealm =
-          UserRealm(AppConstants.REALM_USER_ID.key, id.toString(), email!!, displayName, familyName, givenName,
+          UserRealm(AppConstants.REALM_USER_ID.intKey, id.toString(), email!!, displayName, familyName, givenName,
             photoUrl.toString())
 
         // Using RealmObject
