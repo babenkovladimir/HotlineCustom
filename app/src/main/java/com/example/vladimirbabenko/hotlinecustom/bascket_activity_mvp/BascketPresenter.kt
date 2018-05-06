@@ -18,7 +18,7 @@ class BascketPresenter():BasePresenter<BascketActivity>(){
 
   fun update(deltaValue: Int, position: Int){
     val items = dataManager.getFromBasket()
-    items.elementAt(position).num += deltaValue
+    items.elementAt(position).num = items.elementAt(position).num!! + deltaValue
 
     dataManager.clearBascket();
     for (item in items) dataManager.addBascket(item)

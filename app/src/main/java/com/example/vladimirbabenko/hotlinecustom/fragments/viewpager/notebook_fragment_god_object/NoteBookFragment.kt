@@ -88,8 +88,8 @@ class NoteBookFragment : Fragment() {
     rvNoteBookRecycler.adapter = adapter
 
     // Create ItemDecoration and setup RV with ItemDecoration
-    val itemDecoration = DividerItemDecoration(rvNoteBookRecycler.context, LinearLayout.VERTICAL)
-    rvNoteBookRecycler.addItemDecoration(itemDecoration)
+    //val itemDecoration = DividerItemDecoration(rvNoteBookRecycler.context, LinearLayout.VERTICAL)
+    //rvNoteBookRecycler.addItemDecoration(itemDecoration)
 
     //
     //Check for first run????
@@ -97,7 +97,7 @@ class NoteBookFragment : Fragment() {
     if (dataManager.prefs.withInternetConnection) {
       dataManager.saveCasheNoteBook(dataManager.fetchMocks())
     }
-    notebooks = dataManager.getCasheNotebook()
+    notebooks = dataManager.getCasheNotebook() as MutableList<NoteBook>
     adapter.setNoteBooks(notebooks, getChosenList())
     Log.d("TAGRRRR", getChosenList().toString())
 
@@ -152,7 +152,7 @@ class NoteBookFragment : Fragment() {
   private fun getChosenList(): MutableList<Int>{
     var chosenList = mutableListOf<Int>()
     val items = dataManager.getFromBasket()
-    for(item in items) chosenList.add(item.id)
+    for(item in items) chosenList.add(item.id!!)
     return chosenList
   }
 

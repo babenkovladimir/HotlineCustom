@@ -3,17 +3,26 @@ package com.example.vladimirbabenko.hotlinecustom.entity
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+import io.realm.annotations.RealmClass
 
-data class CarPart(val id: Int, val name:String, val partPrice:Int, val partPhotoUrl:String?="", val description:String?="") :
-  Parcelable {
-  constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString(), parcel.readInt(),
-    parcel.readString(), parcel.readString()) {
+@RealmClass
+open class CarPart(
+  @PrimaryKey var id: Int? = 0,
+  var name:String? = "",
+  var partPrice:Int? = 0,
+  var partPhotoUrl:String? = "",
+  var description:String? = "") : RealmObject(), Parcelable {
+  constructor(parcel: Parcel) : this(parcel.readValue(Int::class.java.classLoader) as? Int,
+    parcel.readString(), parcel.readValue(Int::class.java.classLoader) as? Int, parcel.readString(),
+    parcel.readString()) {
   }
 
   override fun writeToParcel(parcel: Parcel, flags: Int) {
-    parcel.writeInt(id)
+    parcel.writeValue(id)
     parcel.writeString(name)
-    parcel.writeInt(partPrice)
+    parcel.writeValue(partPrice)
     parcel.writeString(partPhotoUrl)
     parcel.writeString(description)
   }

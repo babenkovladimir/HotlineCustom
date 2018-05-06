@@ -16,6 +16,12 @@ import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.entity.UserRealm
 import com.example.vladimirbabenko.hotlinecustom.entity.VideoCard
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASHE_CAR_PART_PREFS_KEY
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASHE_NOTEBOOK_PREF_KEY
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASHE_VIDEO_CARD_PREFS_KEY
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASH_CAR_PART_JSON_KEY
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASH_NOTEBOOK_JSON_KEY
+import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASH_VIDEO_CARD_JSON_KEY
 import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
 
 class DataManager private constructor(context: Context) {
@@ -39,17 +45,15 @@ class DataManager private constructor(context: Context) {
   }
 
   private val casheNoteBook: CasheNotebookJ =
-    CasheNotebookJ(context, AppConstants.CASHE_NOTEBOOK_PREF_KEY.key,
-      AppConstants.CASH_NOTEBOOK_JSON_KEY.key)
+    CasheNotebookJ(context, CASHE_NOTEBOOK_PREF_KEY.key, CASH_NOTEBOOK_JSON_KEY.key)
 
   private val casheCarPart: CasheCarPart by lazy(SYNCHRONIZED) {
-    CasheCarPart(context, AppConstants.CASHE_CAR_PART_PREFS_KEY.key,
-      AppConstants.CASH_CAR_PART_JSON_KEY.key)
+    CasheCarPart(context, CASHE_CAR_PART_PREFS_KEY.key, CASH_CAR_PART_JSON_KEY.key)
   }
 
   private val casheVideoCard: CasheVideoCard =
-    CasheVideoCard(context = context, PREFS_KEY = AppConstants.CASHE_VIDEO_CARD_PREFS_KEY.key,
-      jsonKey = AppConstants.CASH_VIDEO_CARD_JSON_KEY.key)
+    CasheVideoCard(context = context, PREFS_KEY = CASHE_VIDEO_CARD_PREFS_KEY.key,
+      jsonKey = CASH_VIDEO_CARD_JSON_KEY.key)
 
   private val bascketHelper: BascketHelper by lazy(SYNCHRONIZED) {
     BascketHelper(context, AppConstants.BASCKET_PREFS_KEY.key, AppConstants.BASCKET_JSON_KEY.key)
@@ -84,33 +88,58 @@ class DataManager private constructor(context: Context) {
     realmDbHelper.dropRealmTable(UserRealm::class.java)
   }
 
-  // Cashe
-  fun getCasheNotebook() = casheNoteBook.getList()
+  // Cashe by Realm
+  fun getCasheNotebook(): List<NoteBook> { //return casheNoteBook.getList()
+    return realmDbHelper.getAll(NoteBook::class.java)
+  }
 
   fun saveCasheNoteBook(list: List<NoteBook>) {
     casheNoteBook.saveList(list)
-    //realmDbHelper.saveAll(list)
+    realmDbHelper.saveAll(list)
   }
 
-  fun getCasheCarPart() = casheCarPart.getList()
-  fun saveCasheCarPart(list: List<CarPart>) = casheCarPart.saveList(list)
+  fun saveCasheCarPart(list: List<CarPart>): Unit {
+    casheCarPart.saveList(list)
+    realmDbHelper.saveAll(list)
+  }
 
-  fun getCasheVideoCard() = casheVideoCard.getList()
-  fun saveCasheVideoCard(list: List<VideoCard>) = casheVideoCard.saveList(list)
+  fun getCasheCarPart(): List<CarPart> { //return casheCarPart.getList()
+    return realmDbHelper.getAll(CarPart::class.java)
+  }
+
+  fun saveCasheVideoCard(list: List<VideoCard>): Unit {
+    casheVideoCard.saveList(list)
+    realmDbHelper.saveAll(list)
+  }
+
+  fun getCasheVideoCard(): List<VideoCard> { //casheVideoCard.getList()
+    return realmDbHelper.getAll(VideoCard::class.java)
+  }
 
   // Bascket
-  fun addBascket(id: BascketItem) = bascketHelper.put(id)
+  fun addBascket(item: BascketItem): Unit {
+    bascketHelper.put(item)
+    realmDbHelper.save(item)
+  }
 
-  fun getFromBasket(): MutableSet<BascketItem> = bascketHelper.get()
-  fun clearBascket() = bascketHelper.clearBascket()
-  fun removeFromBascket(bascketItem: BascketItem?) {
+  fun getFromBasket(): MutableSet<BascketItem> { //return bascketHelper.get()
+    return realmDbHelper.getAll(BascketItem::class.java).toMutableSet()
+  }
+
+  fun clearBascket(): Unit {
+    bascketHelper.clearBascket()
+    realmDbHelper.dropRealmTable(BascketItem::class.java)
+  }
+
+  fun removeFromBascket(bascketItem: BascketItem) {
     bascketHelper.removeFromBaskcet(bascketItem)
+    realmDbHelper.deleteElementById(BascketItem::class.java, bascketItem.id!!)
   }
 
   fun getChosenList(): MutableList<Int> {
     var chosenList = mutableListOf<Int>()
     val items = getFromBasket()
-    for (item in items) chosenList.add(item.id)
+    for (item in items) chosenList.add(item.id!!)
     return chosenList
   }
 
@@ -129,6 +158,8 @@ class DataManager private constructor(context: Context) {
     firebaseHelper.saveChosenList(chosenList)
   }
 }
+
+
 
 
 

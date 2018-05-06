@@ -52,7 +52,7 @@ class BascketActivity : BaseActivity(), IBascketView {
 
     var totalPrice = 0
     for (item in set){
-      totalPrice+=item.price*item.num
+      totalPrice+=item.price!!*item.num!!
     }
     tvTotalPrice.text = "$ ${totalPrice}"
   }

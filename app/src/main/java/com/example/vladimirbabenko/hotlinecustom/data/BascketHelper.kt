@@ -46,7 +46,7 @@ class BascketHelper(val context: Context, val BASCKET_PREFERENCEC_KEY: String,
     var newSet: MutableSet<BascketItem> = emptySet<BascketItem>().toMutableSet()
 
     for(i  in 0..set.size-1)
-      if (!set.elementAt(i).id.equals(item?.id)) {newSet.add(set.elementAt(i))}
+      if (!set.elementAt(i).id!!.equals(item?.id)) {newSet.add(set.elementAt(i))}
 
     prefs.edit().putString(json_key, gson.toJson(newSet)).apply()
   }

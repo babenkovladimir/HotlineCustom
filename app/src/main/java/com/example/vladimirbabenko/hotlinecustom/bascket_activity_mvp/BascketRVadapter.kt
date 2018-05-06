@@ -82,7 +82,7 @@ class BascketRVadapter : RecyclerView.Adapter<BascketRVadapter.BascketWrapperVie
 
       itemView.btCardViewMinus.setOnClickListener() {
         //@Produce fun increase() = Events.PriceCorrectionEvent(1)
-        if (itemsCount > 0) {
+        if (itemsCount!! > 0) {
           //itemView.tvItemCount.text = "${--itemsCount}"
           incrementListner.onIncrement(-1, position)
         }

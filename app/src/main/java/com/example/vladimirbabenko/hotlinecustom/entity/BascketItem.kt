@@ -3,19 +3,28 @@ package com.example.vladimirbabenko.hotlinecustom.entity
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+import io.realm.annotations.RealmClass
 
-data class BascketItem (val id: Int, val name:String, val price: Int, val photoUrl:String, var num:Int) :
-  Parcelable {
-  constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString(), parcel.readInt(),
-    parcel.readString(), parcel.readInt()) {
+@RealmClass
+open class BascketItem (
+  @PrimaryKey var id: Int? = 0,
+  var name:String? = "",
+  var price: Int? = 0,
+  var photoUrl:String? = "",
+  var num:Int? = 0) : RealmObject(), Parcelable {
+  constructor(parcel: Parcel) : this(parcel.readValue(Int::class.java.classLoader) as? Int,
+    parcel.readString(), parcel.readValue(Int::class.java.classLoader) as? Int, parcel.readString(),
+    parcel.readValue(Int::class.java.classLoader) as? Int) {
   }
 
   override fun writeToParcel(parcel: Parcel, flags: Int) {
-    parcel.writeInt(id)
+    parcel.writeValue(id)
     parcel.writeString(name)
-    parcel.writeInt(price)
+    parcel.writeValue(price)
     parcel.writeString(photoUrl)
-    parcel.writeInt(num)
+    parcel.writeValue(num)
   }
 
   override fun describeContents(): Int {

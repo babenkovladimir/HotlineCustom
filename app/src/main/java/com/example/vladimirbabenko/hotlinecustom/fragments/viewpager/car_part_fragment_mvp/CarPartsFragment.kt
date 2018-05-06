@@ -60,9 +60,9 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     val view: View = inflater.inflate(R.layout.fragment_car_parts, container, false)
 
     recyclerView = view.rvCarParts
-    recyclerView.layoutManager = layoutManager
-    itemDecoration = DividerItemDecoration(recyclerView.context, LinearLayout.VERTICAL)
-    recyclerView.addItemDecoration(itemDecoration)
+    recyclerView.layoutManager = layoutManager // RecyclerView item decoration
+    //    itemDecoration = DividerItemDecoration(recyclerView.context, LinearLayout.VERTICAL)
+    //    recyclerView.addItemDecoration(itemDecoration)
     recyclerView.adapter = adapter
 
     presenter.fetchMocks()

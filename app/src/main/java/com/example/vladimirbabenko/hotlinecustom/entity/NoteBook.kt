@@ -3,25 +3,33 @@ package com.example.vladimirbabenko.hotlinecustom.entity
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+import io.realm.annotations.RealmClass
 
-data class NoteBook(val id: Int, val brand: String, val model: String, val price: Int,
-  val processor: String, val videoCard: String, val hdd: String, val photUrl: String? = "",
-  val description: String? = "") : Parcelable {
+@RealmClass
+open class NoteBook(
 
-  constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString(), parcel.readString(),
-    parcel.readInt(), parcel.readString(), parcel.readString(), parcel.readString(),
-    parcel.readString(), parcel.readString()) {
-  }
-
-  override fun toString(): String {
-    return "Brand: $brand, model: $model, price: $price, processor: $processor, videoCard: $videoCard, hdd: $hdd, photo: $photUrl"
+  @PrimaryKey var id: Int? = 0,
+  var brand: String? = "",
+  var model: String? = "",
+  var price: Int? = 0,
+  var processor: String? = "",
+  var videoCard: String? = "",
+  var hdd: String? = "",
+  var photUrl: String? = "",
+  var description: String? = "") : RealmObject(), Parcelable {
+  constructor(parcel: Parcel) : this(parcel.readValue(Int::class.java.classLoader) as? Int,
+    parcel.readString(), parcel.readString(), parcel.readValue(Int::class.java.classLoader) as? Int,
+    parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(),
+    parcel.readString()) {
   }
 
   override fun writeToParcel(parcel: Parcel, flags: Int) {
-    parcel.writeInt(id)
+    parcel.writeValue(id)
     parcel.writeString(brand)
     parcel.writeString(model)
-    parcel.writeInt(price)
+    parcel.writeValue(price)
     parcel.writeString(processor)
     parcel.writeString(videoCard)
     parcel.writeString(hdd)

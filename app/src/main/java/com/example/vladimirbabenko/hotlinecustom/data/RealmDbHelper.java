@@ -34,6 +34,15 @@ public class RealmDbHelper {
     realm.commitTransaction();
   }
 
+  // Метод удаляет элемент из таблицы по id
+  public <T extends RealmObject> void deleteElementById(Class<T> clazz, int id) {
+    Realm realm = Realm.getInstance(mConfiguration);
+    RealmResults<T> results = realm.where(clazz).equalTo("id", id).findAll();
+    realm.beginTransaction();
+    results.deleteAllFromRealm();
+    realm.commitTransaction();
+  }
+
   public <T extends RealmObject> List<T> getAll(Class<T> clazz) {
     List<T> list = new ArrayList<T>();
     Realm realm = Realm.getInstance(mConfiguration);

@@ -7,5 +7,5 @@ class VideoCardMapper :
   BaseMapper<VideoCard, BascketItem> {
 
   override fun transform(input: VideoCard) =
-    BascketItem(id = input.id, name = input.name, price = input.price, photoUrl = input.photoUrl, num = 1)
+    BascketItem(id = input.id!!, name = input.name!!, price = input.price!!, photoUrl = input.photoUrl!!, num = 1)
 }

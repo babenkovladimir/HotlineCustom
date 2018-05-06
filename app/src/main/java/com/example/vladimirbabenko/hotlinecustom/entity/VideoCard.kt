@@ -3,18 +3,29 @@ package com.example.vladimirbabenko.hotlinecustom.entity
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+import io.realm.annotations.RealmClass
 
-data class VideoCard(val id: Int, val name: String, val memorySize: Int, val price: Int, val photoUrl: String, val description: String) :
-  Parcelable {
-  constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString(), parcel.readInt(),
-    parcel.readInt(), parcel.readString(), parcel.readString()) {
+@RealmClass
+open class VideoCard(
+  @PrimaryKey var id: Int? = 0,
+  var name: String? = "",
+  var memorySize: Int? = 0,
+  var price: Int? = 0,
+  var photoUrl: String? = "",
+  var description: String? = "") : RealmObject(), Parcelable {
+  constructor(parcel: Parcel) : this(parcel.readValue(Int::class.java.classLoader) as? Int,
+    parcel.readString(), parcel.readValue(Int::class.java.classLoader) as? Int,
+    parcel.readValue(Int::class.java.classLoader) as? Int, parcel.readString(),
+    parcel.readString()) {
   }
 
   override fun writeToParcel(parcel: Parcel, flags: Int) {
-    parcel.writeInt(id)
+    parcel.writeValue(id)
     parcel.writeString(name)
-    parcel.writeInt(memorySize)
-    parcel.writeInt(price)
+    parcel.writeValue(memorySize)
+    parcel.writeValue(price)
     parcel.writeString(photoUrl)
     parcel.writeString(description)
   }
