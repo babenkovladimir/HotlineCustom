@@ -22,6 +22,7 @@ class BascketPresenter() : BasePresenter<BascketActivity>() {
     val basketItemToUpdate = items.elementAt(position)
     dataManager.updateBasketItemCountValue(basketItemToUpdate, deltaValue)
     dataManager.saveBasketItemsToFirebase()
+    dataManager.saveBasketItemsToFirebase()
     getView()?.showList(dataManager.getFromBasket())
   }
 }
