@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.util.Log
 import android.view.View
+import com.example.vladimirbabenko.hotlinecustom.MainScreenActivity
 import com.example.vladimirbabenko.hotlinecustom.R.layout
 import com.example.vladimirbabenko.hotlinecustom.TermsActivity
 import com.example.vladimirbabenko.hotlinecustom.base.BaseActivity
@@ -92,11 +93,12 @@ class LoginActivity : BaseActivity() {
   }
 
   private fun handleSignInResunlt(completeTask: Task<GoogleSignInAccount>) {
+    if (completeTask.isSuccessful)
     try {
       val account: GoogleSignInAccount = completeTask.result
       saveToPrefs(account)
-
-      startActivity(Intent(applicationContext, MainScreenActivityJ::class.java))
+      dataManager.synhronizeVithCloud()
+      startActivity(Intent(applicationContext, MainScreenActivity::class.java))
       finishAffinity()
     } catch (e: ApiException) {
       Log.w(TAG, "signInResult:failed code=" + e.statusCode)
@@ -123,8 +125,8 @@ class LoginActivity : BaseActivity() {
         userPhotoUrl = photoUrl.toString()!!
 
         val userRealm =
-          UserRealm(AppConstants.REALM_USER_ID.intKey, id.toString(), email!!, displayName, familyName, givenName,
-            photoUrl.toString())
+          UserRealm(AppConstants.REALM_USER_ID.intKey, id.toString(), email!!, displayName,
+            familyName, givenName, photoUrl.toString())
 
         // Using RealmObject
         dataManager.setUser(userRealm)

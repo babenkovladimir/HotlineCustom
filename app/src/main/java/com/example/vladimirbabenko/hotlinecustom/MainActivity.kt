@@ -23,11 +23,10 @@ class MainActivity : BaseActivity() {
       mAuth.addAuthStateListener(object : FirebaseAuth.AuthStateListener {
         override fun onAuthStateChanged(firebaseAuth: FirebaseAuth) {
           val user = firebaseAuth.currentUser
-          Log.d("TAGFIREUSER","current user = "+ user.toString())
+          Log.d("TAGFIREUSER", "current user = " + user.toString())
           if (user == null) dataManager.prefs.clearUserPreferences()
         }
-      }
-      )
+      })
     }
 
     val isUserLoggedIn: Boolean = dataManager.prefs.userLoggedIn
@@ -42,9 +41,9 @@ class MainActivity : BaseActivity() {
   }
 
   override fun onDestroy() {
-//    if (mAuthStateListner != null) {
-//      mAuth.removeAuthStateListener(mAuthStateListner as FirebaseAuth.AuthStateListener)
-//    }
+    //    if (mAuthStateListner != null) {
+    //      mAuth.removeAuthStateListener(mAuthStateListner as FirebaseAuth.AuthStateListener)
+    //    }
     super.onDestroy()
   }
 }

@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp"
-    android:background="@drawable/umbrella_sign_in_background"
+
     android:padding="24dp"
     tools:context=".fragments.j.SignUpFragmentJ"
     >
+  <!--android:background="@drawable/umbrella_sign_in_background"-->
 
   <ImageView
       android:id="@+id/ivSignUpFragmentLogo"
@@ -98,7 +99,7 @@
       android:id="@+id/btFragmentSignUp"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:backgroundTint="@color/colorRed"
+      android:backgroundTint="@android:color/holo_orange_light"
       android:text="Sign Up"
       app:layout_constraintBottom_toBottomOf="parent"
       />

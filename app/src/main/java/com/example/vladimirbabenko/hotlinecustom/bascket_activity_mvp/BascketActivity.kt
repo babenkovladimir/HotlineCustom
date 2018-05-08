@@ -11,6 +11,10 @@ import com.example.vladimirbabenko.hotlinecustom.entity.BascketItem
 import kotlinx.android.synthetic.main.activity_bascket.rvBascketList
 import kotlinx.android.synthetic.main.activity_bascket.tvTotalPrice
 
+/*
+* This activity is based on mvp pattern.
+* */
+
 class BascketActivity : BaseActivity(), IBascketView {
 
   val presenter = BascketPresenter()

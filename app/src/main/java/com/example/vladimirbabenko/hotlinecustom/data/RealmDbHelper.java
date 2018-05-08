@@ -1,5 +1,6 @@
 package com.example.vladimirbabenko.hotlinecustom.data;
 
+import com.example.vladimirbabenko.hotlinecustom.entity.BascketItem;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
@@ -69,6 +70,20 @@ public class RealmDbHelper {
     t = query.findFirst();
     realm.commitTransaction();
     return t;
+  }
+
+  // Метод делает updateValueNum
+
+  public <T extends RealmObject> void updateValueNum(Class<T> clazz, int id, int value) {
+
+    Realm realm = Realm.getInstance(mConfiguration);
+    realm.executeTransaction(new Realm.Transaction() {
+      @Override public void execute(Realm realm) {
+        T t = realm.where(clazz).equalTo("id", id).findFirst();
+        ((BascketItem) t).setNum(((BascketItem) t).getNum() + value);
+        realm.insertOrUpdate(t);
+      }
+    });
   }
 
   // Метод возвращает списох объектов по id

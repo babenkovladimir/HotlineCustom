@@ -2,6 +2,7 @@ package com.example.vladimirbabenko.hotlinecustom.data
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.example.vladimirbabenko.hotlinecustom.base.App
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheCarPart
 import com.example.vladimirbabenko.hotlinecustom.data.cashe.CasheNotebookJ
@@ -15,6 +16,8 @@ import com.example.vladimirbabenko.hotlinecustom.entity.CloudBasketItem
 import com.example.vladimirbabenko.hotlinecustom.entity.NoteBook
 import com.example.vladimirbabenko.hotlinecustom.entity.UserRealm
 import com.example.vladimirbabenko.hotlinecustom.entity.VideoCard
+import com.example.vladimirbabenko.hotlinecustom.event_bus.Events
+import com.example.vladimirbabenko.hotlinecustom.event_bus.GlobalBus
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASHE_CAR_PART_PREFS_KEY
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASHE_NOTEBOOK_PREF_KEY
@@ -22,6 +25,13 @@ import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASHE_VIDEO_
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASH_CAR_PART_JSON_KEY
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASH_NOTEBOOK_JSON_KEY
 import com.example.vladimirbabenko.hotlinecustom.utils.AppConstants.CASH_VIDEO_CARD_JSON_KEY
+import com.example.vladimirbabenko.hotlinecustom.utils.mappers.MapperBasketItemToCloudBasketItem
+import com.example.vladimirbabenko.hotlinecustom.utils.mappers.MapperCloudBascketItemToBAsketItem
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
+import com.google.firebase.database.ValueEventListener
 import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
 
 class DataManager private constructor(context: Context) {
@@ -30,6 +40,7 @@ class DataManager private constructor(context: Context) {
   private val mRepositoryMockNoteBookS = RepositoryMockNoteBookS()
   private val mRepositoryMockCarParts = RepositoryMockCarParts()
   private val mRepositoryMockVidoCard = RepositoryMockVidoCard()
+  val bus = GlobalBus.instance
 
   // Realm Helper class - мой хелпер класс
   private val realmHelper = RealmHelper()
@@ -61,6 +72,7 @@ class DataManager private constructor(context: Context) {
 
   init {
     Log.d("TAG", "DataMandger is Created in companion object")
+    bus.register(this)
   }
 
   companion object {
@@ -118,7 +130,7 @@ class DataManager private constructor(context: Context) {
 
   // Bascket
   fun addBascket(item: BascketItem): Unit {
-    bascketHelper.put(item)
+    bascketHelper.put(item) // Not using now
     realmDbHelper.save(item)
   }
 
@@ -136,6 +148,14 @@ class DataManager private constructor(context: Context) {
     realmDbHelper.deleteElementById(BascketItem::class.java, bascketItem.id!!)
   }
 
+  /*
+  * This void updates value "num" - quantity items
+  * */
+  fun updateBasketItemCountValue(basketItemToUpdate: BascketItem, value: Int) {
+    val id = basketItemToUpdate.id!!
+    realmDbHelper.updateValueNum<BascketItem>(BascketItem::class.java, id, value)
+  }
+
   fun getChosenList(): MutableList<Int> {
     var chosenList = mutableListOf<Int>()
     val items = getFromBasket()
@@ -143,19 +163,49 @@ class DataManager private constructor(context: Context) {
     return chosenList
   }
 
-  //  fun getChosenListF(): MutableList<Int>? {
-  //
-  //    return firebaseHelper.getChosenList()?.toMutableList()
-  //  }
+  // Firebase
 
-  // Firebase database fucntions
-
-  fun saveToFirebase(userName: String) {
-    firebaseHelper.saveUserName(userName = userName)
+  fun saveToFirebaseUserName() {
+    firebaseHelper.saveUserName(userName = getUser()!!.displayedName.toString())
   }
 
-  fun saveChosenListtoFirebase(chosenList: List<CloudBasketItem>) {
-    firebaseHelper.saveChosenList(chosenList)
+  fun saveBasketItemsToFirebase() {
+    val basketItems = getFromBasket()
+    val listCloudItems = mutableListOf<CloudBasketItem>()
+    basketItems.forEach { item ->
+      listCloudItems.add(MapperBasketItemToCloudBasketItem().transform(item))
+    }
+    firebaseHelper.saveBasketItemsToCloud(listCloudItems)
+  }
+
+  fun synhronizeVithCloud() { //val listBasketItems = mutableListOf<BascketItem>()
+    // val cloudList = firebaseHelper.getListCloudBascketItems()
+    //Log.d("TAGSYNCH", cloudList.toString())
+    val ref = FirebaseDatabase.getInstance().reference
+
+    ref.child("users".toString()).child(getUser()!!.userId).child("chosenList".toString())
+      .addValueEventListener(object : ValueEventListener {
+        override fun onDataChange(
+          dataSnapshot: DataSnapshot?) { // It fails if use List<> instead ArrayList<>
+          val typeToken = object : GenericTypeIndicator<ArrayList<CloudBasketItem>>() {}
+
+          val list = dataSnapshot?.getValue(typeToken)
+          val listBasketItems = mutableListOf<BascketItem>()
+          list?.forEach { item ->
+            listBasketItems.add(
+              MapperCloudBascketItemToBAsketItem().transform(item)) // This is kostul
+            realmDbHelper.saveAll<BascketItem>(listBasketItems)
+
+
+//            Toast.makeText(App.applicationContext(), "Synchronizing is finished",
+//              Toast.LENGTH_SHORT).show() // posts the event to invalidate options menu
+            bus.post(Events.BascketEvent())
+          }
+        }
+
+        override fun onCancelled(p0: DatabaseError?) {
+        }
+      })
   }
 }
 

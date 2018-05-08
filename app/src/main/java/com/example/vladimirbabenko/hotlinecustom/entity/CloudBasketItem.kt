@@ -1,3 +1,8 @@
 package com.example.vladimirbabenko.hotlinecustom.entity
 
-class CloudBasketItem(val id: Int, val name: String, val price: Int, val photoUrl: String = "", var num:Int)
+data class CloudBasketItem(
+  var id: Int? = 0,
+  var name: String? = "",
+  var price: Int? = 0,
+  var photoUrl: String? = "",
+  var num:Int?=0)

@@ -26,16 +26,16 @@
         android:screenOrientation="portrait"
         >
     </activity>
-    <activity
-        android:name=".j.LoginActivityJ"
-        android:label="LoginJ">
-    </activity>
+    <!--<activity-->
+        <!--android:name=".j.LoginActivityJ"-->
+        <!--android:label="LoginJ">-->
+    <!--</activity>-->
     <!-- <activity android:name=".base.BaseActivity"> -->
     <!-- </activity> -->
-    <activity
-        android:name=".j.MainScreenActivityJ"
-        android:label="MainScreenJ">
-    </activity>
+    <!--<activity-->
+        <!--android:name=".j.MainScreenActivityJ"-->
+        <!--android:label="MainScreenJ">-->
+    <!--</activity>-->
     <activity
         android:name=".MainScreenActivity"
         android:label="MainScreen"

@@ -48,10 +48,13 @@ class ProfileFragment : Fragment() {
 
     Picasso.get().load(userRealm?.fotoUrl).error(R.drawable.mr_white).into(view.civCircleImageView)
 
+    /*
+    * Floating action bar is used to sinc data
+    * */
     fabChangeProfileInformation.setOnClickListener(){
       Toast.makeText(context, "Firebase is called", Toast.LENGTH_SHORT).show()
-//      dataManager.saveToFirebase()
-
+      dataManager.saveBasketItemsToFirebase()
+      dataManager.saveToFirebaseUserName()
       //dataManager.saveChosenListtoFirebase(dataManager.getChosenList())
     }
   }

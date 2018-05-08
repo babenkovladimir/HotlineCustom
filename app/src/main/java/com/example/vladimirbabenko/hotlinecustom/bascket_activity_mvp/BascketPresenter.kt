@@ -4,25 +4,24 @@ import android.util.Log
 import com.example.vladimirbabenko.hotlinecustom.base.mvp.BasePresenter
 import com.example.vladimirbabenko.hotlinecustom.data.DataManager
 
-class BascketPresenter():BasePresenter<BascketActivity>(){
+class BascketPresenter() : BasePresenter<BascketActivity>() {
 
   val dataManager = DataManager.create
+
   init {
     Log.d("TAGBASKET", "BascketPresenter initializing")
   }
 
-  fun fetchMocks(){
-    Log.d("BascketPresenter",dataManager.getFromBasket().toString())
+  fun fetchMocks() {
+    Log.d("BascketPresenter", dataManager.getFromBasket().toString())
     getView()?.showList(dataManager.getFromBasket())
   }
 
-  fun update(deltaValue: Int, position: Int){
+  fun update(deltaValue: Int, position: Int) {
     val items = dataManager.getFromBasket()
-    items.elementAt(position).num = items.elementAt(position).num!! + deltaValue
-
-    dataManager.clearBascket();
-    for (item in items) dataManager.addBascket(item)
-
+    val basketItemToUpdate = items.elementAt(position)
+    dataManager.updateBasketItemCountValue(basketItemToUpdate, deltaValue)
+    dataManager.saveBasketItemsToFirebase()
     getView()?.showList(dataManager.getFromBasket())
   }
 }

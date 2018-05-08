@@ -18,6 +18,14 @@ import kotlinx.android.synthetic.main.item_basket_item.view.tvNameBasketItem
 import kotlinx.android.synthetic.main.item_basket_item.view.tvPriceBasketItem
 import java.lang.ref.WeakReference
 
+
+/*
+* В данном классе слушатель на изменение количества единиц товара в корзине сделан при помощи
+* паттерна интерфейса. Можно было бы использовать itemClickSupport, но для развития скиловости я
+* передал викреференс в адаптер. Таким образом в адаптере сделал реализацию интерфейса и дёргал ссылку на активити через
+* слабую связю. Так же используются методы привязки и отвязки активити.
+*
+* */
 class BascketRVadapter : RecyclerView.Adapter<BascketRVadapter.BascketWrapperViewHolder>() {
 
   private var basketList = emptySet<BascketItem>()
@@ -39,9 +47,6 @@ class BascketRVadapter : RecyclerView.Adapter<BascketRVadapter.BascketWrapperVie
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BascketWrapperViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.item_basket_item, parent, false)
     val holder = BascketWrapperViewHolder(view)
-
-
-
     return holder
   }
 
@@ -49,13 +54,13 @@ class BascketRVadapter : RecyclerView.Adapter<BascketRVadapter.BascketWrapperVie
 
   override fun onBindViewHolder(holder: BascketWrapperViewHolder, position: Int) {
     holder.bind(basketList.elementAt(position), position)
+
     holder.setIncrementListner(object: IncrementListner{
       override fun onIncrement(deltaValue: Int, position: Int) {
         activity.get()?.presenter?.update(deltaValue, position)
       }
     })
   }
-
 
   // View holder
   class BascketWrapperViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

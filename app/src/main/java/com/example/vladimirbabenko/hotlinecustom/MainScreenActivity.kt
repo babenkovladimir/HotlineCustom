@@ -33,16 +33,18 @@ class MainScreenActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main_screen)
-    //bus.register(this);
+    setContentView(
+      R.layout.activity_main_screen) // bus.register(this); // it happens in BaseActivity
 
     setupUI(savedInstanceState)
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    super.onCreateOptionsMenu(menu)
     menuInflater.inflate(R.menu.menu_main_screen, menu)
     val count = dataManager.getFromBasket().size
-    Toast.makeText(applicationContext, "onCreateOptionsMenu, basketSize = " + count, Toast.LENGTH_SHORT).show()
+    Toast.makeText(applicationContext, "onCreateOptionsMenu, basketSize = " + count,
+      Toast.LENGTH_SHORT).show()
     if (count < 1) {
       ActionItemBadge.hide(menu?.findItem(R.id.miBascket))
     } else {
@@ -58,8 +60,7 @@ class MainScreenActivity : BaseActivity() {
     return true
   }
 
-  override fun onDestroy() {
-    //bus.unregister(this);
+  override fun onDestroy() { // bus.unregister(this);// it happens in BaseActivity
     super.onDestroy()
   }
 
