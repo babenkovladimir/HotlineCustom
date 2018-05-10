@@ -29,13 +29,15 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
   val bus = GlobalBus.instance
   var adapter: CarRVAdapter
   lateinit var recyclerView: RecyclerView
-  var layoutManager: LinearLayoutManager
+  //var layoutManager: LinearLayoutManager
   lateinit var itemDecoration: DividerItemDecoration
 
   init {
-    presenter = CarPartsPresenter()
-    layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
-    adapter = CarRVAdapter()
+    presenter =
+        com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.car_part_fragment_mvp.CarPartsPresenter()
+    //layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+    adapter =
+        com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.car_part_fragment_mvp.CarRVAdapter()
   }
 
   companion object {
@@ -59,8 +61,17 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
     savedInstanceState: Bundle?): View? {
     val view: View = inflater.inflate(R.layout.fragment_car_parts, container, false)
 
+
+
+    return view
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
     recyclerView = view.rvCarParts
-    recyclerView.layoutManager = layoutManager // RecyclerView item decoration
+    recyclerView.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
+    // RecyclerView item decoration
     //    itemDecoration = DividerItemDecoration(recyclerView.context, LinearLayout.VERTICAL)
     //    recyclerView.addItemDecoration(itemDecoration)
     recyclerView.adapter = adapter
@@ -79,7 +90,7 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
         override fun onItemLongClicked(recyclerView: RecyclerView?, position: Int,
           v: View?): Boolean {
 
-          val builder = AlertDialog.Builder(container!!.context)
+          val builder = AlertDialog.Builder(view.context)
           builder.setTitle("Spear part").setMessage("You should by it!!!").setCancelable(true)
 
           val dialog = builder.create()
@@ -90,7 +101,7 @@ class CarPartsFragment() : Fragment(), ICarPartsView {
 
     //TODO fil the fragment with logic and add some listner or some other feature
 
-    return view
+
   }
 
   @Subscribe fun getFromDialog(refresh: CarFragmentRefresh) {
