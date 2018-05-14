@@ -2,7 +2,6 @@ package com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -13,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.vladimirbabenko.hotlinecustom.R
-import com.example.vladimirbabenko.hotlinecustom.databinding.FragmentEmployeeBinding
 import com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm.data.HeaderTitle
 import com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm.recycler_adapter.EmployeeRecyclerAdapter
 import com.example.vladimirbabenko.hotlinecustom.room.Employee
@@ -26,6 +24,10 @@ class EmployeeFragment() : Fragment() {
   private var mAdapter: EmployeeRecyclerAdapter? = null
   private var recyclerView: RecyclerView? = null
   private lateinit var viewModel: AllEmployeeViewModel
+
+  init {
+    Log.d(TAG, "initializing")
+  }
 
   companion object {
     val title = "Employee"
@@ -55,7 +57,7 @@ class EmployeeFragment() : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    setupDataBinding()
+    //setupDataBinding()
     setupRecyclerView(view, savedInstanceState)
     setupSwipeRefreshLayout(view)
   }
@@ -68,9 +70,9 @@ class EmployeeFragment() : Fragment() {
     // ObservableField
     //val headerTitle = ObservableField(HeaderTitle())
     val headerTitle = HeaderTitle()
-    val binding:FragmentEmployeeBinding = DataBindingUtil.setContentView(activity!!,  R.layout.fragment_employee)
-    binding.headertitle = headerTitle
-    binding.invalidateAll()// not using vith LiveData???
+//    val binding:FragmentEmployeeBinding = DataBindingUtil.setContentView(activity!!,  R.layout.fragment_employee)
+//    binding.headertitle = headerTitle
+//    binding.invalidateAll()// not using vith LiveData???
   }
 
   private fun setupSwipeRefreshLayout(view: View) {
@@ -80,7 +82,7 @@ class EmployeeFragment() : Fragment() {
   // private helpers
 
   private fun setupRecyclerView(view: View, savedInstanceState: Bundle?) {
-    //mAdapter = EmployeeRecyclerAdapter()
+    mAdapter = EmployeeRecyclerAdapter()
     recyclerView = view.rvEmplyee
 
     recyclerView!!.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)

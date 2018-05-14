@@ -1,165 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-<data>
-<variable
-name="employee"
-type="com.example.vladimirbabenko.hotlinecustom.room.Employee"
-/>
-</data>
+  <data>
+    <variable
+        name="employee"
+        type="com.example.vladimirbabenko.hotlinecustom.room.Employee"
+        />
+    <import type="android.text.TextUtils"/>
+  </data>
 
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
-
-  <android.support.v7.widget.CardView
-      xmlns:card_view="http://schemas.android.com/apk/res-auto"
-      android:id="@+id/card_view"
+  <LinearLayout
+      xmlns:tools="http://schemas.android.com/tools"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      card_view:cardBackgroundColor="@color/colorApricot"
-      card_view:cardCornerRadius="4dp"
-      card_view:cardElevation="4dp"
-      card_view:cardUseCompatPadding="true"
-      card_view:layout_constraintEnd_toEndOf="parent"
-      card_view:layout_constraintStart_toStartOf="parent"
-      card_view:layout_constraintTop_toTopOf="parent"
+      android:orientation="vertical"
       >
-    <LinearLayout
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        card_view:cardBackgroundColor="@color/colorApricot"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent"
         >
       <LinearLayout
-          android:id="@+id/llEmployeeId"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:weightSum="5"
+          android:orientation="vertical"
           >
-
-        <TextView
-            android:id="@+id/tvEmployeeIdDescription"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/llEmployeeId"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:text="Id:"
-            />
-        <TextView
-            android:id="@+id/tvEmployeeId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:paddingStart="8dp"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            >
 
-            tools:text="123454"
+          <TextView
+              android:id="@+id/tvEmployeeIdDescription"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1.5"
+              android:text="Id:"
+              />
+          <TextView
+              android:id="@+id/tvEmployeeId"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1.5"
+              android:paddingStart="8dp"
+
+              tools:text="123454"
+              />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorWhite"
             />
+
+        <LinearLayout
+            android:id="@+id/llEmployeeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            >
+
+          <TextView
+              android:id="@+id/tvEmployeeNameDescription"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1.5"
+              android:text="Nsme:"
+              />
+          <TextView
+              android:id="@+id/tvEmployeeName"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="3"
+              android:paddingStart="8dp"
+
+              tools:text="Vladimir"
+              />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorWhite"
+            />
+        <LinearLayout
+            android:id="@+id/llEmployeeSecondName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            >
+
+          <TextView
+              android:id="@+id/tvEmployeeSecondNameDescription"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1.5"
+              android:text="SecondName:"
+              />
+          <TextView
+              android:id="@+id/tvEmployeeSecondName"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="3"
+              android:paddingStart="8dp"
+
+              tools:text="Babenko"
+              />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorWhite"
+            />
+        <LinearLayout
+            android:id="@+id/llEmployeeSalary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            >
+
+          <TextView
+              android:id="@+id/tvEmployeeSalaryDescription"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1.5"
+              android:text="Salary:"
+              />
+          <TextView
+              android:id="@+id/tvEmployeeSalary"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="3"
+              android:paddingStart="8dp"
+
+              tools:text="3000$"
+              />
+
+        </LinearLayout>
+
 
       </LinearLayout>
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="2dp"
-          android:background="@color/colorWhite"
-          />
+    </android.support.v7.widget.CardView>
+  </LinearLayout>
 
-      <LinearLayout
-          android:id="@+id/llEmployeeName"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:weightSum="5"
-          >
-
-        <TextView
-            android:id="@+id/tvEmployeeNameDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:text="Nsme:"
-            />
-        <TextView
-            android:id="@+id/tvEmployeeName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:paddingStart="8dp"
-
-            tools:text="Vladimir"
-            />
-
-      </LinearLayout>
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="2dp"
-          android:background="@color/colorWhite"
-          />
-      <LinearLayout
-          android:id="@+id/llEmployeeSecondName"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:weightSum="5"
-          >
-
-        <TextView
-            android:id="@+id/tvEmployeeSecondNameDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:text="SecondName:"
-            />
-        <TextView
-            android:id="@+id/tvEmployeeSecondName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:paddingStart="8dp"
-
-            tools:text="Babenko"
-            />
-
-      </LinearLayout>
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="2dp"
-          android:background="@color/colorWhite"
-          />
-      <LinearLayout
-          android:id="@+id/llEmployeeSalary"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:weightSum="5"
-          >
-
-        <TextView
-            android:id="@+id/tvEmployeeSalaryDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:text="Salary:"
-            />
-        <TextView
-            android:id="@+id/tvEmployeeSalary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:paddingStart="8dp"
-
-            tools:text="3000$"
-            />
-
-      </LinearLayout>
-
-
-    </LinearLayout>
-  </android.support.v7.widget.CardView>
-</LinearLayout>
-
-    </layout>
+</layout>

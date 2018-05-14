@@ -10,7 +10,7 @@ import com.example.vladimirbabenko.hotlinecustom.fragments.viewpager.video_card_
 
 class TabsPagerFragmentAdapter(val fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-  private val PAGE_COUNT: Int = 3
+  private val PAGE_COUNT: Int = 4
   private val tabTitels =
     arrayOf(NoteBookFragment.title, CarPartsFragment.title, VideCardFragment.title, EmployeeFragment.title)
 

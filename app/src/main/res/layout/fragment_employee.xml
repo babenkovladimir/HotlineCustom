@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    >
-  <data>
-    <!--Binding требует импорта классов-->
-    <import type="android.view.View"/>
-    <import type="android.text.TextUtils"/>
+<!--<layout-->
+    <!--&gt;-->
+  <!--<data>-->
+    <!--&lt;!&ndash;Binding требует импорта классов&ndash;&gt;-->
+    <!--<import type="android.view.View"/>-->
+    <!--<import type="android.text.TextUtils"/>-->
 
-    <variable
-        name="headertitle"
-        type="com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm.data.HeaderTitle"
-        >
-    </variable>
-  </data>
+    <!--<variable-->
+        <!--name="headertitle"-->
+        <!--type="com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm.data.HeaderTitle"-->
+        <!--&gt;-->
+    <!--</variable>-->
+  <!--</data>-->
 
   <android.support.constraint.ConstraintLayout
       xmlns:android="http://schemas.android.com/apk/res/android"
@@ -25,8 +25,10 @@
         android:id="@+id/tvTemporaryTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{String.valueOf(headertitle.title)}"
+        tools:text = "Some text by tools"
         />
+  <!--android:text="@{String.valueOf(headertitle.title)}"-->
+
     <!--Потдерживается вышеописанная метода конвертирования в string-->
     <!--android:text="@{headertitle.title}"-->
 
@@ -48,4 +50,4 @@
     </android.support.v4.widget.SwipeRefreshLayout>
   </android.support.constraint.ConstraintLayout>
 
-</layout>
+<!--</layout>-->
