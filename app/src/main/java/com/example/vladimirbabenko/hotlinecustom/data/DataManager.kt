@@ -36,14 +36,15 @@ import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
 
 class DataManager private constructor(context: Context) {
 
-  val prefs: PreferencesHelper = PreferencesHelper(context)
+  val prefs: PreferencesHelper =
+    com.example.vladimirbabenko.hotlinecustom.data.PreferencesHelper(context)
   private val mRepositoryMockNoteBookS = RepositoryMockNoteBookS()
   private val mRepositoryMockCarParts = RepositoryMockCarParts()
   private val mRepositoryMockVidoCard = RepositoryMockVidoCard()
   val bus = GlobalBus.instance
 
   // Realm Helper class - мой хелпер класс
-  private val realmHelper = RealmHelper()
+  private val realmHelper = com.example.vladimirbabenko.hotlinecustom.data.RealmHelper()
 
   // Realm DbHelper from Nikita
 
@@ -52,7 +53,7 @@ class DataManager private constructor(context: Context) {
   // FirebaseDB
 
   private val firebaseHelper: FirebaseDBHelper by lazy {
-    FirebaseDBHelper(getUser()!!.userId)
+    com.example.vladimirbabenko.hotlinecustom.data.FirebaseDBHelper(getUser()!!.userId)
   }
 
   private val casheNoteBook: CasheNotebookJ =
@@ -67,7 +68,8 @@ class DataManager private constructor(context: Context) {
       jsonKey = CASH_VIDEO_CARD_JSON_KEY.key)
 
   private val bascketHelper: BascketHelper by lazy(SYNCHRONIZED) {
-    BascketHelper(context, AppConstants.BASCKET_PREFS_KEY.key, AppConstants.BASCKET_JSON_KEY.key)
+    com.example.vladimirbabenko.hotlinecustom.data.BascketHelper(context, AppConstants.BASCKET_PREFS_KEY.key,
+      AppConstants.BASCKET_JSON_KEY.key)
   }
 
   init {

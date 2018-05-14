@@ -1,0 +1,57 @@
+https://github.com/JetBrains/kotlin-examples/blob/master/gradle/android-databinding/app/src/main/res/layout/weather_row.xml
+
+
+
+<TextView
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:text='@{employee.name + ", " + employee.address}' />
+
+------------------------------------------------------------------
+   <TextView
+           android:id="@+id/tvTemporaryTV"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@{String.valueOf(headertitle.title)}"
+           />
+       <!--Потдерживается вышеописанная метода конвертирования в string-->
+       <!--android:text="@{headertitle.title}"-->
+
+
+------------------------------------------------------------------
+Видимость View в зависимости от значения поля
+
+<TextView
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:text="@{employee.address}"
+   android:visibility="@{TextUtils.isEmpty(employee.address) ? View.GONE : View.VISIBLE}"/>
+
+Адрес будет отображен, только если он не пустой. А при пустом адресе видимость этого TextView будет GONE.
+
+-----------------------------------------------------------------
+
+<TextView
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:text="@{TextUtils.isEmpty(employee.address) ? @string/empty_address : employee.address}"/>
+
+-----------------------------------------------------------------
+View
+
+Если нам нужны какие-либо View из нашего layout, то их можно получить из биндинга. Для этого необходимо, чтобы View имело id.
+
+Например, если в layout есть поле:
+
+<TextView
+    android:id="@+id/name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+то мы можем получить его их биндинга так:
+TextView textViewName = binding.name;
+
+Также можно получить корневое View методом getRoot:
+View rootView = binding.getRoot();
+
+

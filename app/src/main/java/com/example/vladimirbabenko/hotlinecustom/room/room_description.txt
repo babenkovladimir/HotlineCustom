@@ -1,0 +1,8 @@
+https://medium.com/google-developers/7-steps-to-room-27a5fe5f99b2
+https://medium.com/mindorks/android-architecture-components-room-and-kotlin-f7b725c8d1d
+
+
+Итак, при создании Room базы данных в прилоджении необхзодимо выполнить следующие шаги!
+1) Необходимо создать сущьность, с которой будет работать наша база
+2) Создать интефейс для работы с этой сущностью.
+3) необходимо получить INSTANCE Room
