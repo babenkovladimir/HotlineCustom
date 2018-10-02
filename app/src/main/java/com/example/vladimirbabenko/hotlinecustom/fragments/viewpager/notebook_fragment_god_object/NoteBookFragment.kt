@@ -104,7 +104,7 @@ class NoteBookFragment : Fragment() {
     ItemClickSupport.addTo(rvNoteBookRecycler)
       .setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
         override fun onItemClicked(recyclerView: RecyclerView?, position: Int, v: View?) {
-          YoYo.with(Techniques.ZoomInUp).duration(300)
+          YoYo.with(Techniques.FadeIn).duration(300)
             .onEnd({ showNotebookDetailsFragment(notebooks.elementAt(position)) }).playOn(v);
         }
       })

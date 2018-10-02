@@ -1,16 +1,19 @@
 package com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm.recycler_adapter
 
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.android.databinding.library.baseAdapters.BR
 import com.example.vladimirbabenko.hotlinecustom.R
 import com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm.recycler_adapter.EmployeeRecyclerAdapter.EmployeeHolder
 import com.example.vladimirbabenko.hotlinecustom.room.Employee
 
 class EmployeeRecyclerAdapter() : RecyclerView.Adapter<EmployeeHolder>() {
 
-  private var employeeList: List<Employee> = mutableListOf<Employee>()
+  private var employeeList: List<Employee> = mutableListOf()
 
   fun setEmployeeList(employeeList: List<Employee>) {
     this.employeeList = employeeList
@@ -20,13 +23,12 @@ class EmployeeRecyclerAdapter() : RecyclerView.Adapter<EmployeeHolder>() {
   // Life
   override fun onCreateViewHolder(parent: ViewGroup,
     viewType: Int): EmployeeHolder { // not using w=in DataBinding
-    val view = LayoutInflater.from(parent.context).inflate(R.layout.item_employee, parent, false)
 
-//    val layoutInflater = LayoutInflater.from(parent.context)
-//    val binding: ViewDataBinding =
-//      DataBindingUtil.inflate(layoutInflater, R.layout.item_employee, parent, false)
+    val layoutInflater = LayoutInflater.from(parent.context)
+    val binding: ViewDataBinding =
+      DataBindingUtil.inflate(layoutInflater, R.layout.item_employee, parent, false)
 
-    return EmployeeHolder(view)
+    return EmployeeHolder(binding)
   }
 
   override fun getItemCount(): Int = employeeList.size
@@ -35,18 +37,12 @@ class EmployeeRecyclerAdapter() : RecyclerView.Adapter<EmployeeHolder>() {
     holder.bind(employeeList.elementAt(position))
   }
 
-  class EmployeeHolder(var binding: View) : RecyclerView.ViewHolder(binding) {
+  class EmployeeHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(employee: Any) {
 
-      //      with(itemView) {
-      //        tvEmployeeId.text = employee.id.toString()
-      //        tvEmployeeName.text = employee.name
-      //        tvEmployeeSecondName.text = employee.secondName
-      //        tvEmployeeSalary.text = "$ " + employee.salary.toString()
-      //      }
-     // binding.setVariable()
-      //binding.executePendingBindings()
+      binding.setVariable(BR.employee, employee)
+      binding.executePendingBindings()
     }
   }
 }

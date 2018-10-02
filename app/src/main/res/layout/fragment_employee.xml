@@ -1,53 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<layout-->
-    <!--&gt;-->
-  <!--<data>-->
-    <!--&lt;!&ndash;Binding требует импорта классов&ndash;&gt;-->
-    <!--<import type="android.view.View"/>-->
-    <!--<import type="android.text.TextUtils"/>-->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+  <data>
+    <!--Binding требует импорта классов-->
+    <import type="android.view.View"/>
+    <import type="android.text.TextUtils"/>
 
-    <!--<variable-->
-        <!--name="headertitle"-->
-        <!--type="com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm.data.HeaderTitle"-->
-        <!--&gt;-->
-    <!--</variable>-->
-  <!--</data>-->
+    <variable
+        name="headertitle"
+        type="com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm.data.HeaderTitle"
+        >
+    </variable>
+  </data>
 
-  <android.support.constraint.ConstraintLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools"
+  <!--<TextView-->
+      <!--android:id="@+id/tvTemporaryTV"-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="20sp"-->
+      <!--android:layout_marginEnd="8dp"-->
+      <!--android:layout_marginStart="8dp"-->
+      <!--android:layout_marginTop="8dp"-->
+      <!--android:layout_marginBottom="8dp"-->
+      <!--android:text="@{String.valueOf(headertitle.title)}"-->
+     <!---->
+      <!--/>-->
+
+  <LinearLayout
+      android:id="@+id/llRoot"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:orientation="vertical"
+      xmlns:tools="http://schemas.android.com/tools"
       >
 
-    <TextView
-        android:id="@+id/tvTemporaryTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text = "Some text by tools"
-        />
-  <!--android:text="@{String.valueOf(headertitle.title)}"-->
+
+
 
     <!--Потдерживается вышеописанная метода конвертирования в string-->
     <!--android:text="@{headertitle.title}"-->
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srlRefreshLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTemporaryTV"
         >
       <android.support.v7.widget.RecyclerView
           android:id="@+id/rvEmplyee"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          app:layout_constraintTop_toBottomOf="@id/tvTemporaryTV"
-
           />
 
     </android.support.v4.widget.SwipeRefreshLayout>
-  </android.support.constraint.ConstraintLayout>
 
-<!--</layout>-->
+  </LinearLayout>
+
+</layout>

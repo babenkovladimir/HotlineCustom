@@ -2,6 +2,7 @@ package com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.vladimirbabenko.hotlinecustom.R
+import com.example.vladimirbabenko.hotlinecustom.databinding.FragmentEmployeeBinding
 import com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm.data.HeaderTitle
 import com.example.vladimirbabenko.hotlinecustom.fragment_employee_mvvm.recycler_adapter.EmployeeRecyclerAdapter
 import com.example.vladimirbabenko.hotlinecustom.room.Employee
@@ -62,17 +64,16 @@ class EmployeeFragment() : Fragment() {
     setupSwipeRefreshLayout(view)
   }
 
-
   /*
   * Класс отвечающий за
   * */
-  private fun setupDataBinding() {
-    // ObservableField
+  private fun setupDataBinding() { // ObservableField
     //val headerTitle = ObservableField(HeaderTitle())
     val headerTitle = HeaderTitle()
-//    val binding:FragmentEmployeeBinding = DataBindingUtil.setContentView(activity!!,  R.layout.fragment_employee)
-//    binding.headertitle = headerTitle
-//    binding.invalidateAll()// not using vith LiveData???
+    val binding1: FragmentEmployeeBinding =
+      DataBindingUtil.setContentView(activity!!, R.layout.fragment_employee)
+    binding1.headertitle = headerTitle
+    binding1.invalidateAll() // not using vith LiveData???
   }
 
   private fun setupSwipeRefreshLayout(view: View) {

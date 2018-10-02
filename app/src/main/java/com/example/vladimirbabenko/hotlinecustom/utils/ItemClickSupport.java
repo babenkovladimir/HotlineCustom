@@ -13,6 +13,7 @@ public final class ItemClickSupport {
   private final RecyclerView mRecyclerView;
   private OnItemClickListener mOnItemClickListener;
   private OnItemLongClickListener mOnItemLongClickListener;
+
   private View.OnClickListener mOnClickListener = new View.OnClickListener() {
     @Override public void onClick(View v) {
       if (mOnItemClickListener != null) {
@@ -21,6 +22,7 @@ public final class ItemClickSupport {
       }
     }
   };
+
   private View.OnLongClickListener mOnLongClickListener = new View.OnLongClickListener() {
     @Override public boolean onLongClick(View v) {
       if (mOnItemLongClickListener != null) {

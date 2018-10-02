@@ -40,8 +40,7 @@ import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
 
     val create: AppDatabaseRoom by lazy(SYNCHRONIZED) {
       Room.databaseBuilder(App.applicationContext(), AppDatabaseRoom::class.java, "roomdata.db")
-        .allowMainThreadQueries()
-        .build()
+        .allowMainThreadQueries().build()
     }
 
     fun destroyInstance() {
